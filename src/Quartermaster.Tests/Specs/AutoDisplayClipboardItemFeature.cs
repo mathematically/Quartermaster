@@ -2,6 +2,7 @@
 using ExpectedObjects;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModel;
 using NSubstitute;
 using Quartermaster.Infrastructure;
@@ -34,7 +35,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [Fact]
         public void On_startup_if_the_clipboard_is_empty_then_no_item_should_be_displayed()
         {
-            //Clipboard.Clear();
             StartQuartermaster();
 
             IPoeItem currentItem = _quartermaster.Item;
@@ -45,13 +45,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [Fact]
         public void Copying_an_iron_ring_in_game_sets_the_displayed_item_to_an_iron_ring()
         {
-            const string ironRingGameText = @"Rarity: Normal
-Iron Ring
---------
-Itemlevel: 4
---------
-Adds 1-4 Physical Damage";
-
             var ironRing = new PoeItem(
 
                     "Iron Ring", 
@@ -61,8 +54,7 @@ Adds 1-4 Physical Damage";
 
             StartQuartermaster();
 
-            //Clipboard.SetData(DataFormats.Text, ironRingGameText);
-            _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(), new ClipboardChangedEventArgs(ironRingGameText));
+            _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(), new ClipboardChangedEventArgs(ItemTextExamples.IronRing));
 
             _quartermasterViewModel.Item.ShouldMatch(ironRing);
         }

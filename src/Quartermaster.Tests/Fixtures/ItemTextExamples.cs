@@ -1,6 +1,6 @@
 ﻿namespace Mathematically.Quartermaster.Tests.Fixtures
 {
-    public static class ItemTextFixture
+    public static class ItemTextExamples
     {
         internal const string IronRing = @"Rarity: Normal
 Iron Ring

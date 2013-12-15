@@ -1,6 +1,8 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using NSubstitute;
+using Ploeh.AutoFixture;
 using Quartermaster.Infrastructure;
 using Xunit;
 
@@ -8,6 +10,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 {
     public class ClipboardItemTextSourceTests
     {
+        private readonly Fixture _fixture = new Fixture();
+
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
 
         private ClipboardItemTextSource _sut;
@@ -16,7 +20,6 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         private void CreateSUT()
         {
             _sut = new ClipboardItemTextSource(_clipboardMonitor);
-
             ListenForClipboardUpdates();
         }
 
@@ -26,11 +29,20 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             _sut.ItemTextArrived += (s, a) => _actualItemText = a.ItemText;
         }
 
+        [Fact]
+        public void When_the_clipboard_is_updated_with_game_text_the_item_arrived_event_is_raised()
+        {
+            CreateSUT();
+
+            FakeItemCopy(ItemTextExamples.IronRing);
+
+            _actualItemText.Should().NotBeNullOrEmpty();
+        }
+
         private void FakeItemCopy(string itemText)
         {
-            // Ideally we would do this for real via the clipboard like this...
-            //Clipboard.SetData(DataFormats.Text, itemText);
-
+            // I suppose we could do this for real via the clipboard like this...
+            //      Clipboard.SetData(DataFormats.Text, itemText);
             // .. but that would mean getting a hwndSource somehow so just raise the event on the fake
             // as if we had done that.
             _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(),
@@ -38,13 +50,50 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         [Fact]
-        public void When_the_clipboard_is_updated_with_game_text_the_item_arrived_event_is_raised()
+        public void When_the_clipboard_is_updated_with_non_game_text_the_item_arrived_event_is_not_raised()
+        {
+            CreateSUT();
+            PasteNonItemText();
+
+            FakeItemCopy(_fixture.Create<string>());
+
+            _actualItemText.Should().BeNullOrEmpty();
+        }
+
+        private Action PasteNonItemText()
+        {
+            return () => FakeItemCopy(_fixture.Create<string>());
+        }
+
+        [Fact]
+        public void When_the_clipboard_is_updated_with_null_the_item_arrived_event_is_not_raised()
         {
             CreateSUT();
 
-            FakeItemCopy(ItemTextFixture.IronRing);
+            PasteNullText()
+                .ShouldNotThrow();
+        }
 
-            _actualItemText.Should().NotBeNullOrEmpty();
+        private Action PasteNullText()
+        {
+            return () => FakeItemCopy(null);
+        }
+
+        [Fact]
+        public void When_the_clipboard_is_updated_with_invalid_text_previous_text_is_not_lost()
+        {
+            CreateSUT();
+            PasteIronRing();
+
+            PasteNonItemText()
+                .ShouldNotThrow();
+
+            _actualItemText.Should().Be(ItemTextExamples.IronRing);
+        }
+
+        private void PasteIronRing()
+        {
+            FakeItemCopy(ItemTextExamples.IronRing);
         }
 
         [Fact]
@@ -52,9 +101,9 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             CreateSUT();
 
-            FakeItemCopy(ItemTextFixture.IronRing);
+            PasteIronRing();
 
-            _actualItemText.Should().Be(ItemTextFixture.IronRing);
+            _actualItemText.Should().Be(ItemTextExamples.IronRing);
         }
     }
 }

@@ -6,6 +6,9 @@ namespace Quartermaster.Infrastructure
 {
     public class ClipboardItemTextSource : IItemTextSource, IDisposable
     {
+        private const string RARITY_MARKER = "Rarity: ";
+        private const string SECTION_DIVIDER = "--------";
+
         private readonly IClipboardMonitor _clipboardMonitor;
 
         public ClipboardItemTextSource(IClipboardMonitor clipboardMonitor)
@@ -16,7 +19,17 @@ namespace Quartermaster.Infrastructure
 
         private void OnClipboardTextArrived(object sender, ClipboardChangedEventArgs args)
         {
-            OnItemTextArrived(new GameItemChangedEventArgs(args.GameItemText));
+            var arrivedText = args.GameItemText;
+
+            if (IsPotentialGameText(arrivedText))
+            {
+                OnItemTextArrived(new GameItemChangedEventArgs(arrivedText));
+            }
+        }
+
+        private static bool IsPotentialGameText(string arrivedText)
+        {
+            return !string.IsNullOrEmpty(arrivedText) && arrivedText.Contains(RARITY_MARKER) && arrivedText.Contains(SECTION_DIVIDER);
         }
 
         public event EventHandler<GameItemChangedEventArgs> ItemTextArrived;

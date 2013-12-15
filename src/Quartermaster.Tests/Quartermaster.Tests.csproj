@@ -69,7 +69,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Fixtures\ItemTextFixture.cs" />
+    <Compile Include="Fixtures\ItemTextExamples.cs" />
     <Compile Include="Specs\AutoDisplayClipboardItemFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\ClipboardItemTextSourceTests.cs" />
