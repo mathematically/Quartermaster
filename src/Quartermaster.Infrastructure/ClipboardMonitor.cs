@@ -24,10 +24,14 @@ namespace Quartermaster.Infrastructure
 
         #endregion
 
-        private readonly IntPtr _hWnd;
-        private readonly HwndSource _source;
+        private IntPtr _hWnd;
+        private HwndSource _source;
 
-        public ClipboardMonitor(IntPtr hWnd, HwndSource source)
+        public ClipboardMonitor()
+        {
+        }
+
+        public void BindToVisual(IntPtr hWnd, HwndSource source)
         {
             _hWnd = hWnd;
             _source = source;

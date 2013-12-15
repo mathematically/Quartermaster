@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System.Linq.Expressions;
+using System.Windows;
 using ExpectedObjects;
+using FluentAssertions;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.Fixtures;
-using Mathematically.Quartermaster.ViewModel;
+using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
 using Quartermaster.Infrastructure;
 using Xunit;
@@ -19,6 +21,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
     {
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
 
+        private ItemTextSanityCheck _itemTextSanityCheck;
         private ClipboardItemTextSource _clipboardItemTextSource;
         private QuartermasterStore _quartermaster;
         private QuartermasterViewModel _quartermasterViewModel;
@@ -27,9 +30,12 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
         private void StartQuartermaster()
         {
-            _clipboardItemTextSource = new ClipboardItemTextSource(_clipboardMonitor);
+            _itemTextSanityCheck = new ItemTextSanityCheck();
+            _clipboardItemTextSource = new ClipboardItemTextSource(_clipboardMonitor, _itemTextSanityCheck);
             _quartermaster = new QuartermasterStore(_clipboardItemTextSource);
-            _quartermasterViewModel = new QuartermasterViewModel(_quartermaster);
+            _quartermasterViewModel = new QuartermasterViewModel(_quartermaster, _clipboardMonitor);
+
+            _quartermasterViewModel.MonitorEvents();
         }
 
         [Fact]
@@ -57,6 +63,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
             _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(), new ClipboardChangedEventArgs(ItemTextExamples.IronRing));
 
             _quartermasterViewModel.Item.ShouldMatch(ironRing);
+            _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
     }
 }

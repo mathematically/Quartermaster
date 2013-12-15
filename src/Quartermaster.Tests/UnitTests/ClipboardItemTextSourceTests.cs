@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using NSubstitute;
 using Ploeh.AutoFixture;
@@ -13,13 +14,14 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         private readonly Fixture _fixture = new Fixture();
 
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
+        private readonly IItemTextSanityCheck _itemTextSanityCheck = Substitute.For<IItemTextSanityCheck>();
 
         private ClipboardItemTextSource _sut;
         private string _actualItemText;
 
         private void CreateSUT()
         {
-            _sut = new ClipboardItemTextSource(_clipboardMonitor);
+            _sut = new ClipboardItemTextSource(_clipboardMonitor, _itemTextSanityCheck);
             ListenForClipboardUpdates();
         }
 
