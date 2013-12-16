@@ -17,18 +17,26 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         private readonly IItemTextSanityCheck _itemTextSanityCheck = Substitute.For<IItemTextSanityCheck>();
 
         private ClipboardItemTextSource _sut;
-        private string _actualItemText;
+        private string _itemArrivedEventText = string.Empty;
 
         private void CreateSUT()
         {
             _sut = new ClipboardItemTextSource(_clipboardMonitor, _itemTextSanityCheck);
+
             ListenForClipboardUpdates();
+            ConfigureSanityChecker();
+
         }
 
         private void ListenForClipboardUpdates()
         {
-            _actualItemText = string.Empty;
-            _sut.ItemTextArrived += (s, a) => _actualItemText = a.ItemText;
+            _sut.ItemTextArrived += (s, a) => _itemArrivedEventText = a.ItemText;
+        }
+
+        private void ConfigureSanityChecker()
+        {
+            _itemTextSanityCheck.LooksLikeGameText(Arg.Any<string>()).Returns(false);
+            _itemTextSanityCheck.LooksLikeGameText(Arg.Is(ItemTextExamples.IronRing)).Returns(true);
         }
 
         [Fact]
@@ -38,7 +46,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             FakeItemCopy(ItemTextExamples.IronRing);
 
-            _actualItemText.Should().NotBeNullOrEmpty();
+            _itemArrivedEventText.Should().NotBeNullOrEmpty();
         }
 
         private void FakeItemCopy(string itemText)
@@ -55,16 +63,10 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         public void When_the_clipboard_is_updated_with_non_game_text_the_item_arrived_event_is_not_raised()
         {
             CreateSUT();
-            PasteNonItemText();
 
             FakeItemCopy(_fixture.Create<string>());
 
-            _actualItemText.Should().BeNullOrEmpty();
-        }
-
-        private Action PasteNonItemText()
-        {
-            return () => FakeItemCopy(_fixture.Create<string>());
+            _itemArrivedEventText.Should().BeNullOrEmpty();
         }
 
         [Fact]
@@ -90,12 +92,17 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             PasteNonItemText()
                 .ShouldNotThrow();
 
-            _actualItemText.Should().Be(ItemTextExamples.IronRing);
+            _itemArrivedEventText.Should().Be(ItemTextExamples.IronRing);
         }
 
         private void PasteIronRing()
         {
             FakeItemCopy(ItemTextExamples.IronRing);
+        }
+
+        private Action PasteNonItemText()
+        {
+            return () => FakeItemCopy(_fixture.Create<string>());
         }
 
         [Fact]
@@ -105,7 +112,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             PasteIronRing();
 
-            _actualItemText.Should().Be(ItemTextExamples.IronRing);
+            _itemArrivedEventText.Should().Be(ItemTextExamples.IronRing);
         }
     }
 }

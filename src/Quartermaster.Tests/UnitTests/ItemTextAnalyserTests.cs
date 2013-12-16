@@ -22,8 +22,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         [Theory]
         [InlineAutoData(ItemTextExamples.IronRing)]
         [InlineAutoData(ItemTextExamples.IronRing)]
-        [InlineAutoData("Rarity: " + "\r\n" + "--------" + "\r\n" + "--------")] // This is just a sanity check so this should pass.
-        [InlineAutoData("Rarity: " + "\n" + "--------" + "\n" + "--------")] // This is just a sanity check so this should pass.
+        [InlineAutoData("Rarity: " + "\r\n" + "--------" + "\r\n" + "--------")] // This is just the sanity check so this should pass.
+        [InlineAutoData("Rarity: " + "\n" + "--------" + "\n" + "--------")] // Do ti with linux and windows line endings just in case.
         public void Analyser_allows_good_text(string text, ItemTextSanityCheck sut)
         {
             sut.LooksLikeGameText(text).Should().BeTrue();

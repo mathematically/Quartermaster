@@ -3,7 +3,6 @@ using Mathematically.Quartermaster.Domain.Items;
 
 namespace Mathematically.Quartermaster.Domain
 {
-// ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class QuartermasterStore : IQuartermaster
     {
         private readonly IItemTextSource _itemTextSource;
@@ -17,7 +16,7 @@ namespace Mathematically.Quartermaster.Domain
 
         public event EventHandler<PoeItemEventArgs> PoeItemArrived;
 
-        protected virtual void OnPoeItemArrived(PoeItemEventArgs e)
+        private void OnPoeItemArrived(PoeItemEventArgs e)
         {
             EventHandler<PoeItemEventArgs> handler = PoeItemArrived;
             if (handler != null) handler(this, e);

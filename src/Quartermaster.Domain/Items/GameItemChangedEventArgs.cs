@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mathematically.Quartermaster.Domain
+namespace Mathematically.Quartermaster.Domain.Items
 {
     public class GameItemChangedEventArgs : EventArgs
     {

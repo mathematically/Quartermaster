@@ -27,6 +27,13 @@ namespace Mathematically.Quartermaster.Tests.Specs
         private QuartermasterViewModel _quartermasterViewModel;
 
         private readonly ExpectedObject _noItem = new EmptyPoeItem().ToExpectedObject();
+        private readonly ExpectedObject _expectedIronRingItem  = new PoeItem(
+
+                "Iron Ring", 
+                ItemRarity.Normal
+
+                ).ToExpectedObject();
+
 
         private void StartQuartermaster()
         {
@@ -51,18 +58,11 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [Fact]
         public void Copying_an_iron_ring_in_game_sets_the_displayed_item_to_an_iron_ring()
         {
-            var ironRing = new PoeItem(
-
-                    "Iron Ring", 
-                    ItemRarity.Normal
-
-                ).ToExpectedObject();
-
             StartQuartermaster();
 
             _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(), new ClipboardChangedEventArgs(ItemTextExamples.IronRing));
 
-            _quartermasterViewModel.Item.ShouldMatch(ironRing);
+            _quartermasterViewModel.Item.ShouldMatch(_expectedIronRingItem);
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
     }

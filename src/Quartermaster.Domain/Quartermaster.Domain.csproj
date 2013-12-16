@@ -40,15 +40,15 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="GameItemChangedEventArgs.cs" />
     <Compile Include="IQuartermaster.cs" />
     <Compile Include="Items\EmptyPoeItem.cs" />
+    <Compile Include="Items\GameItemChangedEventArgs.cs" />
     <Compile Include="Items\IItemTextSanityCheck.cs" />
     <Compile Include="Items\IItemTextSource.cs" />
     <Compile Include="Items\IPoeItem.cs" />
     <Compile Include="Items\ItemRarity.cs" />
     <Compile Include="Items\PoeItem.cs" />
-    <Compile Include="PoeItemEventArgs.cs" />
+    <Compile Include="Items\PoeItemEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuartermasterStore.cs" />
   </ItemGroup>
