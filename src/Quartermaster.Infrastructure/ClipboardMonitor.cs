@@ -27,8 +27,14 @@ namespace Quartermaster.Infrastructure
         private IntPtr _hWnd;
         private HwndSource _source;
 
+        public string CurrentText { get; private set; }
+
         public ClipboardMonitor()
         {
+            if (Clipboard.ContainsText())
+            {
+                CurrentText = Clipboard.GetText();
+            }
         }
 
         public void BindToVisual(IntPtr hWnd, HwndSource source)

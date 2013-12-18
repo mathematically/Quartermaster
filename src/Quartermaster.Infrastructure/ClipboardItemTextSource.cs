@@ -1,5 +1,4 @@
 ﻿using System;
-using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
 
 namespace Quartermaster.Infrastructure
@@ -9,21 +8,45 @@ namespace Quartermaster.Infrastructure
         private readonly IClipboardMonitor _clipboardMonitor;
         private readonly IItemTextSanityCheck _itemTextSanityChecker;
 
+        public string ItemText
+        {
+            get; private set;
+        }
+
+        public bool HasItemText()
+        {
+            return !string.IsNullOrEmpty(ItemText);
+        }
+
         public ClipboardItemTextSource(IClipboardMonitor clipboardMonitor, IItemTextSanityCheck itemTextSanityChecker)
         {
             _clipboardMonitor = clipboardMonitor;
             _itemTextSanityChecker = itemTextSanityChecker;
 
+            TryLoadGameTest(clipboardMonitor.CurrentText);
+
             _clipboardMonitor.ClipboardTextArrived += OnClipboardTextArrived;
+        }
+
+        private bool TryLoadGameTest(string currentClipboardText)
+        {
+            if (_itemTextSanityChecker.LooksLikeGameText(currentClipboardText))
+            {
+                ItemText = currentClipboardText;
+                return true;
+            }
+
+            return false;
         }
 
         private void OnClipboardTextArrived(object sender, ClipboardChangedEventArgs args)
         {
-            var gameItemText = args.GameItemText;
+            var clipboardText = args.GameItemText;
 
-            if (_itemTextSanityChecker.LooksLikeGameText(gameItemText))
+            TryLoadGameTest(clipboardText);
+            if (TryLoadGameTest(clipboardText))
             {
-                OnItemTextArrived(new GameItemChangedEventArgs(gameItemText));
+                OnItemTextArrived(new GameItemChangedEventArgs(clipboardText));
             }
         }
 

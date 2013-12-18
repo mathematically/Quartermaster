@@ -9,23 +9,23 @@ using Xunit;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class ClipboardItemTextSourceTests
+    public class ClipboardItemTextSourceTests: QuartermasterFixture
     {
-        private readonly Fixture _fixture = new Fixture();
-
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
         private readonly IItemTextSanityCheck _itemTextSanityCheck = Substitute.For<IItemTextSanityCheck>();
 
         private ClipboardItemTextSource _sut;
         private string _itemArrivedEventText = string.Empty;
 
+        public ClipboardItemTextSourceTests()
+        {
+            ConfigureSanityChecker();
+        }
+
         private void CreateSUT()
         {
             _sut = new ClipboardItemTextSource(_clipboardMonitor, _itemTextSanityCheck);
-
             ListenForClipboardUpdates();
-            ConfigureSanityChecker();
-
         }
 
         private void ListenForClipboardUpdates()
@@ -40,6 +40,15 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         [Fact]
+        public void If_an_item_is_already_in_the_clipboard_at_startup_then_it_will_be_available_in_the_item_property()
+        {
+            _clipboardMonitor.CurrentText.Returns(ItemTextExamples.IronRing);
+            CreateSUT();
+
+            _sut.ItemText.Should().Be(ItemTextExamples.IronRing);
+        }
+
+        [Fact]
         public void When_the_clipboard_is_updated_with_game_text_the_item_arrived_event_is_raised()
         {
             CreateSUT();
@@ -51,10 +60,6 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private void FakeItemCopy(string itemText)
         {
-            // I suppose we could do this for real via the clipboard like this...
-            //      Clipboard.SetData(DataFormats.Text, itemText);
-            // .. but that would mean getting a hwndSource somehow so just raise the event on the fake
-            // as if we had done that.
             _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(),
                 new ClipboardChangedEventArgs(itemText));
         }
@@ -64,7 +69,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             CreateSUT();
 
-            FakeItemCopy(_fixture.Create<string>());
+            FakeItemCopy(Auto.Create<string>());
 
             _itemArrivedEventText.Should().BeNullOrEmpty();
         }
@@ -102,7 +107,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private Action PasteNonItemText()
         {
-            return () => FakeItemCopy(_fixture.Create<string>());
+            return () => FakeItemCopy(Auto.Create<string>());
         }
 
         [Fact]

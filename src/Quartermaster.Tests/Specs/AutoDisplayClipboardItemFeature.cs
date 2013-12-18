@@ -7,6 +7,7 @@ using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
+using Ploeh.AutoFixture;
 using Quartermaster.Infrastructure;
 using Xunit;
 
@@ -17,7 +18,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
     /// WHEN an item is copied to the clipboard in game
     /// THEN the item should be displayed in the UI
     /// </summary>
-    public class AutoDisplayClipboardItemFeature
+    public class AutoDisplayClipboardItemFeature: QuartermasterFixture
     {
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
 
@@ -25,15 +26,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         private ClipboardItemTextSource _clipboardItemTextSource;
         private QuartermasterStore _quartermaster;
         private QuartermasterViewModel _quartermasterViewModel;
-
-        private readonly ExpectedObject _noItem = new EmptyPoeItem().ToExpectedObject();
-        private readonly ExpectedObject _expectedIronRingItem  = new PoeItem(
-
-                "Iron Ring", 
-                ItemRarity.Normal
-
-                ).ToExpectedObject();
-
 
         private void StartQuartermaster()
         {
@@ -50,9 +42,26 @@ namespace Mathematically.Quartermaster.Tests.Specs
         {
             StartQuartermaster();
 
-            IPoeItem currentItem = _quartermaster.Item;
+            _quartermaster.Item.ShouldMatch(NoItem);
+        }
 
-            currentItem.ShouldMatch(_noItem);
+        [Fact]
+        public void On_startup_if_the_clipboard_has_non_poe_content_then_no_item_should_be_displayed()
+        {
+            Clipboard.SetData(DataFormats.Text, Auto.Create<string>());
+            StartQuartermaster();
+
+            _quartermaster.Item.ShouldMatch(NoItem);
+        }
+
+        [Fact]
+        public void On_startup_if_the_clipboard_has_an_iron_ring_then_an_iron_ring_should_be_displayed()
+        {
+            _clipboardMonitor.CurrentText.Returns(ItemTextExamples.IronRing);
+            StartQuartermaster();
+
+            _quartermaster.Item.ShouldMatch(ExpectedIronRingItem);
+            _quartermasterViewModel.Item.ShouldMatch(ExpectedIronRingItem);
         }
 
         [Fact]
@@ -62,7 +71,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
             _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(), new ClipboardChangedEventArgs(ItemTextExamples.IronRing));
 
-            _quartermasterViewModel.Item.ShouldMatch(_expectedIronRingItem);
+            _quartermasterViewModel.Item.ShouldMatch(ExpectedIronRingItem);
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
     }

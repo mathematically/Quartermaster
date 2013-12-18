@@ -21,6 +21,8 @@ namespace Mathematically.Quartermaster.ViewModels
             _quartermaster = quartermaster;
             _monitor = monitor;
 
+            Item = quartermaster.Item;
+
             _quartermaster.PoeItemArrived += NewItemArrived;
         }
 

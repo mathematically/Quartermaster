@@ -14,6 +14,22 @@ namespace Mathematically.Quartermaster.Domain
             private set { _item = value; }
         }
 
+        public QuartermasterStore(IItemTextSource itemTextSource)
+        {
+            _itemTextSource = itemTextSource;
+            _itemTextSource.ItemTextArrived += ItemTextSourceOnItemTextArrived;
+
+            if (_itemTextSource.HasItemText())
+            {
+                CreatePoeItem(_itemTextSource.ItemText);
+            }
+        }
+
+        private void CreatePoeItem(string itemText)
+        {
+            _item = new PoeItem("Iron Ring", ItemRarity.Normal);
+        }
+
         public event EventHandler<PoeItemEventArgs> PoeItemArrived;
 
         private void OnPoeItemArrived(PoeItemEventArgs e)
@@ -22,15 +38,9 @@ namespace Mathematically.Quartermaster.Domain
             if (handler != null) handler(this, e);
         }
 
-        public QuartermasterStore(IItemTextSource itemTextSource)
-        {
-            _itemTextSource = itemTextSource;
-            _itemTextSource.ItemTextArrived += ItemTextSourceOnItemTextArrived;
-        }
-
         private void ItemTextSourceOnItemTextArrived(object sender, GameItemChangedEventArgs args)
         {
-            _item = new PoeItem("Iron Ring", ItemRarity.Normal);
+            CreatePoeItem(args.ItemText);
 
             OnPoeItemArrived(new PoeItemEventArgs(_item));
         }
