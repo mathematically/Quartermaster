@@ -4,7 +4,7 @@ using Mathematically.Quartermaster.Domain.Items;
 
 namespace Quartermaster.Infrastructure
 {
-    public class ItemTextSanityCheck : IItemTextSanityCheck
+    public class ItemTextChecker : IItemTextChecker
     {
         // Check diff line endings in case we get some windows test in their somehow.
         private readonly string[] _allPlatformLineSplitChars = { "\r\n", "\n" };
@@ -12,16 +12,18 @@ namespace Quartermaster.Infrastructure
         private const string RARITY_MARKER = "Rarity: ";
         private const string SECTION_DIVIDER = "--------";
 
-        public bool LooksLikeGameText(string text)
+        public bool LooksLikeGameText(string itemText)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(itemText))
                 return false;
 
-            if (!text.Contains(RARITY_MARKER))
+            if (!itemText.Contains(RARITY_MARKER))
                 return false;
 
-            var lines = text.Split(_allPlatformLineSplitChars, StringSplitOptions.None);
-            return lines.Count(line => line == SECTION_DIVIDER) >= 2;
+            var lines = itemText.Split(_allPlatformLineSplitChars, StringSplitOptions.None);
+            var hasAtLeastTwoSectionDividers = lines.Count(line => line == SECTION_DIVIDER) >= 2;
+
+            return hasAtLeastTwoSectionDividers;
         }
     }
 }

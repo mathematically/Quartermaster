@@ -47,7 +47,7 @@
     <Compile Include="ClipboardItemTextSource.cs" />
     <Compile Include="ClipboardMonitor.cs" />
     <Compile Include="IClipboardMonitor.cs" />
-    <Compile Include="ItemTextSanityCheck.cs" />
+    <Compile Include="ItemTextSanityChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

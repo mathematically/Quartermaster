@@ -12,7 +12,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
     public class ClipboardItemTextSourceTests: QuartermasterFixture
     {
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
-        private readonly IItemTextSanityCheck _itemTextSanityCheck = Substitute.For<IItemTextSanityCheck>();
+        private readonly IItemTextChecker _itemTextChecker = Substitute.For<IItemTextChecker>();
 
         private ClipboardItemTextSource _sut;
         private string _itemArrivedEventText = string.Empty;
@@ -24,7 +24,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private void CreateSUT()
         {
-            _sut = new ClipboardItemTextSource(_clipboardMonitor, _itemTextSanityCheck);
+            _sut = new ClipboardItemTextSource(_clipboardMonitor, _itemTextChecker);
             ListenForClipboardUpdates();
         }
 
@@ -35,8 +35,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private void ConfigureSanityChecker()
         {
-            _itemTextSanityCheck.LooksLikeGameText(Arg.Any<string>()).Returns(false);
-            _itemTextSanityCheck.LooksLikeGameText(Arg.Is(ItemTextExamples.IronRing)).Returns(true);
+            _itemTextChecker.LooksLikeGameText(Arg.Any<string>()).Returns(false);
+            _itemTextChecker.LooksLikeGameText(Arg.Is(ItemTextExamples.IronRing)).Returns(true);
         }
 
         [Fact]

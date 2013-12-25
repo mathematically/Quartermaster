@@ -25,7 +25,7 @@ namespace Mathematically.Quartermaster
 
                 // Domain dependencies
                 x.For<IItemTextSource>().Use<ClipboardItemTextSource>();
-                x.For<IItemTextSanityCheck>().Use<ItemTextSanityCheck>();
+                x.For<IItemTextChecker>().Use<ItemTextChecker>();
 
                 // Infrastructure objects.
                 x.For<IClipboardMonitor>().Singleton().Use<ClipboardMonitor>();

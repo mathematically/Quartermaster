@@ -6,7 +6,7 @@ namespace Quartermaster.Infrastructure
     public class ClipboardItemTextSource : IItemTextSource, IDisposable
     {
         private readonly IClipboardMonitor _clipboardMonitor;
-        private readonly IItemTextSanityCheck _itemTextSanityChecker;
+        private readonly IItemTextChecker _itemTextChecker;
 
         public string ItemText
         {
@@ -18,10 +18,10 @@ namespace Quartermaster.Infrastructure
             return !string.IsNullOrEmpty(ItemText);
         }
 
-        public ClipboardItemTextSource(IClipboardMonitor clipboardMonitor, IItemTextSanityCheck itemTextSanityChecker)
+        public ClipboardItemTextSource(IClipboardMonitor clipboardMonitor, IItemTextChecker itemTextChecker)
         {
             _clipboardMonitor = clipboardMonitor;
-            _itemTextSanityChecker = itemTextSanityChecker;
+            _itemTextChecker = itemTextChecker;
 
             TryLoadGameTest(clipboardMonitor.CurrentText);
 
@@ -30,7 +30,7 @@ namespace Quartermaster.Infrastructure
 
         private bool TryLoadGameTest(string currentClipboardText)
         {
-            if (_itemTextSanityChecker.LooksLikeGameText(currentClipboardText))
+            if (_itemTextChecker.LooksLikeGameText(currentClipboardText))
             {
                 ItemText = currentClipboardText;
                 return true;

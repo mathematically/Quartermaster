@@ -11,7 +11,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         private ClipboardMonitor _sut;
 
         [Fact]
-        public void If_the_clipbard_already_has_text_new_monitors_will_have_that_text_in_their_item_property()
+        public void If_the_clipboard_already_has_text_new_monitors_will_have_that_text_in_their_item_property()
         {
             Clipboard.SetData(DataFormats.Text, ItemTextExamples.IronRing);
 

@@ -16,21 +16,22 @@ namespace Mathematically.Quartermaster.Tests.Specs
     /// <summary>
     /// GIVEN the app is running
     /// WHEN an item is copied to the clipboard in game
-    /// THEN the item should be displayed in the UI
+    /// THEN the item should be displayed in the 
+    /// UI
     /// </summary>
     public class AutoDisplayClipboardItemFeature: QuartermasterFixture
     {
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
 
-        private ItemTextSanityCheck _itemTextSanityCheck;
-        private ClipboardItemTextSource _clipboardItemTextSource;
         private QuartermasterStore _quartermaster;
         private QuartermasterViewModel _quartermasterViewModel;
+        private ClipboardItemTextSource _clipboardItemTextSource;
+        private ItemTextChecker _itemTextChecker;
 
         private void StartQuartermaster()
         {
-            _itemTextSanityCheck = new ItemTextSanityCheck();
-            _clipboardItemTextSource = new ClipboardItemTextSource(_clipboardMonitor, _itemTextSanityCheck);
+            _itemTextChecker = new ItemTextChecker();
+            _clipboardItemTextSource = new ClipboardItemTextSource(_clipboardMonitor, _itemTextChecker);
             _quartermaster = new QuartermasterStore(_clipboardItemTextSource);
             _quartermasterViewModel = new QuartermasterViewModel(_quartermaster, _clipboardMonitor);
 
@@ -49,6 +50,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         public void On_startup_if_the_clipboard_has_non_poe_content_then_no_item_should_be_displayed()
         {
             Clipboard.SetData(DataFormats.Text, Auto.Create<string>());
+
             StartQuartermaster();
 
             _quartermaster.Item.ShouldMatch(NoItem);
@@ -58,6 +60,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         public void On_startup_if_the_clipboard_has_an_iron_ring_then_an_iron_ring_should_be_displayed()
         {
             _clipboardMonitor.CurrentText.Returns(ItemTextExamples.IronRing);
+
             StartQuartermaster();
 
             _quartermaster.Item.ShouldMatch(ExpectedIronRingItem);
