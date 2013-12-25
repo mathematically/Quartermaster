@@ -78,6 +78,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Fixtures\FakeQuartermasterFixture.cs" />
     <Compile Include="Fixtures\ItemTextExamples.cs" />
     <Compile Include="Fixtures\QuartermasterFixture.cs" />
     <Compile Include="Specs\AutoDisplayClipboardItemFeature.cs" />
@@ -85,6 +86,8 @@
     <Compile Include="UnitTests\ClipboardItemTextSourceTests.cs" />
     <Compile Include="UnitTests\ClipboardMonitorTests.cs" />
     <Compile Include="UnitTests\ItemTextAnalyserTests.cs" />
+    <Compile Include="UnitTests\PoeItemFactoryTests.cs" />
+    <Compile Include="UnitTests\PoeItemParserTests.cs" />
     <Compile Include="UnitTests\QuartermasterStoreTests.cs" />
   </ItemGroup>
   <ItemGroup>

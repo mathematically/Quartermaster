@@ -5,7 +5,9 @@ namespace Mathematically.Quartermaster.Domain
 {
     public class QuartermasterStore : IQuartermaster
     {
+        private readonly IPoeItemFactory _itemFactory;
         private readonly IItemTextSource _itemTextSource;
+
         private IPoeItem _item = new EmptyPoeItem();
 
         public IPoeItem Item
@@ -14,9 +16,11 @@ namespace Mathematically.Quartermaster.Domain
             private set { _item = value; }
         }
 
-        public QuartermasterStore(IItemTextSource itemTextSource)
+        public QuartermasterStore(IPoeItemFactory itemFactory, IItemTextSource itemTextSource)
         {
+            _itemFactory = itemFactory;
             _itemTextSource = itemTextSource;
+
             _itemTextSource.ItemTextArrived += ItemTextSourceOnItemTextArrived;
 
             if (_itemTextSource.HasItemText())
@@ -27,7 +31,7 @@ namespace Mathematically.Quartermaster.Domain
 
         private void CreatePoeItem(string itemText)
         {
-            _item = new PoeItem("Iron Ring", ItemRarity.Normal);
+            _item = _itemFactory.CreateItem(itemText);
         }
 
         public event EventHandler<PoeItemEventArgs> PoeItemArrived;

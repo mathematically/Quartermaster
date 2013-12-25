@@ -2,24 +2,27 @@
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.Fixtures;
-using NSubstitute;
-using Xunit;
+using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class QuartermasterStoreTests : QuartermasterFixture
+    public class QuartermasterStoreTests : FakeQuartermasterFixture
     {
-        private readonly IItemTextSource _itemTextSource = Substitute.For<IItemTextSource>();
-
-        [Fact]
-        public void If_the_clipboard_has_an_item_quartermaster_will_load_that_item_at_startup()
+        // These tests have so much fakery they are not that useful and overlap with other, better tests.
+        // So just do a couple.
+        [Theory]
+        [InlineData(ItemTextExamples.IronRing, IronRingName, ItemRarity.Normal)]
+        [InlineData(ItemTextExamples.SapphireRing, SapphireRingName, ItemRarity.Normal)]
+        public void If_the_clipboard_has_an_item_quartermaster_will_load_that_item_at_startup(string itemText, string itemName, ItemRarity rarity)
         {
-            _itemTextSource.ItemText.Returns(ItemTextExamples.IronRing);
-            _itemTextSource.HasItemText().Returns(true);
+            var expectedItem = GetExpectedItem(itemName);
 
-            var sut = new QuartermasterStore(_itemTextSource);
+            ConfigureFakeItemTextSourceWith(itemText);
+            ConfigureFakeFactoryFor(itemName);
 
-            sut.Item.ShouldMatch(ExpectedIronRingItem);
+            var sut = new QuartermasterStore(ItemTextFactory, ItemTextSource);
+
+            sut.Item.ShouldMatch(expectedItem);
         }
     }
 }

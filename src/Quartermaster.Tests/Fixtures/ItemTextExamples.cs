@@ -21,5 +21,19 @@ Itemlevel: 15
 +28% to Cold Resistance
 ";
 
+        internal const string ThirstyRubyRingOfSuccess = @"Rarity: Magic
+Thirsty Ruby Ring of Success
+--------
+Requirements:
+Level: 11
+--------
+Itemlevel: 16
+--------
++30% to Fire Resistance
+--------
++3 Life gained on Kill
+1% of Physical Attack Damage Leeched as Mana
+";
+
     }
 }

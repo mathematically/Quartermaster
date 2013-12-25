@@ -23,12 +23,12 @@ namespace Quartermaster.Infrastructure
             _clipboardMonitor = clipboardMonitor;
             _itemTextChecker = itemTextChecker;
 
-            TryLoadGameTest(clipboardMonitor.CurrentText);
+            TryLoadGameText(clipboardMonitor.CurrentText);
 
             _clipboardMonitor.ClipboardTextArrived += OnClipboardTextArrived;
         }
 
-        private bool TryLoadGameTest(string currentClipboardText)
+        private bool TryLoadGameText(string currentClipboardText)
         {
             if (_itemTextChecker.LooksLikeGameText(currentClipboardText))
             {
@@ -43,8 +43,7 @@ namespace Quartermaster.Infrastructure
         {
             var clipboardText = args.GameItemText;
 
-            TryLoadGameTest(clipboardText);
-            if (TryLoadGameTest(clipboardText))
+            if (TryLoadGameText(clipboardText))
             {
                 OnItemTextArrived(new GameItemChangedEventArgs(clipboardText));
             }

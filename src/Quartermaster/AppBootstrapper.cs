@@ -26,6 +26,8 @@ namespace Mathematically.Quartermaster
                 // Domain dependencies
                 x.For<IItemTextSource>().Use<ClipboardItemTextSource>();
                 x.For<IItemTextChecker>().Use<ItemTextChecker>();
+                x.For<IPoeItemFactory>().Use<PoeItemFactory>();
+                x.For<IPoeItemParser>().Use<PoeItemParser>();
 
                 // Infrastructure objects.
                 x.For<IClipboardMonitor>().Singleton().Use<ClipboardMonitor>();

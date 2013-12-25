@@ -16,6 +16,9 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private ClipboardItemTextSource _sut;
         private string _itemArrivedEventText = string.Empty;
+        protected readonly IPoeItemParser ItemParser = Substitute.For<IPoeItemParser>();
+        protected readonly IPoeItemFactory ItemTextFactory = Substitute.For<IPoeItemFactory>();
+        protected readonly IItemTextSource ItemTextSource = Substitute.For<IItemTextSource>();
 
         public ClipboardItemTextSourceTests()
         {
@@ -118,6 +121,22 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             PasteIronRing();
 
             _itemArrivedEventText.Should().Be(ItemTextExamples.IronRing);
+        }
+
+        protected void ConfigureFakeParserWith(string itemText, string itemName, ItemRarity rarity)
+        {
+            ItemParser.When(itemParser => itemParser.Parse(Arg.Is<string>(s => s == itemText)))
+                .Do(callInfo =>
+                {
+                    ItemParser.Name.Returns(itemName);
+                    ItemParser.Rarity.Returns(rarity);
+                });
+        }
+
+        protected void ConfigureFakeItemTextSourceWith(string itemText)
+        {
+            ItemTextSource.ItemText.Returns(itemText);
+            ItemTextSource.HasItemText().Returns(true);
         }
     }
 }
