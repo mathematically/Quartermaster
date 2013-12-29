@@ -1,7 +1,6 @@
 ﻿using ExpectedObjects;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.Fixtures;
-using NSubstitute;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
@@ -23,8 +22,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             var expectedItem = GetExpectedItem(itemName);
             ConfigureFakeParserWith(itemText, itemName, rarity);
-
             CreateSUT();
+
             var item = _sut.CreateItem(itemText);
 
             item.ShouldMatch(expectedItem);

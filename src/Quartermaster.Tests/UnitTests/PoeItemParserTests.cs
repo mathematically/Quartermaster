@@ -45,5 +45,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             _sut.Rarity.Should().Be(rarity);
         }
+
+        // Item level always the same
     }
 }

@@ -7,7 +7,7 @@ using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class ItemTextAnalyserTests
+    public class ItemTextCheckerTests
     {
         [Theory]
         [InlineAutoData("")]
