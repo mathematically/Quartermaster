@@ -9,13 +9,14 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         protected readonly IPoeItemFactory ItemTextFactory = Substitute.For<IPoeItemFactory>();
         protected readonly IPoeItemParser ItemParser = Substitute.For<IPoeItemParser>();
 
-        protected void ConfigureFakeParserWith(string itemText, string itemName, ItemRarity rarity)
+        protected void ConfigureFakeParserWith(string itemText, string itemName, ItemRarity rarity, int itemLevel)
         {
             ItemParser.When(itemParser => itemParser.Parse(Arg.Is<string>(s => s == itemText)))
                 .Do(callInfo =>
                 {
                     ItemParser.Name.Returns(itemName);
                     ItemParser.Rarity.Returns(rarity);
+                    ItemParser.ItemLevel.Returns(itemLevel);
 
                 });
         }

@@ -21,7 +21,8 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         protected static readonly PoeItem IronRing = new PoeItem(
             IronRingName,
-            ItemRarity.Normal
+            ItemRarity.Normal,
+            4
             );
 
         protected readonly ExpectedObject IronRingItem = IronRing.ToExpectedObject();
@@ -34,7 +35,8 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         protected static readonly PoeItem SapphireRing = new PoeItem(
             SapphireRingName,
-            ItemRarity.Normal
+            ItemRarity.Normal,
+            15
             );
 
         protected readonly ExpectedObject SapphireRingItem = SapphireRing.ToExpectedObject();
@@ -47,7 +49,8 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         protected static readonly PoeItem ThirstyRubyRingOfSuccess = new PoeItem(
             ThirstyRubyRingOfSuccessName,
-            ItemRarity.Magic
+            ItemRarity.Magic,
+            16
             );
 
         protected readonly ExpectedObject ThirstyRubyRingOfSuccessItem = ThirstyRubyRingOfSuccess.ToExpectedObject();

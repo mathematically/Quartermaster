@@ -47,5 +47,14 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         // Item level always the same
+        [Theory]
+        [InlineData(ItemTextExamples.IronRing, 4)]
+        [InlineData(ItemTextExamples.SapphireRing, 15)]
+        public void Parser_parses_item_level_correctly(string itemText, int itemLevel)
+        {
+            ParseTextWithSut(itemText);
+
+            _sut.ItemLevel.Should().Be(itemLevel);
+        }
     }
 }

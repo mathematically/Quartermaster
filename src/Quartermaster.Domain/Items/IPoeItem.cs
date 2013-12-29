@@ -4,5 +4,6 @@
     {
         string Name { get; }
         ItemRarity Rarity { get; }
+        int ItemLevel { get; }
     }
 }

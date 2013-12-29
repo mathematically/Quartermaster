@@ -14,5 +14,10 @@
         {
             get { return ItemRarity.Normal; }
         }
+
+        public override int ItemLevel
+        {
+            get { return 1; }
+        }
     }
 }

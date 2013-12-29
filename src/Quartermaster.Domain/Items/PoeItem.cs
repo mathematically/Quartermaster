@@ -4,6 +4,7 @@
     {
         private readonly string _name;
         private readonly ItemRarity _rarity;
+        private readonly int _itemLevel;
 
         public virtual string Name
         {
@@ -15,12 +16,20 @@
             get { return _rarity; }
         }
 
-        public PoeItem(string name, ItemRarity rarity)
+        public virtual int ItemLevel
+        {
+            get { return _itemLevel; }
+        }
+
+        public PoeItem(string name, ItemRarity rarity, int itemLevel)
         {
             _name = name;
             _rarity = rarity;
+            _itemLevel = itemLevel;
         }
 
-        protected PoeItem() {}
+        protected PoeItem()
+        {
+        }
     }
 }

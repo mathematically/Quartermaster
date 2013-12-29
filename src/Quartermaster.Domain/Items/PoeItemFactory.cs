@@ -13,7 +13,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         public IPoeItem CreateItem(string gameItemText)
         {
             _itemParser.Parse(gameItemText);
-            return new PoeItem(_itemParser.Name, _itemParser.Rarity);
+            return new PoeItem(_itemParser.Name, _itemParser.Rarity, _itemParser.ItemLevel);
         }
     }
 }

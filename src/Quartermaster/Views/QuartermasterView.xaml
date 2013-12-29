@@ -26,6 +26,8 @@
                         HorizontalAlignment="Center">
                 <TextBlock Text="{Binding Rarity, Converter={StaticResource EnumDescriptionConverter}}" />
                 <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="--------" />
+                <TextBlock Text="{Binding ItemLevel, StringFormat='Item Level: {0}'}" />
             </StackPanel>
         </DataTemplate>
 
