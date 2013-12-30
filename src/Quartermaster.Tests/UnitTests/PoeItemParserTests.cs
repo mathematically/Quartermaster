@@ -1,6 +1,7 @@
 using System.Windows.Media.Animation;
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using NSubstitute;
 using Xunit.Extensions;
@@ -19,8 +20,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         // Name parsing is always the same so two tests is enough
 
         [Theory]
-        [InlineData(ItemTextExamples.IronRing, IronRingName)]
-        [InlineData(ItemTextExamples.SapphireRing, SapphireRingName)]
+        [InlineData(Rings.IronRing, IronRingName)]
+        [InlineData(Rings.SapphireRing, SapphireRingName)]
         public void Parser_parses_name_correctly(string itemText, string itemName)
         {
             ParseTextWithSut(itemText);
@@ -37,8 +38,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         // Parse one of each rarity
 
         [Theory]
-        [InlineData(ItemTextExamples.IronRing, ItemRarity.Normal)]
-        [InlineData(ItemTextExamples.ThirstyRubyRingOfSuccess, ItemRarity.Magic)]
+        [InlineData(Rings.IronRing, ItemRarity.Normal)]
+        [InlineData(Rings.ThirstyRubyRingOfSuccess, ItemRarity.Magic)]
         public void Parser_parses_rarity_correctly(string itemText, ItemRarity rarity)
         {
             ParseTextWithSut(itemText);
@@ -48,8 +49,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         // Item level always the same
         [Theory]
-        [InlineData(ItemTextExamples.IronRing, 4)]
-        [InlineData(ItemTextExamples.SapphireRing, 15)]
+        [InlineData(Rings.IronRing, 4)]
+        [InlineData(Rings.SapphireRing, 15)]
         public void Parser_parses_item_level_correctly(string itemText, int itemLevel)
         {
             ParseTextWithSut(itemText);

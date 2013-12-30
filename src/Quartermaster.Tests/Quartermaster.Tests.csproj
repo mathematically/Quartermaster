@@ -78,8 +78,9 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ExampleItems\Rings.cs" />
+    <Compile Include="ExampleItems\Weapons.cs" />
     <Compile Include="Fixtures\FakeQuartermasterFixture.cs" />
-    <Compile Include="Fixtures\ItemTextExamples.cs" />
     <Compile Include="Fixtures\QuartermasterFixture.cs" />
     <Compile Include="Specs\AutoDisplayClipboardItemFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

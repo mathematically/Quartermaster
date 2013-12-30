@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using Ploeh.AutoFixture.Xunit;
 using Quartermaster.Infrastructure;
@@ -20,8 +21,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         [Theory]
-        [InlineAutoData(ItemTextExamples.IronRing)]
-        [InlineAutoData(ItemTextExamples.IronRing)]
+        [InlineAutoData(Rings.IronRing)]
+        [InlineAutoData(Rings.IronRing)]
         [InlineAutoData("Rarity: " + "\r\n" + "--------" + "\r\n" + "--------")] // This is just the sanity check text so this should pass.
         [InlineAutoData("Rarity: " + "\n" + "--------" + "\n" + "--------")] // Do it with linux and windows line endings just in case.
         public void Analyser_allows_good_text(string testText, ItemTextChecker sut)

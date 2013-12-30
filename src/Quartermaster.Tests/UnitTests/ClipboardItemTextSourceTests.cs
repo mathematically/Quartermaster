@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using NSubstitute;
 using Ploeh.AutoFixture;
@@ -39,16 +40,16 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         private void ConfigureSanityChecker()
         {
             _itemTextChecker.LooksLikeGameText(Arg.Any<string>()).Returns(false);
-            _itemTextChecker.LooksLikeGameText(Arg.Is(ItemTextExamples.IronRing)).Returns(true);
+            _itemTextChecker.LooksLikeGameText(Arg.Is(Rings.IronRing)).Returns(true);
         }
 
         [Fact]
         public void If_an_item_is_already_in_the_clipboard_at_startup_then_it_will_be_available_in_the_item_property()
         {
-            _clipboardMonitor.CurrentText.Returns(ItemTextExamples.IronRing);
+            _clipboardMonitor.CurrentText.Returns(Rings.IronRing);
             CreateSUT();
 
-            _sut.ItemText.Should().Be(ItemTextExamples.IronRing);
+            _sut.ItemText.Should().Be(Rings.IronRing);
         }
 
         [Fact]
@@ -56,7 +57,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             CreateSUT();
 
-            FakeItemCopy(ItemTextExamples.IronRing);
+            FakeItemCopy(Rings.IronRing);
 
             _itemArrivedEventText.Should().NotBeNullOrEmpty();
         }
@@ -100,12 +101,12 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             PasteNonItemText()
                 .ShouldNotThrow();
 
-            _itemArrivedEventText.Should().Be(ItemTextExamples.IronRing);
+            _itemArrivedEventText.Should().Be(Rings.IronRing);
         }
 
         private void PasteIronRing()
         {
-            FakeItemCopy(ItemTextExamples.IronRing);
+            FakeItemCopy(Rings.IronRing);
         }
 
         private Action PasteNonItemText()
@@ -120,7 +121,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             PasteIronRing();
 
-            _itemArrivedEventText.Should().Be(ItemTextExamples.IronRing);
+            _itemArrivedEventText.Should().Be(Rings.IronRing);
         }
 
         protected void ConfigureFakeParserWith(string itemText, string itemName, ItemRarity rarity)

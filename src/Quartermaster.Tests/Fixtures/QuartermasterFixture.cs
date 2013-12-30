@@ -15,6 +15,8 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         private readonly Dictionary<string, PoeItem> _items = new Dictionary<string, PoeItem>();
         private readonly Dictionary<string, ExpectedObject> _expectedItems = new Dictionary<string, ExpectedObject>();
 
+        #region RINGS
+
         #region Iron Ring
 
         protected const string IronRingName = "Iron Ring";
@@ -57,14 +59,50 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         #endregion
 
+        #endregion 
+
+        #region WEAPONS
+
+        #region Driftwood Wand
+
+        protected const string DriftwoodWandName = "Driftwood Wand";
+
+        protected static readonly PoeItem DriftwoodWand = new PoeItem(
+            DriftwoodWandName,
+            ItemRarity.Normal,
+            4
+            );
+
+        protected readonly ExpectedObject DriftwoodWandItem = DriftwoodWand.ToExpectedObject();
+
+        #endregion
+
+        #region Driftwood Maul
+
+        protected const string DriftwoodMaulName = "Driftwood Maul";
+
+        protected static readonly PoeItem DriftwoodMaul = new PoeItem(
+            DriftwoodMaulName,
+            ItemRarity.Normal,
+            4
+            );
+
+        protected readonly ExpectedObject DriftwoodMaulItem = DriftwoodMaul.ToExpectedObject();
+
+        #endregion
+
+        #endregion
+
         protected QuartermasterFixture( )
         {
-            // Indexed access to the test items makes thoeries easier to write.
+            // Indexed access to the test items makes theories easier to write.
             _items = new Dictionary<string, PoeItem>()
             {
                 {IronRing.Name, IronRing},
                 {SapphireRing.Name, SapphireRing},
                 {ThirstyRubyRingOfSuccess.Name, ThirstyRubyRingOfSuccess},
+                {DriftwoodWand.Name, DriftwoodWand},
+                {DriftwoodMaul.Name, DriftwoodMaul},
 
             };
 
