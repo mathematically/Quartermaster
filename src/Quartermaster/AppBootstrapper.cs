@@ -18,7 +18,7 @@ namespace Mathematically.Quartermaster
             _container = new StructureMap.Container(x =>
             {
                 // Caliburn's window manager so we can specify window options.
-                x.For<IWindowManager>().Use<QuartermasterWindowManager>();
+                x.For<IWindowManager>().Singleton().Use<QuartermasterWindowManager>();
 
                 // The composition root for the domain
                 x.For<IQuartermaster>().Singleton().Use<QuartermasterStore>();

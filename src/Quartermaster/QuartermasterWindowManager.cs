@@ -11,7 +11,7 @@ namespace Mathematically.Quartermaster
         protected override Window CreateWindow(object rootModel, bool isDialog, object context,
             IDictionary<string, object> settings)
         {
-            var options = new Dictionary<string, object>
+            var defaultSettings = new Dictionary<string, object>
             {
                 {"Title", "Quartermaster v" + Assembly.GetExecutingAssembly().GetName().Version},
                 {"WindowStyle", WindowStyle.ToolWindow},
@@ -19,7 +19,7 @@ namespace Mathematically.Quartermaster
                 {"MinHeight", 300},
             };
 
-            return base.CreateWindow(rootModel, isDialog, context, options);
+            return base.CreateWindow(rootModel, isDialog, context, settings ?? defaultSettings);
         }
     }
 }

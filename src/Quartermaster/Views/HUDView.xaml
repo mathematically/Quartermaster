@@ -1,0 +1,13 @@
+﻿<Window x:Class="Mathematically.Quartermaster.Views.HUDView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:viewModels="clr-namespace:Mathematically.Quartermaster.ViewModels"
+        xmlns:behaviours="clr-namespace:Mathematically.Quartermaster.Behaviours">
+        <i:Interaction.Behaviors>
+            <behaviours:AlwaysOnTopBehavior/>
+        </i:Interaction.Behaviors>
+    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <TextBlock Text="{Binding Item.ItemLevel}" Foreground="White" />
+    </Grid>
+</Window>

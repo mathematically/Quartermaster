@@ -42,10 +42,12 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -61,9 +63,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Behaviours\AlwaysOnTopBehavior.cs" />
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
     <Compile Include="QuartermasterWindowManager.cs" />
+    <Compile Include="ViewModels\HUDViewModel.cs" />
     <Compile Include="ViewModels\QuartermasterViewModel.cs" />
+    <Compile Include="Views\HUDView.xaml.cs">
+      <DependentUpon>HUDView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\QuartermasterView.xaml.cs">
       <DependentUpon>QuartermasterView.xaml</DependentUpon>
     </Compile>
@@ -77,6 +84,10 @@
     <Page Include="Resources\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HUDView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuartermasterView.xaml">
       <SubType>Designer</SubType>

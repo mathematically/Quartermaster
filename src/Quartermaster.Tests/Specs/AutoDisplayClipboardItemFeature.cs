@@ -2,44 +2,24 @@
 using Caliburn.Micro;
 using ExpectedObjects;
 using FluentAssertions;
-using Mathematically.Quartermaster.Domain;
-using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
 using Ploeh.AutoFixture;
-using Quartermaster.Infrastructure;
 using Xunit;
 using Xunit.Extensions;
-using Action = System.Action;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    /// <summary>
-    ///     GIVEN the app is running
-    ///     WHEN an item is copied to the clipboard in game
-    ///     THEN the item should be displayed in the UI
-    /// </summary>
-    public class AutoDisplayClipboardItemFeature : QuartermasterFixture
+    public class AutoDisplayClipboardItemFeature : QuartermasterFeature
     {
-        private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
-
-        private ClipboardItemTextSource _clipboardItemTextSource;
-        private ItemTextChecker _itemTextChecker;
-        private PoeItemParser _itemParser;
-        private PoeItemFactory _itemFactory;
-        private QuartermasterStore _quartermaster;
         private QuartermasterViewModel _quartermasterViewModel;
 
-        private void StartQuartermaster()
+        protected override void StartQuartermaster()
         {
-            _itemTextChecker = new ItemTextChecker();
-            _itemParser = new PoeItemParser();
-            _itemFactory = new PoeItemFactory(_itemParser);
-            _clipboardItemTextSource = new ClipboardItemTextSource(_clipboardMonitor, _itemTextChecker);
-            _quartermaster = new QuartermasterStore(_itemFactory, _clipboardItemTextSource);
-            _quartermasterViewModel = new QuartermasterViewModel(_quartermaster, _clipboardMonitor);
+            base.StartQuartermaster();
 
+            _quartermasterViewModel = new QuartermasterViewModel(Substitute.For<IWindowManager>(), Quartermaster, ClipboardMonitor);
             _quartermasterViewModel.MonitorEvents();
         }
 
@@ -55,16 +35,9 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
             PasteIntoClipboard(gameItemText);
 
-            _quartermaster.Item.ShouldMatch(expectedItem);
+            Quartermaster.Item.ShouldMatch(expectedItem);
             _quartermasterViewModel.Item.ShouldMatch(expectedItem);
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
-        }
-
-        private void PasteIntoClipboard(string gameItemText)
-        {
-            _clipboardMonitor.CurrentText.Returns(gameItemText);
-            _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(),
-                new ClipboardChangedEventArgs(gameItemText));
         }
 
         [Fact]
@@ -72,7 +45,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         {
             StartQuartermaster();
 
-            _quartermaster.Item.ShouldMatch(NoItem);
+            Quartermaster.Item.ShouldMatch(NoItem);
         }
 
         [Fact]
@@ -82,17 +55,17 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
             StartQuartermaster();
 
-            _quartermaster.Item.ShouldMatch(NoItem);
+            Quartermaster.Item.ShouldMatch(NoItem);
         }
 
         [Fact]
         public void On_startup_if_the_clipboard_has_an_iron_ring_then_an_iron_ring_should_be_displayed()
         {
-            _clipboardMonitor.CurrentText.Returns(ItemTextExamples.IronRing);
+            ClipboardMonitor.CurrentText.Returns(ItemTextExamples.IronRing);
 
             StartQuartermaster();
 
-            _quartermaster.Item.ShouldMatch(IronRingItem);
+            Quartermaster.Item.ShouldMatch(IronRingItem);
             _quartermasterViewModel.Item.ShouldMatch(IronRingItem);
         }
     }

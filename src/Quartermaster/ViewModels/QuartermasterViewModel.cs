@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Dynamic;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
@@ -13,11 +15,13 @@ namespace Mathematically.Quartermaster.ViewModels
         private HwndSource _hwndSource;
 
         private readonly IClipboardMonitor _monitor;
+        private readonly IWindowManager _windowManager;
         private readonly IQuartermaster _quartermaster;
         private IPoeItem _item;
 
-        public QuartermasterViewModel(IQuartermaster quartermaster, IClipboardMonitor monitor)
+        public QuartermasterViewModel(IWindowManager windowManager, IQuartermaster quartermaster, IClipboardMonitor monitor)
         {
+            _windowManager = windowManager;
             _quartermaster = quartermaster;
             _monitor = monitor;
 
@@ -28,7 +32,7 @@ namespace Mathematically.Quartermaster.ViewModels
 
         protected override void OnViewLoaded(object view)
         {
-            // Probably a better way to do this in structuremap? Basically we need to be late bound enough
+            // Possibly a better way to do this in StructureMap? Basically we need to be late bound "enough"
             // to get access to the actual window/visual for its hwnd so we can use the clipboard.
             var window = GetView() as Window;
             if (window == null) throw new NullReferenceException("Window is null!?");
@@ -55,6 +59,20 @@ namespace Mathematically.Quartermaster.ViewModels
                 _item = value;
                 NotifyOfPropertyChange(() => Item);
             }
+        }
+
+        public void HUD( )
+        {
+            dynamic settings = new ExpandoObject();
+
+            settings.WindowStyle = WindowStyle.None;
+            settings.Left = 10;
+            settings.Top = 10;
+            settings.AllowsTransparency = true;
+            settings.Background = Brushes.Transparent;
+            settings.SizeToContent = SizeToContent.WidthAndHeight;
+
+            _windowManager.ShowWindow(new HUDViewModel(_quartermaster), null, settings);
         }
 
         public void Dispose()

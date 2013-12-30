@@ -7,19 +7,7 @@
              mc:Ignorable="d">
     <UserControl.Resources>
 
-        <Style x:Key="StatusPanelStyle" TargetType="{x:Type StackPanel}">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-        </Style>
-
-        <Style x:Key="StatusMessageStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="HorizontalAlignment" Value="Left" />
-        </Style>
-
         <DataTemplate x:Key="PoeItemTemplate">
-            <TextBlock Text="{Binding}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="PoeItemContentTemplate"  DataType="items:IPoeItem">
             <StackPanel TextElement.FontFamily="/Resources/#Fontin SmallCaps"
                         TextElement.FontSize="12"
                         TextOptions.TextFormattingMode="Display"
@@ -30,12 +18,13 @@
                 <TextBlock Text="{Binding ItemLevel, StringFormat='Item Level: {0}'}" />
             </StackPanel>
         </DataTemplate>
-
     </UserControl.Resources>
 
     <DockPanel>
-        <StackPanel>
-            <ContentControl Content="{Binding Path=Item}" ContentTemplate="{StaticResource PoeItemContentTemplate}" />
+        <StackPanel DockPanel.Dock="Bottom">
+            <Button x:Name="HUD">HUD</Button>
         </StackPanel>
+        <ContentControl Name="Item" ContentTemplate="{StaticResource PoeItemTemplate}" />
     </DockPanel>
+    
 </UserControl>
