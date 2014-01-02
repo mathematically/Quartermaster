@@ -10,29 +10,26 @@ using Quartermaster.Infrastructure;
 
 namespace Mathematically.Quartermaster.ViewModels
 {
-    public class QuartermasterViewModel : Screen, IDisposable
+    public class QuartermasterViewModel : ItemViewModel
     {
         private HwndSource _hwndSource;
 
         private readonly IClipboardMonitor _monitor;
         private readonly IWindowManager _windowManager;
-        private readonly IQuartermaster _quartermaster;
-        private IPoeItem _item;
 
-        public QuartermasterViewModel(IWindowManager windowManager, IQuartermaster quartermaster, IClipboardMonitor monitor)
+        private readonly HUDViewModel _hud;
+
+        public QuartermasterViewModel(IWindowManager windowManager, IQuartermaster quartermaster, IClipboardMonitor monitor): base(quartermaster)
         {
             _windowManager = windowManager;
-            _quartermaster = quartermaster;
             _monitor = monitor;
 
-            Item = quartermaster.Item;
-
-            _quartermaster.PoeItemArrived += NewItemArrived;
+            _hud = new HUDViewModel(quartermaster);
         }
 
         protected override void OnViewLoaded(object view)
         {
-            // Possibly a better way to do this in StructureMap? Basically we need to be late bound "enough"
+            // Possibly a better way to do this, but basically we need to be late bound "enough"
             // to get access to the actual window/visual for its hwnd so we can use the clipboard.
             var window = GetView() as Window;
             if (window == null) throw new NullReferenceException("Window is null!?");
@@ -46,22 +43,19 @@ namespace Mathematically.Quartermaster.ViewModels
             base.OnViewLoaded(view);
         }
 
-        void NewItemArrived(object sender, PoeItemEventArgs e)
+        public void HUD( )
         {
-            Item = e.PoeItem;
-        }
-
-        public IPoeItem Item
-        {
-            get { return _item; }
-            private set
+            if (_hud.IsActive)
             {
-                _item = value;
-                NotifyOfPropertyChange(() => Item);
+                CloseHUD();
+            }
+            else
+            {
+                OpenHUD();
             }
         }
 
-        public void HUD( )
+        private void OpenHUD( )
         {
             dynamic settings = new ExpandoObject();
 
@@ -71,16 +65,14 @@ namespace Mathematically.Quartermaster.ViewModels
             settings.AllowsTransparency = true;
             settings.Background = Brushes.Transparent;
             settings.SizeToContent = SizeToContent.WidthAndHeight;
+            settings.ShowInTaskbar = false;
 
-            _windowManager.ShowWindow(new HUDViewModel(_quartermaster), null, settings);
+            _windowManager.ShowWindow(_hud, null, settings);
         }
 
-        public void Dispose()
+        private void CloseHUD()
         {
-            _quartermaster.PoeItemArrived -= NewItemArrived;
-
-            _hwndSource.Dispose();
-            _quartermaster.Dispose();
+            _hud.TryClose();
         }
     }
 }

@@ -21,6 +21,19 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                 });
         }
 
+        protected void ConfigureFakeWeaponParserWith(string itemText, string itemName, ItemRarity rarity, int itemLevel)
+        {
+            ItemParser.When(itemParser => itemParser.Parse(Arg.Is<string>(s => s == itemText)))
+                .Do(callInfo =>
+                {
+                    ItemParser.Name.Returns(itemName);
+                    ItemParser.Rarity.Returns(rarity);
+                    ItemParser.ItemLevel.Returns(itemLevel);
+                    ItemParser.IsWeapon.Returns(true);
+
+                });
+        }
+
         protected void ConfigureFakeFactoryFor(string itemName)
         {
             ItemTextFactory.CreateItem(Arg.Any<string>()).Returns(GetItem(itemName));

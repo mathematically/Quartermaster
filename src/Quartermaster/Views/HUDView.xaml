@@ -7,7 +7,10 @@
         <i:Interaction.Behaviors>
             <behaviours:AlwaysOnTopBehavior/>
         </i:Interaction.Behaviors>
-    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <StackPanel Orientation="Horizontal">
         <TextBlock Text="{Binding Item.ItemLevel}" Foreground="White" />
-    </Grid>
+        <ContentControl Name="Weapon" Foreground="White"
+                            ContentTemplate="{StaticResource PoeWeaponTemplate}"
+                            Visibility="{Binding Converter={StaticResource CollapsedIfNull}}" />
+    </StackPanel>
 </Window>

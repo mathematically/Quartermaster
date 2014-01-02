@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:items="clr-namespace:Mathematically.Quartermaster.Domain.Items;assembly=Quartermaster.Domain">
+
+    <DataTemplate x:Key="PoeItemTemplate" DataType="{x:Type items:PoeItem}">
+        <StackPanel>
+            <TextBlock Text="{Binding Rarity, Converter={StaticResource EnumDescriptionConverter}}" />
+            <TextBlock Text="{Binding Name}" />
+            <TextBlock Text="--------" />
+            <TextBlock Text="{Binding ItemLevel, StringFormat='Item Level: {0}'}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PoeWeaponTemplate" DataType="{x:Type items:PoeWeapon}">
+        <StackPanel>
+            <TextBlock Text="{Binding DPS, StringFormat='Base DPS: {0:0.0}'}" />
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

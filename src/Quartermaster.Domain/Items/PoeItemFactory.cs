@@ -1,7 +1,6 @@
-
 namespace Mathematically.Quartermaster.Domain.Items
 {
-    public class PoeItemFactory: IPoeItemFactory    
+    public class PoeItemFactory : IPoeItemFactory
     {
         private readonly IPoeItemParser _itemParser;
 
@@ -13,7 +12,10 @@ namespace Mathematically.Quartermaster.Domain.Items
         public IPoeItem CreateItem(string gameItemText)
         {
             _itemParser.Parse(gameItemText);
-            return new PoeItem(_itemParser.Name, _itemParser.Rarity, _itemParser.ItemLevel);
+
+            return _itemParser.IsWeapon
+                ? new PoeWeapon(_itemParser.Name, _itemParser.Rarity, _itemParser.ItemLevel)
+                : new PoeItem(_itemParser.Name, _itemParser.Rarity, _itemParser.ItemLevel);
         }
     }
 }

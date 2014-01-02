@@ -15,7 +15,7 @@ namespace Quartermaster.Infrastructure
             if (!itemText.Contains(PoeText.RARITY_MARKER))
                 return false;
 
-            var lines = itemText.Split(PoeText.AllPlatformLineSplitChars, StringSplitOptions.None);
+            var lines = itemText.Split(Constants.AllPlatformLineSplitChars, StringSplitOptions.None);
             var hasAtLeastTwoSectionDividers = lines.Count(line => line == PoeText.SECTION_DIVIDER) >= 2;
 
             return hasAtLeastTwoSectionDividers;

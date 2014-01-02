@@ -7,15 +7,14 @@ namespace Mathematically.Quartermaster.Tests.Specs
 {
     public class HUDDisplayFeature : QuartermasterFeature
     {
-// ReSharper disable once InconsistentNaming
-        private HUDViewModel _HUDViewModel;
+        private HUDViewModel _hudViewModel;
 
         protected override void StartQuartermaster()
         {
             base.StartQuartermaster();
 
-            _HUDViewModel = new HUDViewModel(Quartermaster);
-            _HUDViewModel.MonitorEvents();
+            _hudViewModel = new HUDViewModel(Quartermaster);
+            _hudViewModel.MonitorEvents();
         }
 
         [Theory]
@@ -28,8 +27,8 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
             PasteIntoClipboard(gameItemText);
 
-            _HUDViewModel.Item.ItemLevel.Should().Be(itemLevel);
-            _HUDViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
+            _hudViewModel.Item.ItemLevel.Should().Be(itemLevel);
+            _hudViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
     }
 }

@@ -17,14 +17,16 @@ namespace Mathematically.Quartermaster.Domain.Items
         public string Name { get; private set; }
         public ItemRarity Rarity { get; private set; }
         public int ItemLevel { get; private set; }
+        public bool IsWeapon { get; private set; }
 
         public void Parse(string itemText)
         {
-            _textLines = itemText.Split(PoeText.AllPlatformLineSplitChars, StringSplitOptions.None);
+            _textLines = itemText.Split(Constants.AllPlatformLineSplitChars, StringSplitOptions.None);
 
             Rarity = ParseRarity();
             Name = _textLines[NameLineIndex];
             ItemLevel = ParseItemLevel();
+            IsWeapon = DetectWeapon();
         }
 
         private ItemRarity ParseRarity( )
@@ -40,16 +42,21 @@ namespace Mathematically.Quartermaster.Domain.Items
             return rawLineText.Substring(markerLength, rawLineText.Length - markerLength);
         }
 
+        private int ParseItemLevel( )
+        {
+            string rawLineText = _textLines.First(line => line.Contains(PoeText.ITEMLEVEL_MARKER));
+            return ExtractNumericMarkerValue(rawLineText, ItemLevelMarkerLength);
+        }
+
         private int ExtractNumericMarkerValue(string rawLineText, int markerLength)
         {
             string valueText = ExtractMarkerValue(rawLineText, markerLength);
             return int.Parse(valueText);
         }
 
-        private int ParseItemLevel( )
+        private bool DetectWeapon()
         {
-            string rawLineText = _textLines.First(line => line.Contains(PoeText.ITEMLEVEL_MARKER));
-            return ExtractNumericMarkerValue(rawLineText, ItemLevelMarkerLength);
+            return _textLines.FirstOrDefault(line => line.Contains(PoeText.WEAPON_MARKER)) != null;
         }
     }
 }

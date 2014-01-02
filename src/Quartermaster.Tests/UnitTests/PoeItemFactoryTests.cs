@@ -1,4 +1,5 @@
 ﻿using ExpectedObjects;
+using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
@@ -29,5 +30,20 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             item.ShouldMatch(expectedItem);
         }
+
+        [Theory]
+        [InlineData(Weapons.DriftwoodWand, DriftwoodWandName, ItemRarity.Normal, 4)]
+        public void Item_factory_generates_weapons_for_weapon_text(string itemText, string itemName, ItemRarity rarity, int itemLevel)
+        {
+            var expectedItem = GetExpectedItem(itemName);
+            ConfigureFakeWeaponParserWith(itemText, itemName, rarity, itemLevel);
+            CreateSUT();
+
+            var item = _sut.CreateItem(itemText);
+
+            item.ShouldMatch(expectedItem);
+            item.Should().BeOfType<PoeWeapon>();
+        }
     }
+
 }

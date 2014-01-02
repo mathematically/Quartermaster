@@ -4,6 +4,7 @@ using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using NSubstitute;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
@@ -48,6 +49,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         // Item level always the same
+
         [Theory]
         [InlineData(Rings.IronRing, 4)]
         [InlineData(Rings.SapphireRing, 15)]
@@ -56,6 +58,17 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             ParseTextWithSut(itemText);
 
             _sut.ItemLevel.Should().Be(itemLevel);
+        }
+
+        [Theory]
+        [InlineData(Weapons.DriftwoodWand, true)]
+        [InlineData(Weapons.DriftwoodMaul, true)]
+        [InlineData(Rings.IronRing, false)]
+        public void Parser_detects_weapons_correctly(string itemText, bool isWeapon)
+        {
+            ParseTextWithSut(itemText);
+
+            _sut.IsWeapon.Should().Be(isWeapon);
         }
     }
 }

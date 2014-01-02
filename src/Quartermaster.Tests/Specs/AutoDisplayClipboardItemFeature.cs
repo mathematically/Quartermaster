@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.InteropServices;
+using System.Windows;
 using Caliburn.Micro;
 using ExpectedObjects;
 using FluentAssertions;
@@ -8,9 +9,14 @@ using NSubstitute;
 using Ploeh.AutoFixture;
 using Xunit;
 using Xunit.Extensions;
+using Xunit.Sdk;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
+    public class DPSCalculatorFeature : QuartermasterFeature
+    {
+    }
+
     public class AutoDisplayClipboardItemFeature : QuartermasterFeature
     {
         private QuartermasterViewModel _quartermasterViewModel;
@@ -41,6 +47,24 @@ namespace Mathematically.Quartermaster.Tests.Specs
             _quartermasterViewModel.Item.ShouldMatch(expectedItem);
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
+
+        [Theory]
+        [InlineData(Rings.IronRing, false)]
+        [InlineData(Weapons.DriftwoodMaul, true)]
+        public void Weapon_property_should_only_be_set_for_weapons(string gameItemText, bool isWeapon)
+        {
+            StartQuartermaster();
+
+            PasteIntoClipboard(gameItemText);
+
+            if (isWeapon)
+                _quartermasterViewModel.Weapon.Should().NotBe(null);
+            else
+                _quartermasterViewModel.Weapon.Should().Be(null);
+
+            _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Weapon);
+        }
+
 
         [Fact]
         public void On_startup_if_the_clipboard_is_empty_then_no_item_should_be_displayed()
