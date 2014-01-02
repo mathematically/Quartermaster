@@ -2,15 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:viewModels="clr-namespace:Mathematically.Quartermaster.ViewModels"
         xmlns:behaviours="clr-namespace:Mathematically.Quartermaster.Behaviours">
         <i:Interaction.Behaviors>
             <behaviours:AlwaysOnTopBehavior/>
         </i:Interaction.Behaviors>
     <StackPanel Orientation="Horizontal">
-        <TextBlock Text="{Binding Item.ItemLevel}" Foreground="White" />
-        <ContentControl Name="Weapon" Foreground="White"
-                            ContentTemplate="{StaticResource PoeWeaponTemplate}"
-                            Visibility="{Binding Converter={StaticResource CollapsedIfNull}}" />
+        <TextBlock Text="{Binding Item.ItemLevel}" Foreground="White" Margin="2, 4"/>
+        <ContentControl Name="Weapon"
+                        ContentTemplate="{StaticResource PoeWeaponHUDTemplate}"
+                        Visibility="{Binding Path=Weapon.DPS, Converter={StaticResource CollapsedIfZero}}" />
     </StackPanel>
 </Window>

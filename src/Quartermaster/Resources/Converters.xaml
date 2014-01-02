@@ -3,4 +3,5 @@
                     xmlns:converters="clr-namespace:Mathematically.Quartermaster.Converters">
     <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
     <converters:NullVisibilityConverter x:Key="CollapsedIfNull" IsNotNull="Visible" IsNull="Collapsed" />
+    <converters:ZeroDoubleVisibilityConverter x:Key="CollapsedIfZero" IsZero="Collapsed" IsNotZero="Visible" />
 </ResourceDictionary>

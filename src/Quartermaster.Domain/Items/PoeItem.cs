@@ -28,6 +28,13 @@
             _itemLevel = itemLevel;
         }
 
+        public PoeItem(IPoeItemData itemData)
+        {
+            _name = itemData.Name;
+            _rarity = itemData.Rarity;
+            _itemLevel = itemData.ItemLevel;
+        }
+
         protected PoeItem()
         {
         }

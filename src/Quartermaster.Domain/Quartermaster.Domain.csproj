@@ -44,13 +44,17 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IQuartermaster.cs" />
     <Compile Include="Items\EmptyPoeItem.cs" />
+    <Compile Include="Items\EmptyPoeWeapon.cs" />
     <Compile Include="Items\GameItemChangedEventArgs.cs" />
     <Compile Include="Items\IItemTextChecker.cs" />
     <Compile Include="Items\IItemTextSource.cs" />
     <Compile Include="Items\IPoeItem.cs" />
+    <Compile Include="Items\IPoeItemData.cs" />
     <Compile Include="Items\IPoeItemFactory.cs" />
     <Compile Include="Items\IPoeItemParser.cs" />
+    <Compile Include="Items\IPoeUniversalItemData.cs" />
     <Compile Include="Items\IPoeWeapon.cs" />
+    <Compile Include="Items\IPoeWeaponData.cs" />
     <Compile Include="Items\ItemRarity.cs" />
     <Compile Include="Items\PoeItem.cs" />
     <Compile Include="Items\PoeItemEventArgs.cs" />

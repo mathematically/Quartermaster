@@ -11,6 +11,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         protected readonly Fixture Auto = new Fixture();
 
         protected readonly ExpectedObject NoItem = new EmptyPoeItem().ToExpectedObject();
+        protected readonly ExpectedObject NotAWeapon = new EmptyPoeWeapon().ToExpectedObject();
 
         private readonly Dictionary<string, PoeItem> _items = new Dictionary<string, PoeItem>();
         private readonly Dictionary<string, ExpectedObject> _expectedItems = new Dictionary<string, ExpectedObject>();
@@ -103,7 +104,6 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                 {ThirstyRubyRingOfSuccess.Name, ThirstyRubyRingOfSuccess},
                 {DriftwoodWand.Name, DriftwoodWand},
                 {DriftwoodMaul.Name, DriftwoodMaul},
-
             };
 
             // And if we have an expected object for each we can do easy comparison checks.
@@ -120,4 +120,4 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
             return _items[itemName];
         }
     }
-} ;
+}

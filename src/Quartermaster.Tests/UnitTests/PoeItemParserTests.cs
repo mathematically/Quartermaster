@@ -1,10 +1,7 @@
-using System.Windows.Media.Animation;
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
-using NSubstitute;
-using Xunit;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
@@ -69,6 +66,33 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             ParseTextWithSut(itemText);
 
             _sut.IsWeapon.Should().Be(isWeapon);
+        }
+
+        // All weapons have physical damage, non-weapons should be zero
+
+        [Theory]
+        [InlineData(Weapons.DriftwoodWand, 4, 7)]
+        [InlineData(Weapons.DriftwoodMaul, 12, 19)]
+        [InlineData(Rings.IronRing, 0, 0)]
+        public void Parser_detects_physical_damage_correctly(string itemText, int minPhysicalDamage, int maxPhysicalDamage)
+        {
+            ParseTextWithSut(itemText);
+
+            _sut.MinPhysicalDamage.Should().Be(minPhysicalDamage);
+            _sut.MaxPhysicalDamage.Should().Be(maxPhysicalDamage);
+        }
+
+        // Same for attack speed
+
+        [Theory]
+        [InlineData(Weapons.DriftwoodWand, 1.30)]
+        [InlineData(Weapons.DriftwoodMaul, 1.10)]
+        [InlineData(Rings.IronRing, 0)]
+        public void Parser_detects_attack_speed_correctly(string itemText, double attackSpeed)
+        {
+            ParseTextWithSut(itemText);
+
+            _sut.AttackSpeed.Should().Be(attackSpeed);
         }
     }
 }

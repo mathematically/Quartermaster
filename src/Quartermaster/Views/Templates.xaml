@@ -13,7 +13,13 @@
 
     <DataTemplate x:Key="PoeWeaponTemplate" DataType="{x:Type items:PoeWeapon}">
         <StackPanel>
-            <TextBlock Text="{Binding DPS, StringFormat='Base DPS: {0:0.0}'}" />
+            <TextBlock Text="{Binding DPS, StringFormat='DPS: {0:0.0}'}" />
+        </StackPanel>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="PoeWeaponHUDTemplate" DataType="{x:Type items:PoeWeapon}">
+        <StackPanel>
+            <TextBlock Foreground="White" Margin="2, 4" Text="{Binding DPS, StringFormat='{}{0:0.0}'}" />
         </StackPanel>
     </DataTemplate>
 

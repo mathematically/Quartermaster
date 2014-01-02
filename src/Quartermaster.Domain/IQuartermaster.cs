@@ -9,6 +9,7 @@ namespace Mathematically.Quartermaster.Domain
     public interface IQuartermaster: IDisposable
     {
         IPoeItem Item { get; }
+        IPoeWeapon Weapon { get; }
         event EventHandler<PoeItemEventArgs> PoeItemArrived;
     }
 }

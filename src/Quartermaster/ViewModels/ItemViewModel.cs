@@ -8,6 +8,7 @@ namespace Mathematically.Quartermaster.ViewModels
     {
         private readonly IQuartermaster _quartermaster;
         private IPoeItem _item;
+        private IPoeWeapon _weapon;
 
         protected ItemViewModel(IQuartermaster quartermaster)
         {
@@ -15,7 +16,13 @@ namespace Mathematically.Quartermaster.ViewModels
 
             Item = _quartermaster.Item;
 
-            _quartermaster.PoeItemArrived += (sender, args) => Item = _quartermaster.Item;
+            _quartermaster.PoeItemArrived += _quartermaster_PoeItemArrived;
+        }
+
+        void _quartermaster_PoeItemArrived(object sender, PoeItemEventArgs e)
+        {
+            Item = _quartermaster.Item;
+            Weapon = _quartermaster.Weapon;
         }
 
         public IPoeItem Item
@@ -25,14 +32,17 @@ namespace Mathematically.Quartermaster.ViewModels
             {
                 _item = value;
                 NotifyOfPropertyChange(() => Item);
-                NotifyOfPropertyChange(() => Weapon);
             }
         }
 
         public IPoeWeapon Weapon
         {
-            // todo less hacky way of doing this?
-            get { return _item as PoeWeapon; }
+            get { return _weapon; }
+            private set
+            {
+                _weapon = value;
+                NotifyOfPropertyChange(() => Weapon);
+            }
         }
     }
 }

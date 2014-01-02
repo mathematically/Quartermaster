@@ -5,7 +5,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Caliburn.Micro;
 using Mathematically.Quartermaster.Domain;
-using Mathematically.Quartermaster.Domain.Items;
 using Quartermaster.Infrastructure;
 
 namespace Mathematically.Quartermaster.ViewModels
@@ -62,6 +61,7 @@ namespace Mathematically.Quartermaster.ViewModels
             settings.WindowStyle = WindowStyle.None;
             settings.Left = 10;
             settings.Top = 10;
+            settings.Topmost = true;
             settings.AllowsTransparency = true;
             settings.Background = Brushes.Transparent;
             settings.SizeToContent = SizeToContent.WidthAndHeight;

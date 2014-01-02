@@ -14,11 +14,12 @@
         <StackPanel TextElement.FontFamily="/Resources/#Fontin SmallCaps"
                     TextElement.FontSize="12"
                     TextOptions.TextFormattingMode="Display"
+                    Orientation="Vertical"
                     HorizontalAlignment="Center">
             <ContentControl Name="Item" ContentTemplate="{StaticResource PoeItemTemplate}" />
-            <ContentControl Name="Weapon" 
+            <ContentControl Name="Weapon"
                             ContentTemplate="{StaticResource PoeWeaponTemplate}"
-                            Visibility="{Binding Converter={StaticResource CollapsedIfNull}}" />
+                            Visibility="{Binding Path=Weapon.DPS, Converter={StaticResource CollapsedIfZero}}" />
         </StackPanel>
     </DockPanel>
 

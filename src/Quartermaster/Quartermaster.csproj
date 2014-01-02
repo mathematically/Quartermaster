@@ -66,6 +66,7 @@
     <Compile Include="Behaviours\AlwaysOnTopBehavior.cs" />
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
+    <Compile Include="Converters\ZeroDoubleVisibilityConverter.cs" />
     <Compile Include="QuartermasterWindowManager.cs" />
     <Compile Include="ViewModels\HUDViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />

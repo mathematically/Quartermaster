@@ -13,9 +13,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         {
             _itemParser.Parse(gameItemText);
 
-            return _itemParser.IsWeapon
-                ? new PoeWeapon(_itemParser.Name, _itemParser.Rarity, _itemParser.ItemLevel)
-                : new PoeItem(_itemParser.Name, _itemParser.Rarity, _itemParser.ItemLevel);
+            return _itemParser.IsWeapon ? new PoeWeapon(_itemParser) : new PoeItem(_itemParser);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Quartermaster.Infrastructure
             if (string.IsNullOrEmpty(itemText))
                 return false;
 
-            if (!itemText.Contains(PoeText.RARITY_MARKER))
+            if (!itemText.Contains(PoeText.RARITY_LABEL))
                 return false;
 
             var lines = itemText.Split(Constants.AllPlatformLineSplitChars, StringSplitOptions.None);

@@ -1,9 +1,6 @@
 ﻿namespace Mathematically.Quartermaster.Domain.Items
 {
-    public interface IPoeItem
+    public interface IPoeItem: IPoeItemData
     {
-        string Name { get; }
-        ItemRarity Rarity { get; }
-        int ItemLevel { get; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Windows;
+﻿using System.Windows;
 using Caliburn.Micro;
 using ExpectedObjects;
 using FluentAssertions;
@@ -9,14 +8,9 @@ using NSubstitute;
 using Ploeh.AutoFixture;
 using Xunit;
 using Xunit.Extensions;
-using Xunit.Sdk;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class DPSCalculatorFeature : QuartermasterFeature
-    {
-    }
-
     public class AutoDisplayClipboardItemFeature : QuartermasterFeature
     {
         private QuartermasterViewModel _quartermasterViewModel;
@@ -58,9 +52,9 @@ namespace Mathematically.Quartermaster.Tests.Specs
             PasteIntoClipboard(gameItemText);
 
             if (isWeapon)
-                _quartermasterViewModel.Weapon.Should().NotBe(null);
+                _quartermasterViewModel.Weapon.ShouldNotMatch(NotAWeapon);
             else
-                _quartermasterViewModel.Weapon.Should().Be(null);
+                _quartermasterViewModel.Weapon.ShouldMatch(NotAWeapon);
 
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Weapon);
         }

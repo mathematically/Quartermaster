@@ -18,6 +18,8 @@ Itemlevel: 4
 11% increased Spell Damage
 ";
 
+        internal const double DriftwoodWandDPS = ((7 - 4) / 2.0) * 1.3;
+
         // Another simple example weapon
         internal const string DriftwoodMaul = @"Rarity: Normal
 Driftwood Maul
@@ -36,5 +38,6 @@ Itemlevel: 4
 --------
 20% increased Stun Duration on enemies
 ";
+        internal const double DriftwoodMaulDPS = ((19 - 12) / 2.0) * 1.1;
     }
 }

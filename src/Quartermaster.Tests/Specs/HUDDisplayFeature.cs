@@ -21,6 +21,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Rings.IronRing, 4)]
         [InlineData(Rings.SapphireRing, 15)]
         [InlineData(Weapons.DriftwoodMaul, 4)]
+        [InlineData(Weapons.DriftwoodWand, 4)]
         public void Copying_item_text_in_game_sets_the_HUD_item_level_correctly(string gameItemText, int itemLevel)
         {
             StartQuartermaster();
@@ -29,6 +30,18 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
             _hudViewModel.Item.ItemLevel.Should().Be(itemLevel);
             _hudViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
+        }
+
+        [Theory]
+        [InlineData(Weapons.DriftwoodWand, Weapons.DriftwoodWandDPS)]
+        [InlineData(Weapons.DriftwoodMaul, Weapons.DriftwoodMaulDPS)]
+        public void Copying_weapon_item_text_in_game_sets_the_HUD_DPS_correctly(string gameItemText, double dps)
+        {
+            StartQuartermaster();
+
+            PasteIntoClipboard(gameItemText);
+
+            _hudViewModel.Weapon.DPS.Should().Be(dps);
         }
     }
 }

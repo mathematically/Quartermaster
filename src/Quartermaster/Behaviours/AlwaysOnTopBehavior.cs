@@ -7,6 +7,8 @@ namespace Mathematically.Quartermaster.Behaviours
     {
         protected override void OnAttached( )
         {
+            AssociatedObject.Topmost = true;
+
             base.OnAttached();
             AssociatedObject.LostFocus += (s, e) => AssociatedObject.Topmost = true;
         }
