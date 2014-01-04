@@ -6,12 +6,11 @@ using Ploeh.AutoFixture;
 
 namespace Mathematically.Quartermaster.Tests.Fixtures
 {
-    public class QuartermasterFixture
+    public class TestItemsFixture
     {
         protected readonly Fixture Auto = new Fixture();
 
         protected readonly ExpectedObject NoItem = new EmptyPoeItem().ToExpectedObject();
-        protected readonly ExpectedObject NotAWeapon = new EmptyPoeWeapon().ToExpectedObject();
 
         private readonly Dictionary<string, PoeItem> _items = new Dictionary<string, PoeItem>();
         private readonly Dictionary<string, ExpectedObject> _expectedItems = new Dictionary<string, ExpectedObject>();
@@ -71,7 +70,10 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         protected static readonly PoeItem DriftwoodWand = new PoeItem(
             DriftwoodWandName,
             ItemRarity.Normal,
-            4
+            4,
+            4,
+            7,
+            1.30
             );
 
         protected readonly ExpectedObject DriftwoodWandItem = DriftwoodWand.ToExpectedObject();
@@ -85,25 +87,46 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         protected static readonly PoeItem DriftwoodMaul = new PoeItem(
             DriftwoodMaulName,
             ItemRarity.Normal,
-            4
+            4,
+            12,
+            19,
+            1.1
             );
 
         protected readonly ExpectedObject DriftwoodMaulItem = DriftwoodMaul.ToExpectedObject();
 
         #endregion
 
+        #region Heavy Short Bow
+
+        protected const string HeavyShortBowName = "Heavy Short Bow";
+
+        protected static readonly PoeItem HeavyShortBow = new PoeItem(
+            HeavyShortBowName,
+            ItemRarity.Magic,
+            7,
+            5,
+            14,
+            1.55
+            );
+
+        protected readonly ExpectedObject HeavyShortBowItem = HeavyShortBow.ToExpectedObject();
+
         #endregion
 
-        protected QuartermasterFixture( )
+        #endregion
+
+        protected TestItemsFixture( )
         {
             // Indexed access to the test items makes theories easier to write.
             _items = new Dictionary<string, PoeItem>()
             {
-                {IronRing.Name, IronRing},
-                {SapphireRing.Name, SapphireRing},
-                {ThirstyRubyRingOfSuccess.Name, ThirstyRubyRingOfSuccess},
-                {DriftwoodWand.Name, DriftwoodWand},
-                {DriftwoodMaul.Name, DriftwoodMaul},
+                {IronRingName, IronRing},
+                {SapphireRingName, SapphireRing},
+                {ThirstyRubyRingOfSuccessName, ThirstyRubyRingOfSuccess},
+                {DriftwoodWandName, DriftwoodWand},
+                {DriftwoodMaulName, DriftwoodMaul},
+                {HeavyShortBowName, HeavyShortBow},
             };
 
             // And if we have an expected object for each we can do easy comparison checks.

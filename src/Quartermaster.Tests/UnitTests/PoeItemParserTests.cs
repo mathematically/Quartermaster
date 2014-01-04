@@ -2,11 +2,12 @@ using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class PoeItemParserTests : QuartermasterFixture
+    public class PoeItemParserTests : TestItemsFixture
     {
         private PoeItemParser _sut;
 
@@ -69,6 +70,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         // All weapons have physical damage, non-weapons should be zero
+        // todo this is not true.  There are weapons without physical damage (at least one unique, maybe more).
 
         [Theory]
         [InlineData(Weapons.DriftwoodWand, 4, 7)]
@@ -80,6 +82,15 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             _sut.MinPhysicalDamage.Should().Be(minPhysicalDamage);
             _sut.MaxPhysicalDamage.Should().Be(maxPhysicalDamage);
+        }
+
+        [Fact]
+        public void Physical_damage_parse_works_for_augmented_items( )
+        {
+            ParseTextWithSut(Weapons.HeavyShortBow);
+
+            _sut.MinPhysicalDamage.Should().Be(5);
+            _sut.MaxPhysicalDamage.Should().Be(14);
         }
 
         // Same for attack speed

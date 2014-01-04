@@ -11,7 +11,7 @@ Itemlevel: 4
 Adds 1-4 Physical Damage
 ";
 
-        // Another simple ring with an item requirement.
+        // Another simple ring with a level requirement.
         internal const string SapphireRing = @"Rarity: Normal
 Sapphire Ring
 --------

@@ -44,15 +44,14 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IQuartermaster.cs" />
     <Compile Include="Items\EmptyPoeItem.cs" />
-    <Compile Include="Items\EmptyPoeWeapon.cs" />
     <Compile Include="Items\GameItemChangedEventArgs.cs" />
+    <Compile Include="Items\ICommonPoeItemData.cs" />
     <Compile Include="Items\IItemTextChecker.cs" />
     <Compile Include="Items\IItemTextSource.cs" />
     <Compile Include="Items\IPoeItem.cs" />
     <Compile Include="Items\IPoeItemData.cs" />
     <Compile Include="Items\IPoeItemFactory.cs" />
     <Compile Include="Items\IPoeItemParser.cs" />
-    <Compile Include="Items\IPoeUniversalItemData.cs" />
     <Compile Include="Items\IPoeWeapon.cs" />
     <Compile Include="Items\IPoeWeaponData.cs" />
     <Compile Include="Items\ItemRarity.cs" />
@@ -60,7 +59,7 @@
     <Compile Include="Items\PoeItemEventArgs.cs" />
     <Compile Include="Items\PoeItemFactory.cs" />
     <Compile Include="Items\PoeItemParser.cs" />
-    <Compile Include="Items\PoeWeapon.cs" />
+    <Compile Include="Items\ValueExtractor.cs" />
     <Compile Include="PoeText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuartermasterStore.cs" />

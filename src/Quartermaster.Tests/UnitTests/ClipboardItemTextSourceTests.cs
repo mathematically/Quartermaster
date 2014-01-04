@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class ClipboardItemTextSourceTests: QuartermasterFixture
+    public class ClipboardItemTextSourceTests: TestItemsFixture
     {
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
         private readonly IItemTextChecker _itemTextChecker = Substitute.For<IItemTextChecker>();

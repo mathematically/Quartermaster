@@ -3,7 +3,7 @@ using NSubstitute;
 
 namespace Mathematically.Quartermaster.Tests.Fixtures
 {
-    public class FakeQuartermasterFixture: QuartermasterFixture
+    public class FakeQuartermasterFixture: TestItemsFixture
     {
         protected readonly IItemTextSource ItemTextSource = Substitute.For<IItemTextSource>();
         protected readonly IPoeItemFactory ItemTextFactory = Substitute.For<IPoeItemFactory>();

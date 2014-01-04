@@ -8,22 +8,13 @@ namespace Mathematically.Quartermaster.Domain
         private readonly IPoeItemFactory _itemFactory;
         private readonly IItemTextSource _itemTextSource;
 
-        EmptyPoeItem _blankItem = new EmptyPoeItem();
-        EmptyPoeWeapon _blankWeapon = new EmptyPoeWeapon();
-        
-        private IPoeItem _item;
-        private IPoeWeapon _weapon;
+        private IPoeItem _item = new EmptyPoeItem();
+        private IPoeWeapon _weapon = new EmptyPoeItem();
 
         public IPoeItem Item
         {
             get { return _item; }
             private set { _item = value; }
-        }
-
-        public IPoeWeapon Weapon
-        {
-            get { return _weapon; }
-            private set { _weapon = value; }
         }
 
         public QuartermasterStore(IPoeItemFactory itemFactory, IItemTextSource itemTextSource)
@@ -37,25 +28,11 @@ namespace Mathematically.Quartermaster.Domain
             {
                 CreatePoeItem(_itemTextSource.ItemText);
             }
-            else
-            {
-                _item = _blankItem;
-                _weapon = _blankWeapon;
-            }
         }
 
         private void CreatePoeItem(string itemText)
         {
             _item = _itemFactory.CreateItem(itemText);
-
-            if (_item is PoeWeapon)
-            {
-                _weapon = _item as PoeWeapon;
-            }
-            else
-            {
-                _weapon = _blankWeapon;
-            }
         }
 
         public event EventHandler<PoeItemEventArgs> PoeItemArrived;

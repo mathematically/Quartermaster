@@ -29,6 +29,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Rings.ThirstyRubyRingOfSuccess, ThirstyRubyRingOfSuccessName)]
         [InlineData(Weapons.DriftwoodWand, DriftwoodWandName)]
         [InlineData(Weapons.DriftwoodMaul, DriftwoodMaulName)]
+        [InlineData(Weapons.HeavyShortBow, HeavyShortBowName)]
         public void Copying_item_text_in_game_sets_the_displayed_item_to_the_item_that_text_represents(
             string gameItemText, string itemName)
         {
@@ -52,9 +53,9 @@ namespace Mathematically.Quartermaster.Tests.Specs
             PasteIntoClipboard(gameItemText);
 
             if (isWeapon)
-                _quartermasterViewModel.Weapon.ShouldNotMatch(NotAWeapon);
+                _quartermasterViewModel.Weapon.DPS.Should().NotBe(0.0);
             else
-                _quartermasterViewModel.Weapon.ShouldMatch(NotAWeapon);
+                _quartermasterViewModel.Weapon.DPS.Should().Be(0.0);
 
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Weapon);
         }

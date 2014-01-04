@@ -6,7 +6,7 @@ using Quartermaster.Infrastructure;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class QuartermasterFeature : QuartermasterFixture
+    public class QuartermasterFeature : TestItemsFixture
     {
         // The only thing faked for feature tests is the base clipboard/interop stuff.
         protected readonly IClipboardMonitor ClipboardMonitor = Substitute.For<IClipboardMonitor>();

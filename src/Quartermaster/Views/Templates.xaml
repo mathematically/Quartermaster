@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:items="clr-namespace:Mathematically.Quartermaster.Domain.Items;assembly=Quartermaster.Domain">
 
-    <DataTemplate x:Key="PoeItemTemplate" DataType="{x:Type items:PoeItem}">
+    <DataTemplate x:Key="PoeItemTemplate" DataType="{x:Type items:IPoeItem}">
         <StackPanel>
             <TextBlock Text="{Binding Rarity, Converter={StaticResource EnumDescriptionConverter}}" />
             <TextBlock Text="{Binding Name}" />
@@ -11,13 +11,13 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="PoeWeaponTemplate" DataType="{x:Type items:PoeWeapon}">
+    <DataTemplate x:Key="PoeWeaponTemplate" DataType="{x:Type items:IPoeWeapon}">
         <StackPanel>
             <TextBlock Text="{Binding DPS, StringFormat='DPS: {0:0.0}'}" />
         </StackPanel>
     </DataTemplate>
     
-    <DataTemplate x:Key="PoeWeaponHUDTemplate" DataType="{x:Type items:PoeWeapon}">
+    <DataTemplate x:Key="PoeWeaponHUDTemplate" DataType="{x:Type items:IPoeWeapon}">
         <StackPanel>
             <TextBlock Foreground="White" Margin="2, 4" Text="{Binding DPS, StringFormat='{}{0:0.0}'}" />
         </StackPanel>

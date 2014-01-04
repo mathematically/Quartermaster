@@ -4,6 +4,7 @@ namespace Mathematically.Quartermaster.Domain
     {
         public const string SECTION_DIVIDER = "--------";
         public const char RANGE_DIVIDER = '-';
+        public const string AUGMENTED_ANNOTATION = " (augmented)";
 
         public const string WEAPON_MARKER = ATTACKS_PER_SECOND_LABEL;
 

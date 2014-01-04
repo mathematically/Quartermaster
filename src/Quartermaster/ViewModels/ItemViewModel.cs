@@ -22,7 +22,7 @@ namespace Mathematically.Quartermaster.ViewModels
         void _quartermaster_PoeItemArrived(object sender, PoeItemEventArgs e)
         {
             Item = _quartermaster.Item;
-            Weapon = _quartermaster.Weapon;
+            Weapon = _quartermaster.Item;
         }
 
         public IPoeItem Item

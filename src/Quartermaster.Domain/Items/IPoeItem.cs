@@ -1,6 +1,6 @@
 ﻿namespace Mathematically.Quartermaster.Domain.Items
 {
-    public interface IPoeItem: IPoeItemData
+    public interface IPoeItem : IPoeWeapon, IPoeItemData
     {
     }
 }

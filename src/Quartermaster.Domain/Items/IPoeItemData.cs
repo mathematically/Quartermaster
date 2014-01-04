@@ -1,9 +1,6 @@
 ﻿namespace Mathematically.Quartermaster.Domain.Items
 {
-    public interface IPoeItemData
+    public interface IPoeItemData : ICommonPoeItemData, IPoeWeaponData
     {
-        string Name { get; }
-        ItemRarity Rarity { get; }
-        int ItemLevel { get; }
     }
 }

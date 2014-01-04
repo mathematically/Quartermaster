@@ -9,12 +9,8 @@ namespace Mathematically.Quartermaster.Domain.Items
         private const int RarityLineIndex = 0;
         private const int NameLineIndex = 1;
 
-        private static readonly int RarityLabelLength = PoeText.RARITY_LABEL.Length;
-        private static readonly int ItemLevelLabelLength = PoeText.ITEMLEVEL_LABEL.Length;
-        private static readonly int PhysicalDamageLabelLength = PoeText.PHYSICAL_DAMAGE_LABEL.Length;
-        private static readonly int AttackSpeedLabelLength = PoeText.ATTACKS_PER_SECOND_LABEL.Length;
-
         private string[] _textLines;
+        private readonly ValueExtractor _extract = new ValueExtractor();
 
         public string Name { get; private set; }
         public ItemRarity Rarity { get; private set; }
@@ -47,33 +43,30 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private ItemRarity ParseRarity( )
         {
-            string rawLineText = _textLines[RarityLineIndex];
-            var rarityText = ExtractValueText(rawLineText, RarityLabelLength);
+            var rarityText = _extract.TextFrom(_textLines[RarityLineIndex]);
 
             return (ItemRarity) Enum.Parse(typeof (ItemRarity), rarityText);
         }
 
-        private string ExtractValueText(string rawLineText, int markerLength)
-        {
-            return rawLineText.Substring(markerLength, rawLineText.Length - markerLength);
-        }
-
         private int ParseItemLevel()
         {
-            string rawLineText = _textLines.First(line => line.Contains(PoeText.ITEMLEVEL_LABEL));
-            return ExtractIntegerValue(rawLineText, ItemLevelLabelLength);
+            var line = FindLineWith(PoeText.ITEMLEVEL_LABEL);
+            return _extract.IntegerFrom(line);
         }
 
-        private int ExtractIntegerValue(string rawLineText, int markerLength)
+        private string FindLineWith(string label)
         {
-            string valueText = ExtractValueText(rawLineText, markerLength);
+            return _textLines.First(line => line.Contains(label));
+        }
 
-            return int.Parse(valueText);
+        private string FindOptionalLineWith(string label)
+        {
+            return _textLines.FirstOrDefault(line => line.Contains(label));
         }
 
         private bool DetectWeapon()
         {
-            return _textLines.FirstOrDefault(line => line.Contains(PoeText.WEAPON_MARKER)) != null;
+            return FindOptionalLineWith(PoeText.WEAPON_MARKER) != null;
         }
 
         private void ParseWeaponStats()
@@ -84,33 +77,34 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private void ParsePhysicalDamage( )
         {
-            var rawLineText = _textLines.FirstOrDefault(line => line.Contains(PoeText.PHYSICAL_DAMAGE_LABEL));
-            var range = ExtractIntegerRange(rawLineText, PhysicalDamageLabelLength);
+            var line = FindOptionalLineWith(PoeText.PHYSICAL_DAMAGE_LABEL);
 
-            MinPhysicalDamage = range.Item1;
-            MaxPhysicalDamage = range.Item2;
+            if (String.IsNullOrEmpty(line))
+            {
+                MinPhysicalDamage = 0;
+                MaxPhysicalDamage = 0;
+            }
+            else
+            {
+                var range = _extract.IntegerRangeFrom(line);
+
+                MinPhysicalDamage = range.Item1;
+                MaxPhysicalDamage = range.Item2;
+            }
         }
 
         private void ParseAttackSpeed()
         {
-            var rawLineText = _textLines.FirstOrDefault(line => line.Contains(PoeText.ATTACKS_PER_SECOND_LABEL));
+            var line = FindOptionalLineWith(PoeText.ATTACKS_PER_SECOND_LABEL);
 
-            AttackSpeed = ExtractDoubleValue(rawLineText, AttackSpeedLabelLength);
-        }
-
-        private Tuple<int, int> ExtractIntegerRange(string rawLineText, int markerLength)
-        {
-            string valueText = ExtractValueText(rawLineText, markerLength);
-            var values = valueText.Split(new[] { PoeText.RANGE_DIVIDER }, StringSplitOptions.None);
-
-            return new Tuple<int, int>(int.Parse(values[0]), int.Parse(values[1]));
-        }
-
-        private double ExtractDoubleValue(string rawLineText, int markerLength)
-        {
-            string valueText = ExtractValueText(rawLineText, markerLength);
-
-            return double.Parse(valueText);
+            if (String.IsNullOrEmpty(line))
+            {
+                AttackSpeed = 0.0;
+            }
+            else
+            {
+                AttackSpeed = _extract.DoubleFrom(line);
+            }
         }
     }
 }
