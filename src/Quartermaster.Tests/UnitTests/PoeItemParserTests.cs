@@ -93,17 +93,42 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             _sut.MaxPhysicalDamage.Should().Be(14);
         }
 
-        // Same for attack speed
+        // Attack speed exists for all weapons.
 
         [Theory]
         [InlineData(Weapons.DriftwoodWand, 1.30)]
         [InlineData(Weapons.DriftwoodMaul, 1.10)]
-        [InlineData(Rings.IronRing, 0)]
+        [InlineData(Rings.IronRing, 0.0)]
         public void Parser_detects_attack_speed_correctly(string itemText, double attackSpeed)
         {
             ParseTextWithSut(itemText);
 
             _sut.AttackSpeed.Should().Be(attackSpeed);
+        }
+
+        // Elemental damage
+        [Theory]
+        [InlineData(Weapons.HypnoticWing, 13, 38, 7, 13, 0, 0, 3, 32)]
+        [InlineData(Weapons.CorpseBlast, 19, 58, 27, 46, 7, 12, 4, 53)]
+        public void Parser_detects_elemental_damage_correctly(string itemText,
+            int minPhysicalDamage, int maxPhysicalDamage,
+            int minFireDamage, int maxFireDamage,
+            int minColdDamage, int maxColdDamage,
+            int minLightningDamage, int maxLightningDamage
+            )
+        {
+            ParseTextWithSut(itemText);
+
+            _sut.Elemental.MinFireDamage.Should().Be(minFireDamage);
+            _sut.Elemental.MaxFireDamage.Should().Be(maxFireDamage);
+            _sut.Elemental.MinColdDamage.Should().Be(minColdDamage);
+            _sut.Elemental.MaxColdDamage.Should().Be(maxColdDamage);
+            _sut.Elemental.MinLightningDamage.Should().Be(minLightningDamage);
+            _sut.Elemental.MaxLightningDamage.Should().Be(maxLightningDamage);
+
+            _sut.MinPhysicalDamage.Should().Be(minPhysicalDamage);
+            _sut.MaxPhysicalDamage.Should().Be(maxPhysicalDamage);
+
         }
     }
 }

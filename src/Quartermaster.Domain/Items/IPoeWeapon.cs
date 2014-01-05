@@ -3,6 +3,6 @@
     public interface IPoeWeapon
     {
         double DPS { get; }
-        double AttackSpeed { get; }
+        IElementalDamage Elemental { get; }
     }
 }

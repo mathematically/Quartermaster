@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Mathematically.Quartermaster.Domain.Items
@@ -10,7 +12,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         private const int NameLineIndex = 1;
 
         private string[] _textLines;
-        private readonly ValueExtractor _extract = new ValueExtractor();
+        private readonly PoeTextValueExtractor _extract = new PoeTextValueExtractor();
 
         public string Name { get; private set; }
         public ItemRarity Rarity { get; private set; }
@@ -19,6 +21,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         public int MinPhysicalDamage { get; private set; }
         public int MaxPhysicalDamage { get; private set; }
         public double AttackSpeed { get; private set; }
+        public IElementalDamage Elemental { get; private set; }
 
         public void Parse(string itemText)
         {
@@ -38,6 +41,10 @@ namespace Mathematically.Quartermaster.Domain.Items
             if (IsWeapon)
             {
                 ParseWeaponStats();
+            }
+            else
+            {
+                Elemental = PoeItem.ZeroElementalDamage;
             }
         }
 
@@ -72,10 +79,11 @@ namespace Mathematically.Quartermaster.Domain.Items
         private void ParseWeaponStats()
         {
             ParsePhysicalDamage();
+            ParseElementalDamage();
             ParseAttackSpeed();
         }
 
-        private void ParsePhysicalDamage( )
+        private void ParsePhysicalDamage()
         {
             var line = FindOptionalLineWith(PoeText.PHYSICAL_DAMAGE_LABEL);
 
@@ -88,23 +96,68 @@ namespace Mathematically.Quartermaster.Domain.Items
             {
                 var range = _extract.IntegerRangeFrom(line);
 
-                MinPhysicalDamage = range.Item1;
-                MaxPhysicalDamage = range.Item2;
+                MinPhysicalDamage = range.Min;
+                MaxPhysicalDamage = range.Max;
             }
+        }
+
+        private void ParseElementalDamage()
+        {
+            var line = FindOptionalLineWith(PoeText.ELEMENTAL_DAMAGE_LABEL);
+
+            if (String.IsNullOrEmpty(line))
+            {
+                Elemental = new NullElementalDamage();
+            }
+            else
+            {
+                Elemental = BuildElementalDamage(line);
+            }
+        }
+
+        private IElementalDamage BuildElementalDamage(string line)
+        {
+            var elementalRanges = new List<Range>()
+            {
+                new Range() {Min = 0, Max = 0}
+            };
+
+            elementalRanges.AddRange(_extract.RangeSetFrom(line));
+
+            // Damage mods always in the order fire, cold, lightning
+            var n = 1;
+            var fire = 0;
+            var cold = 0;
+            var lightning = 0;
+
+            if (FindOptionalLineWith(PoeText.FIRE_DAMAGE_LABEL) != null)
+            {
+                fire = n++;
+            }
+
+            if (FindOptionalLineWith(PoeText.COLD_DAMAGE_LABEL) != null)
+            {
+                cold = n++;
+            }
+
+            if (FindOptionalLineWith(PoeText.LIGHTNING_DAMAGE_LABEL) != null)
+            {
+                lightning = n++;
+            }
+
+            return new ElementalDamage(
+                elementalRanges[fire].Min, elementalRanges[fire].Max,
+                elementalRanges[cold].Min, elementalRanges[cold].Max,
+                elementalRanges[lightning].Min, elementalRanges[lightning].Max
+                );
         }
 
         private void ParseAttackSpeed()
         {
             var line = FindOptionalLineWith(PoeText.ATTACKS_PER_SECOND_LABEL);
 
-            if (String.IsNullOrEmpty(line))
-            {
-                AttackSpeed = 0.0;
-            }
-            else
-            {
-                AttackSpeed = _extract.DoubleFrom(line);
-            }
+            AttackSpeed = String.IsNullOrEmpty(line) ? 0.0 : _extract.DoubleFrom(line);
         }
     }
+
 }

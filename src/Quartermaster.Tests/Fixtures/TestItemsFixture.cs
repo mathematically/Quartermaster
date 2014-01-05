@@ -10,7 +10,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
     {
         protected readonly Fixture Auto = new Fixture();
 
-        protected readonly ExpectedObject NoItem = new EmptyPoeItem().ToExpectedObject();
+        protected readonly ExpectedObject NoItem = new NullPoeItem().ToExpectedObject();
 
         private readonly Dictionary<string, PoeItem> _items = new Dictionary<string, PoeItem>();
         private readonly Dictionary<string, ExpectedObject> _expectedItems = new Dictionary<string, ExpectedObject>();
@@ -114,6 +114,46 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         #endregion
 
+        #region Hypnotic Wing Bow
+
+        protected const string HypnoticWingName = "Hypnotic Wing";
+
+        protected static readonly PoeItem HypnoticWing = new PoeItem(
+            HypnoticWingName,
+            ItemRarity.Rare,
+            35,
+            13,
+            38,
+            1.55,
+            7, 13,
+            0, 0,
+            3, 32
+            );
+
+        protected readonly ExpectedObject HypnoticWingItem = HypnoticWing.ToExpectedObject();
+
+        #endregion
+
+        #region Hypnotic Wing Bow
+
+        protected const string CorpseBlastName = "Corpse Blast";
+
+        protected static readonly PoeItem CorpseBlast = new PoeItem(
+            CorpseBlastName,
+            ItemRarity.Rare,
+            35,
+            13,
+            38,
+            1.55,
+            7, 13,
+            0, 0,
+            3, 32
+            );
+
+        protected readonly ExpectedObject CorpseBlastItem = HypnoticWing.ToExpectedObject();
+
+        #endregion
+
         #endregion
 
         protected TestItemsFixture( )
@@ -127,6 +167,8 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                 {DriftwoodWandName, DriftwoodWand},
                 {DriftwoodMaulName, DriftwoodMaul},
                 {HeavyShortBowName, HeavyShortBow},
+                {HypnoticWingName, HypnoticWing},
+                {CorpseBlastName, CorpseBlast},
             };
 
             // And if we have an expected object for each we can do easy comparison checks.

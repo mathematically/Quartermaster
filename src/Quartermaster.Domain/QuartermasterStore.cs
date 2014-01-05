@@ -8,8 +8,8 @@ namespace Mathematically.Quartermaster.Domain
         private readonly IPoeItemFactory _itemFactory;
         private readonly IItemTextSource _itemTextSource;
 
-        private IPoeItem _item = new EmptyPoeItem();
-        private IPoeWeapon _weapon = new EmptyPoeItem();
+        private IPoeItem _item = new NullPoeItem();
+        private IPoeWeapon _weapon = new NullPoeItem();
 
         public IPoeItem Item
         {

@@ -3,7 +3,7 @@
     /// <summary>
     /// A PoeItem null object.
     /// </summary>
-    public class EmptyPoeItem : PoeItem
+    public class NullPoeItem : PoeItem
     {
         public override string Name
         {

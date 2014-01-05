@@ -5,5 +5,6 @@
         int MinPhysicalDamage { get; }
         int MaxPhysicalDamage { get; }
         double AttackSpeed { get; }
+        IElementalDamage Elemental { get; }
     }
 }

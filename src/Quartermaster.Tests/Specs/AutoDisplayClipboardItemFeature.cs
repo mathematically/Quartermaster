@@ -24,14 +24,15 @@ namespace Mathematically.Quartermaster.Tests.Specs
         }
 
         [Theory]
-        [InlineData(Rings.IronRing, IronRingName)]
-        [InlineData(Rings.SapphireRing, SapphireRingName)]
-        [InlineData(Rings.ThirstyRubyRingOfSuccess, ThirstyRubyRingOfSuccessName)]
-        [InlineData(Weapons.DriftwoodWand, DriftwoodWandName)]
-        [InlineData(Weapons.DriftwoodMaul, DriftwoodMaulName)]
-        [InlineData(Weapons.HeavyShortBow, HeavyShortBowName)]
+        [InlineData(Rings.IronRing, IronRingName, 0.0)]
+        [InlineData(Rings.SapphireRing, SapphireRingName, 0.0)]
+        [InlineData(Rings.ThirstyRubyRingOfSuccess, ThirstyRubyRingOfSuccessName, 0.0)]
+        [InlineData(Weapons.DriftwoodWand, DriftwoodWandName, Weapons.DriftwoodWandDPS)]
+        [InlineData(Weapons.DriftwoodMaul, DriftwoodMaulName, Weapons.DriftwoodMaulDPS)]
+        [InlineData(Weapons.HeavyShortBow, HeavyShortBowName, Weapons.HeavyShortBowDPS)]
+        [InlineData(Weapons.HypnoticWing, HypnoticWingName, Weapons.HypnoticWingDPS)]
         public void Copying_item_text_in_game_sets_the_displayed_item_to_the_item_that_text_represents(
-            string gameItemText, string itemName)
+            string gameItemText, string itemName, double dps)
         {
             var expectedItem = GetExpectedItem(itemName);
             StartQuartermaster();
@@ -39,6 +40,8 @@ namespace Mathematically.Quartermaster.Tests.Specs
             PasteIntoClipboard(gameItemText);
 
             Quartermaster.Item.ShouldMatch(expectedItem);
+            Quartermaster.Item.DPS.Should().Be(dps);
+
             _quartermasterViewModel.Item.ShouldMatch(expectedItem);
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
