@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Parser;
 using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using NSubstitute;
@@ -57,15 +58,14 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             CreateSUT();
 
-            FakeItemCopy(Rings.IronRing);
+            PasteIronRing();
 
-            _itemArrivedEventText.Should().NotBeNullOrEmpty();
+            _itemArrivedEventText.Should().Be(Rings.IronRing);
         }
 
         private void FakeItemCopy(string itemText)
         {
-            _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(),
-                new ClipboardChangedEventArgs(itemText));
+            _clipboardMonitor.ClipboardTextArrived += Raise.EventWith(new object(), new ClipboardChangedEventArgs(itemText));
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         [Fact]
-        public void When_the_clipboard_is_updated_with_invalid_text_previous_text_is_not_lost()
+        public void When_the_clipboard_is_updated_with_invalid_text_any_previous_valid_text_is_not_lost()
         {
             CreateSUT();
             PasteIronRing();
@@ -122,22 +122,6 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             PasteIronRing();
 
             _itemArrivedEventText.Should().Be(Rings.IronRing);
-        }
-
-        protected void ConfigureFakeParserWith(string itemText, string itemName, ItemRarity rarity)
-        {
-            ItemParser.When(itemParser => itemParser.Parse(Arg.Is<string>(s => s == itemText)))
-                .Do(callInfo =>
-                {
-                    ItemParser.Name.Returns(itemName);
-                    ItemParser.Rarity.Returns(rarity);
-                });
-        }
-
-        protected void ConfigureFakeItemTextSourceWith(string itemText)
-        {
-            ItemTextSource.ItemText.Returns(itemText);
-            ItemTextSource.HasItemText().Returns(true);
         }
     }
 }

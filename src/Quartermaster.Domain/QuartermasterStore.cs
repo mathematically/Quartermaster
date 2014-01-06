@@ -1,5 +1,6 @@
 ﻿using System;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Parser;
 
 namespace Mathematically.Quartermaster.Domain
 {
@@ -9,7 +10,6 @@ namespace Mathematically.Quartermaster.Domain
         private readonly IItemTextSource _itemTextSource;
 
         private IPoeItem _item = new NullPoeItem();
-        private IPoeWeapon _weapon = new NullPoeItem();
 
         public IPoeItem Item
         {
@@ -32,7 +32,7 @@ namespace Mathematically.Quartermaster.Domain
 
         private void CreatePoeItem(string itemText)
         {
-            _item = _itemFactory.CreateItem(itemText);
+            Item = _itemFactory.CreateItem(itemText);
         }
 
         public event EventHandler<PoeItemEventArgs> PoeItemArrived;
@@ -47,7 +47,7 @@ namespace Mathematically.Quartermaster.Domain
         {
             CreatePoeItem(args.ItemText);
 
-            OnPoeItemArrived(new PoeItemEventArgs(_item));
+            OnPoeItemArrived(new PoeItemEventArgs(Item));
         }
 
         public void Dispose()

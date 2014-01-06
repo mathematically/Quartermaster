@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Parser;
 using Mathematically.Quartermaster.Tests.ExampleItems;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using Xunit;

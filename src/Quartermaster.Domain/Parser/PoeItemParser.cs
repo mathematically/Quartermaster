@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using Mathematically.Quartermaster.Domain.Items;
 
-namespace Mathematically.Quartermaster.Domain.Items
+namespace Mathematically.Quartermaster.Domain.Parser
 {
     public class PoeItemParser : IPoeItemParser
     {
@@ -27,11 +27,15 @@ namespace Mathematically.Quartermaster.Domain.Items
         {
             _textLines = itemText.Split(Constants.AllPlatformLineSplitChars, StringSplitOptions.None);
 
-            Rarity = ParseRarity();
-            Name = _textLines[NameLineIndex];
-            ItemLevel = ParseItemLevel();
-
+            BasePropertiesParse();
             WeaponParse();
+        }
+
+        private void BasePropertiesParse( )
+        {
+            Name = _textLines[NameLineIndex];
+            Rarity = ParseRarity();
+            ItemLevel = ParseItemLevel();
         }
 
         private void WeaponParse( )
@@ -50,7 +54,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private ItemRarity ParseRarity( )
         {
-            var rarityText = _extract.TextFrom(_textLines[RarityLineIndex]);
+            var rarityText = _extract.ValueTextFrom(_textLines[RarityLineIndex]);
 
             return (ItemRarity) Enum.Parse(typeof (ItemRarity), rarityText);
         }
@@ -105,26 +109,19 @@ namespace Mathematically.Quartermaster.Domain.Items
         {
             var line = FindOptionalLineWith(PoeText.ELEMENTAL_DAMAGE_LABEL);
 
-            if (String.IsNullOrEmpty(line))
-            {
-                Elemental = new NullElementalDamage();
-            }
-            else
-            {
-                Elemental = BuildElementalDamage(line);
-            }
+            Elemental = String.IsNullOrEmpty(line) ? new NullElementalDamage() : BuildElementalDamage(line);
         }
 
         private IElementalDamage BuildElementalDamage(string line)
         {
             var elementalRanges = new List<Range>()
             {
-                new Range() {Min = 0, Max = 0}
+                new Range {Min = 0, Max = 0}
             };
 
             elementalRanges.AddRange(_extract.RangeSetFrom(line));
 
-            // Damage mods always in the order fire, cold, lightning
+            // Damage mods are always in the order fire, cold, lightning
             var n = 1;
             var fire = 0;
             var cold = 0;
@@ -132,6 +129,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
             if (FindOptionalLineWith(PoeText.FIRE_DAMAGE_LABEL) != null)
             {
+                // Fire is the nth range
                 fire = n++;
             }
 

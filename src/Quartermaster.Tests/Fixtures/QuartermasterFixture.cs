@@ -1,12 +1,12 @@
 ﻿using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Tests.Fixtures;
+using Mathematically.Quartermaster.Domain.Parser;
 using NSubstitute;
 using Quartermaster.Infrastructure;
 
-namespace Mathematically.Quartermaster.Tests.Specs
+namespace Mathematically.Quartermaster.Tests.Fixtures
 {
-    public class QuartermasterFeature : TestItemsFixture
+    public class QuartermasterFixture : TestItemsFixture
     {
         // The only thing faked for feature tests is the base clipboard/interop stuff.
         protected readonly IClipboardMonitor ClipboardMonitor = Substitute.For<IClipboardMonitor>();

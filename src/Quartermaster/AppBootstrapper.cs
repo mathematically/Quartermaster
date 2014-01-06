@@ -4,6 +4,7 @@ using System.Linq;
 using Caliburn.Micro;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Parser;
 using Mathematically.Quartermaster.ViewModels;
 using Quartermaster.Infrastructure;
 

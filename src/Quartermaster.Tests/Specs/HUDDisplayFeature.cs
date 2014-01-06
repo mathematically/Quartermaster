@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
 using Mathematically.Quartermaster.Tests.ExampleItems;
+using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModels;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class HUDDisplayFeature : QuartermasterFeature
+    public class HUDDisplayFeature : QuartermasterFixture
     {
         private HUDViewModel _hudViewModel;
 

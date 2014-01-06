@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mathematically.Quartermaster.Domain.Items
+namespace Mathematically.Quartermaster.Domain.Parser
 {
     internal class PoeTextValueExtractor
     {
-        public string TextFrom(string rawTooltipLine)
+        public string ValueTextFrom(string rawTooltipLine)
         {
             var markerLength = CalculateMarkerLength(rawTooltipLine);
-            var cookedTooltipLine = RemoveAugmentedIfPresent(rawTooltipLine);
+            var cookedTooltipLine = RemoveAugmentedAnnotationIfPresent(rawTooltipLine);
 
             return cookedTooltipLine.Substring(markerLength, cookedTooltipLine.Length - markerLength);
         }
 
-        private string RemoveAugmentedIfPresent(string tooltipLine)
+        private string RemoveAugmentedAnnotationIfPresent(string tooltipLine)
         {
             if (tooltipLine.Contains(PoeText.AUGMENTED_ANNOTATION))
             {
@@ -31,12 +31,12 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public int IntegerFrom(string tooltipLine)
         {
-            return int.Parse(TextFrom(tooltipLine));
+            return int.Parse(ValueTextFrom(tooltipLine));
         }
 
         public Range IntegerRangeFrom(string tooltipLine)
         {
-            string valueText = TextFrom(tooltipLine);
+            string valueText = ValueTextFrom(tooltipLine);
 
             var values = valueText.Split(new[] { PoeText.RANGE_DIVIDER }, StringSplitOptions.None);
 
@@ -47,12 +47,12 @@ namespace Mathematically.Quartermaster.Domain.Items
             };
         }
 
-        public List<Range> RangeSetFrom(string tooltipLine)
+        public IEnumerable<Range> RangeSetFrom(string tooltipLine)
         {
             var ranges = new List<Range>();
 
             // e.g. "Elemental Damage: 27-46 (augmented), 7-12 (augmented), 4-53 (augmented)"
-            var valueTexts = TextFrom(tooltipLine)
+            var valueTexts = ValueTextFrom(tooltipLine)
                 .Replace(" ", "")
                 .Split(',');
 
@@ -67,7 +67,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public double DoubleFrom(string tooltipLine)
         {
-            return double.Parse(TextFrom(tooltipLine));
+            return double.Parse(ValueTextFrom(tooltipLine));
         }
     }
 

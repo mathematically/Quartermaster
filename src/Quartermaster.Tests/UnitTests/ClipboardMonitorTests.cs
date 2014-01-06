@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using FluentAssertions;
 using Mathematically.Quartermaster.Tests.ExampleItems;
-using Mathematically.Quartermaster.Tests.Fixtures;
 using Quartermaster.Infrastructure;
 using Xunit;
 

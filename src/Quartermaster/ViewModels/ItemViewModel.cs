@@ -1,10 +1,11 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
 
 namespace Mathematically.Quartermaster.ViewModels
 {
-    public class ItemViewModel : Screen
+    public class ItemViewModel : Screen, IDisposable
     {
         private readonly IQuartermaster _quartermaster;
         private IPoeItem _item;
@@ -43,6 +44,11 @@ namespace Mathematically.Quartermaster.ViewModels
                 _weapon = value;
                 NotifyOfPropertyChange(() => Weapon);
             }
+        }
+
+        public void Dispose( )
+        {
+            _quartermaster.PoeItemArrived -= _quartermaster_PoeItemArrived;
         }
     }
 }

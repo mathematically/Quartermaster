@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using ExpectedObjects;
 using FluentAssertions;
 using Mathematically.Quartermaster.Tests.ExampleItems;
+using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
 using Ploeh.AutoFixture;
@@ -11,7 +12,7 @@ using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class AutoDisplayClipboardItemFeature : QuartermasterFeature
+    public class AutoDisplayClipboardItemFeature : QuartermasterFixture
     {
         private QuartermasterViewModel _quartermasterViewModel;
 

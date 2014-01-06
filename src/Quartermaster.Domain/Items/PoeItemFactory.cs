@@ -1,3 +1,5 @@
+using Mathematically.Quartermaster.Domain.Parser;
+
 namespace Mathematically.Quartermaster.Domain.Items
 {
     public class PoeItemFactory : IPoeItemFactory

@@ -1,7 +1,5 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Mathematically.Quartermaster.Tests.ExampleItems;
-using Mathematically.Quartermaster.Tests.Fixtures;
 using Ploeh.AutoFixture.Xunit;
 using Quartermaster.Infrastructure;
 using Xunit.Extensions;

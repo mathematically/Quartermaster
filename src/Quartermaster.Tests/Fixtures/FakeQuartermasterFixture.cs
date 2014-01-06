@@ -1,4 +1,5 @@
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Parser;
 using NSubstitute;
 
 namespace Mathematically.Quartermaster.Tests.Fixtures
@@ -21,6 +22,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                 });
         }
 
+        // Not used yet and incomplete
         protected void ConfigureFakeWeaponParserWith(string itemText, string itemName, ItemRarity rarity, int itemLevel)
         {
             ItemParser.When(itemParser => itemParser.Parse(Arg.Is<string>(s => s == itemText)))
@@ -38,7 +40,6 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         {
             ItemTextFactory.CreateItem(Arg.Any<string>()).Returns(GetItem(itemName));
         }
-
 
         protected void ConfigureFakeItemTextSourceWith(string itemText)
         {

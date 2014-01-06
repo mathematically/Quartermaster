@@ -42,7 +42,7 @@ namespace Mathematically.Quartermaster.ViewModels
             base.OnViewLoaded(view);
         }
 
-        public void HUD( )
+        public void HUD()
         {
             if (_hud.IsActive)
             {
@@ -54,7 +54,7 @@ namespace Mathematically.Quartermaster.ViewModels
             }
         }
 
-        private void OpenHUD( )
+        private void OpenHUD()
         {
             dynamic settings = new ExpandoObject();
 
@@ -73,6 +73,14 @@ namespace Mathematically.Quartermaster.ViewModels
         private void CloseHUD()
         {
             _hud.TryClose();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            if (close)
+            {
+                CloseHUD();
+            }
         }
     }
 }

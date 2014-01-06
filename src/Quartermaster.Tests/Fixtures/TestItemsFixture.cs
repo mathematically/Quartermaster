@@ -114,7 +114,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         #endregion
 
-        #region Hypnotic Wing Bow
+        #region Hypnotic Wing
 
         protected const string HypnoticWingName = "Hypnotic Wing";
 
@@ -134,7 +134,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
 
         #endregion
 
-        #region Hypnotic Wing Bow
+        #region Corpse Blast
 
         protected const string CorpseBlastName = "Corpse Blast";
 
@@ -171,7 +171,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                 {CorpseBlastName, CorpseBlast},
             };
 
-            // And if we have an expected object for each we can do easy comparison checks.
+            // For each item make an expected object for easy comparisons.
             _items.ForEach(i => _expectedItems.Add(i.Key, i.Value.ToExpectedObject()));
         }
 

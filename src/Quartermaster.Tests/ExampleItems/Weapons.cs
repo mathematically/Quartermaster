@@ -148,7 +148,7 @@ Adds 2-4 Physical Damage
 +11% to Cold Resistance
 14% increased Stun Duration on enemies
 ";
-        public const double BeastThrasherDPS = 8.08; // Actually 8.075
-
+        // Actually 8.075 but we are just doing everything at 2 dp for simplicity's sake.
+        public const double BeastThrasherDPS = 8.08; 
     }
 }
