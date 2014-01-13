@@ -38,20 +38,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
             ItemLevel = ParseItemLevel();
         }
 
-        private void WeaponParse( )
-        {
-            IsWeapon = DetectWeapon();
-
-            if (IsWeapon)
-            {
-                ParseWeaponStats();
-            }
-            else
-            {
-                Elemental = PoeItem.ZeroElementalDamage;
-            }
-        }
-
         private ItemRarity ParseRarity( )
         {
             var rarityText = _extract.ValueTextFrom(_textLines[RarityLineIndex]);
@@ -75,6 +61,20 @@ namespace Mathematically.Quartermaster.Domain.Parser
             return _textLines.FirstOrDefault(line => line.Contains(label));
         }
 
+        private void WeaponParse( )
+        {
+            IsWeapon = DetectWeapon();
+
+            if (IsWeapon)
+            {
+                ParseWeaponStats();
+            }
+            else
+            {
+                ResetWeaponStats();
+            }
+        }
+
         private bool DetectWeapon()
         {
             return FindOptionalLineWith(PoeText.WEAPON_MARKER) != null;
@@ -85,6 +85,14 @@ namespace Mathematically.Quartermaster.Domain.Parser
             ParsePhysicalDamage();
             ParseElementalDamage();
             ParseAttackSpeed();
+        }
+
+        private void ResetWeaponStats( )
+        {
+            MinPhysicalDamage = 0;
+            MaxPhysicalDamage = 0;
+            AttackSpeed = 0.0;
+            Elemental = PoeItem.ZeroElementalDamage;
         }
 
         private void ParsePhysicalDamage()
