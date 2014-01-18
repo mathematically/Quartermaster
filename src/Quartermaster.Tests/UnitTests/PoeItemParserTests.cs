@@ -81,8 +81,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             ParseTextWithSut(itemText);
 
-            _sut.MinPhysicalDamage.Should().Be(minPhysicalDamage);
-            _sut.MaxPhysicalDamage.Should().Be(maxPhysicalDamage);
+            _sut.Damage.MinPhysical.Should().Be(minPhysicalDamage);
+            _sut.Damage.MaxPhysical.Should().Be(maxPhysicalDamage);
         }
 
         [Fact]
@@ -90,8 +90,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             ParseTextWithSut(Weapons.HeavyShortBow);
 
-            _sut.MinPhysicalDamage.Should().Be(5);
-            _sut.MaxPhysicalDamage.Should().Be(14);
+            _sut.Damage.MinPhysical.Should().Be(5);
+            _sut.Damage.MaxPhysical.Should().Be(14);
         }
 
         // Attack speed exists for all weapons.
@@ -120,15 +120,15 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             ParseTextWithSut(itemText);
 
-            _sut.Elemental.MinFireDamage.Should().Be(minFireDamage);
-            _sut.Elemental.MaxFireDamage.Should().Be(maxFireDamage);
-            _sut.Elemental.MinColdDamage.Should().Be(minColdDamage);
-            _sut.Elemental.MaxColdDamage.Should().Be(maxColdDamage);
-            _sut.Elemental.MinLightningDamage.Should().Be(minLightningDamage);
-            _sut.Elemental.MaxLightningDamage.Should().Be(maxLightningDamage);
+            _sut.Damage.MinFireDamage.Should().Be(minFireDamage);
+            _sut.Damage.MaxFireDamage.Should().Be(maxFireDamage);
+            _sut.Damage.MinColdDamage.Should().Be(minColdDamage);
+            _sut.Damage.MaxColdDamage.Should().Be(maxColdDamage);
+            _sut.Damage.MinLightningDamage.Should().Be(minLightningDamage);
+            _sut.Damage.MaxLightningDamage.Should().Be(maxLightningDamage);
 
-            _sut.MinPhysicalDamage.Should().Be(minPhysicalDamage);
-            _sut.MaxPhysicalDamage.Should().Be(maxPhysicalDamage);
+            _sut.Damage.MinPhysical.Should().Be(minPhysicalDamage);
+            _sut.Damage.MaxPhysical.Should().Be(maxPhysicalDamage);
 
         }
     }

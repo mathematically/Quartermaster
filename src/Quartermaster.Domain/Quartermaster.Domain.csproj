@@ -43,10 +43,10 @@
     <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IQuartermaster.cs" />
-    <Compile Include="Items\ElementalDamage.cs" />
+    <Compile Include="Items\WeaponDamage.cs" />
     <Compile Include="Items\ElementalType.cs" />
-    <Compile Include="Items\IElementalDamage.cs" />
-    <Compile Include="Items\NullElementalDamage.cs" />
+    <Compile Include="Items\IWeaponDamage.cs" />
+    <Compile Include="Items\NullWeaponDamage.cs" />
     <Compile Include="Items\NullPoeItem.cs" />
     <Compile Include="Items\GameItemChangedEventArgs.cs" />
     <Compile Include="Items\ICommonPoeItemData.cs" />

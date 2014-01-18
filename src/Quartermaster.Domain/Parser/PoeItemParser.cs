@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Mathematically.Quartermaster.Domain.Items;
 
 namespace Mathematically.Quartermaster.Domain.Parser
@@ -14,14 +15,18 @@ namespace Mathematically.Quartermaster.Domain.Parser
         private string[] _textLines;
         private readonly PoeTextValueExtractor _extract = new PoeTextValueExtractor();
 
+        private Range _physicalDamageRange;
+        private Range _fireDamageRange;
+        private Range _coldDamageRange;
+        private Range _lightningDamageRange;
+
         public string Name { get; private set; }
         public ItemRarity Rarity { get; private set; }
         public int ItemLevel { get; private set; }
+
         public bool IsWeapon { get; private set; }
-        public int MinPhysicalDamage { get; private set; }
-        public int MaxPhysicalDamage { get; private set; }
         public double AttackSpeed { get; private set; }
-        public IElementalDamage Elemental { get; private set; }
+        public IWeaponDamage Damage { get; private set; }
 
         public void Parse(string itemText)
         {
@@ -63,15 +68,12 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void WeaponParse( )
         {
+            ZeroWeaponStats();
             IsWeapon = DetectWeapon();
 
             if (IsWeapon)
             {
                 ParseWeaponStats();
-            }
-            else
-            {
-                ResetWeaponStats();
             }
         }
 
@@ -82,45 +84,47 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseWeaponStats()
         {
+            ParseAttackSpeed();
+
             ParsePhysicalDamage();
             ParseElementalDamage();
-            ParseAttackSpeed();
+
+            Damage = new WeaponDamage(AttackSpeed, _physicalDamageRange.Min, _physicalDamageRange.Max,
+                _fireDamageRange.Min, _fireDamageRange.Max,
+                _coldDamageRange.Min, _coldDamageRange.Max,
+                _lightningDamageRange.Min, _lightningDamageRange.Max);
+
         }
 
-        private void ResetWeaponStats( )
+        private void ZeroWeaponStats( )
         {
-            MinPhysicalDamage = 0;
-            MaxPhysicalDamage = 0;
-            AttackSpeed = 0.0;
-            Elemental = PoeItem.ZeroElementalDamage;
+            Damage = PoeItem.NoWeaponDamage;
+        }
+
+        private void ParseAttackSpeed()
+        {
+            var line = FindOptionalLineWith(PoeText.ATTACKS_PER_SECOND_LABEL);
+
+            AttackSpeed = String.IsNullOrEmpty(line) ? 0.0 : _extract.DoubleFrom(line);
         }
 
         private void ParsePhysicalDamage()
         {
             var line = FindOptionalLineWith(PoeText.PHYSICAL_DAMAGE_LABEL);
+            if (String.IsNullOrEmpty(line)) return;
 
-            if (String.IsNullOrEmpty(line))
-            {
-                MinPhysicalDamage = 0;
-                MaxPhysicalDamage = 0;
-            }
-            else
-            {
-                var range = _extract.IntegerRangeFrom(line);
-
-                MinPhysicalDamage = range.Min;
-                MaxPhysicalDamage = range.Max;
-            }
+            _physicalDamageRange = _extract.IntegerRangeFrom(line);
         }
 
         private void ParseElementalDamage()
         {
             var line = FindOptionalLineWith(PoeText.ELEMENTAL_DAMAGE_LABEL);
+            if (String.IsNullOrEmpty(line)) return;
 
-            Elemental = String.IsNullOrEmpty(line) ? new NullElementalDamage() : BuildElementalDamage(line);
+            BuildElementalDamage(line);
         }
 
-        private IElementalDamage BuildElementalDamage(string line)
+        private void BuildElementalDamage(string line)
         {
             var elementalRanges = new List<Range>()
             {
@@ -132,13 +136,16 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
             // Damage mods are always in the order fire, cold, lightning
             var n = 1;
+
+            // Assume that we find no damage for each element and will use the 0th range
+            // which is the dummy null one we created.
             var fire = 0;
             var cold = 0;
             var lightning = 0;
 
             if (FindOptionalLineWith(PoeText.FIRE_DAMAGE_LABEL) != null)
             {
-                // Fire is the nth range
+                // Fire is the nth range specified on the item
                 fire = n++;
             }
 
@@ -152,18 +159,24 @@ namespace Mathematically.Quartermaster.Domain.Parser
                 lightning = n;
             }
 
-            return new ElementalDamage(
-                elementalRanges[fire].Min, elementalRanges[fire].Max,
-                elementalRanges[cold].Min, elementalRanges[cold].Max,
-                elementalRanges[lightning].Min, elementalRanges[lightning].Max
-                );
-        }
+            _fireDamageRange = new Range()
+            {
+                Min = elementalRanges[fire].Min,
+                Max = elementalRanges[fire].Max
+            };
 
-        private void ParseAttackSpeed()
-        {
-            var line = FindOptionalLineWith(PoeText.ATTACKS_PER_SECOND_LABEL);
+            _coldDamageRange = new Range()
+            {
+                Min = elementalRanges[cold].Min,
+                Max = elementalRanges[cold].Max
+            };
 
-            AttackSpeed = String.IsNullOrEmpty(line) ? 0.0 : _extract.DoubleFrom(line);
+
+            _lightningDamageRange = new Range()
+            {
+                Min = elementalRanges[lightning].Min,
+                Max = elementalRanges[lightning].Max
+            };
         }
     }
 

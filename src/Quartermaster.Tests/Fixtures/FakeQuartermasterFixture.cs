@@ -18,7 +18,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                     ItemParser.Name.Returns(itemName);
                     ItemParser.Rarity.Returns(rarity);
                     ItemParser.ItemLevel.Returns(itemLevel);
-                    ItemParser.Elemental.Returns(PoeItem.ZeroElementalDamage);
+                    ItemParser.Damage.Returns(PoeItem.NoWeaponDamage);
                 });
         }
 
@@ -32,7 +32,7 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
                     ItemParser.Rarity.Returns(rarity);
                     ItemParser.ItemLevel.Returns(itemLevel);
                     ItemParser.IsWeapon.Returns(true);
-                    ItemParser.Elemental.Returns(PoeItem.ZeroElementalDamage);
+                    ItemParser.Damage.Returns(PoeItem.NoWeaponDamage);
                 });
         }
 

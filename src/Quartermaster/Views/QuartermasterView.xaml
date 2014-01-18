@@ -17,9 +17,9 @@
                     Orientation="Vertical"
                     HorizontalAlignment="Center">
             <ContentControl Name="Item" ContentTemplate="{StaticResource PoeItemTemplate}" />
-            <ContentControl Name="Weapon"
+            <ContentControl Name="Weapon" Content="{Binding Item}"
                             ContentTemplate="{StaticResource PoeWeaponTemplate}"
-                            Visibility="{Binding Path=Weapon.DPS, Converter={StaticResource CollapsedIfZero}}" />
+                            Visibility="{Binding Path=Item.Damage.DPS, Converter={StaticResource CollapsedIfZero}}" />
         </StackPanel>
     </DockPanel>
 

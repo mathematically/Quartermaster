@@ -9,7 +9,6 @@ namespace Mathematically.Quartermaster.ViewModels
     {
         private readonly IQuartermaster _quartermaster;
         private IPoeItem _item;
-        private IPoeWeapon _weapon;
 
         protected ItemViewModel(IQuartermaster quartermaster)
         {
@@ -23,7 +22,6 @@ namespace Mathematically.Quartermaster.ViewModels
         void _quartermaster_PoeItemArrived(object sender, PoeItemEventArgs e)
         {
             Item = _quartermaster.Item;
-            Weapon = _quartermaster.Item;
         }
 
         public IPoeItem Item
@@ -33,16 +31,6 @@ namespace Mathematically.Quartermaster.ViewModels
             {
                 _item = value;
                 NotifyOfPropertyChange(() => Item);
-            }
-        }
-
-        public IPoeWeapon Weapon
-        {
-            get { return _weapon; }
-            private set
-            {
-                _weapon = value;
-                NotifyOfPropertyChange(() => Weapon);
             }
         }
 

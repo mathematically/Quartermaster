@@ -8,8 +8,8 @@
         </i:Interaction.Behaviors>
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="{Binding Item.ItemLevel}" Foreground="White" Margin="2, 4"/>
-        <ContentControl Name="Weapon"
+        <ContentControl Content="{Binding Item}"
                         ContentTemplate="{StaticResource PoeWeaponHUDTemplate}"
-                        Visibility="{Binding Path=Weapon.DPS, Converter={StaticResource CollapsedIfZero}}" />
+                        Visibility="{Binding Item.Damage.PhysicalDPS, Converter={StaticResource CollapsedIfZero}}" />
     </StackPanel>
 </Window>

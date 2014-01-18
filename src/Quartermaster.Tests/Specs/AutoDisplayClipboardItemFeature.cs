@@ -41,7 +41,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
             PasteIntoClipboard(gameItemText);
 
             Quartermaster.Item.ShouldMatch(expectedItem);
-            Quartermaster.Item.DPS.Should().Be(dps);
+            Quartermaster.Item.Damage.DPS.Should().Be(dps);
 
             _quartermasterViewModel.Item.ShouldMatch(expectedItem);
             _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
@@ -57,11 +57,11 @@ namespace Mathematically.Quartermaster.Tests.Specs
             PasteIntoClipboard(gameItemText);
 
             if (isWeapon)
-                _quartermasterViewModel.Weapon.DPS.Should().NotBe(0.0);
+                _quartermasterViewModel.Item.Damage.DPS.Should().NotBe(0.0);
             else
-                _quartermasterViewModel.Weapon.DPS.Should().Be(0.0);
+                _quartermasterViewModel.Item.Damage.DPS.Should().Be(0.0);
 
-            _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Weapon);
+            _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
         }
 
 

@@ -2,7 +2,6 @@
 {
     public interface IPoeWeapon
     {
-        double DPS { get; }
-        IElementalDamage Elemental { get; }
+        IWeaponDamage Damage { get; }
     }
 }

@@ -1,6 +1,6 @@
 namespace Mathematically.Quartermaster.Domain.Items
 {
-    public class NullElementalDamage : ElementalDamage
+    public class NullWeaponDamage : WeaponDamage
     {
         public override int MinFireDamage
         {
