@@ -124,6 +124,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             var elementalRanges = new List<Range>()
             {
+                // If we don't find a particular element we will use this for 0 dps in that element.
                 new Range {Min = 0, Max = 0}
             };
 
@@ -148,7 +149,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
             if (FindOptionalLineWith(PoeText.LIGHTNING_DAMAGE_LABEL) != null)
             {
-                lightning = n++;
+                lightning = n;
             }
 
             return new ElementalDamage(
