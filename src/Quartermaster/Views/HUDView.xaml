@@ -6,10 +6,9 @@
         <i:Interaction.Behaviors>
             <behaviours:AlwaysOnTopBehavior/>
         </i:Interaction.Behaviors>
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Background="Black">
         <TextBlock Text="{Binding Item.ItemLevel}" Foreground="White" Margin="2, 4"/>
         <ContentControl Content="{Binding Item}"
-                        ContentTemplate="{StaticResource PoeWeaponHUDTemplate}"
-                        Visibility="{Binding Item.Damage.PhysicalDPS, Converter={StaticResource CollapsedIfZero}}" />
+                        ContentTemplate="{StaticResource PoeWeaponHUDTemplate}" />
     </StackPanel>
 </Window>

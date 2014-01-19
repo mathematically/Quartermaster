@@ -45,19 +45,47 @@ namespace Mathematically.Quartermaster.Tests.Specs
             PasteIntoClipboard(gameItemText);
 
             _hudViewModel.Item.Damage.DPS.Should().Be(dps);
-//            _hudViewModel.ShouldRaisePropertyChangeFor(x => x.Weapon);
+        }
+
+        [Theory]
+        [InlineData(Weapons.HypnoticWing, Weapons.HypnoticWingDPS, Weapons.HypnoticWingPhysicalDPS, Weapons.HypnoticWingElementalDPS)]
+        [InlineData(Weapons.CorpseBlast, Weapons.CorpseBlastDPS, Weapons.CorpseBlastPhysicalDPS, Weapons.CorpseBlastElementalDPS)]
+        [InlineData(Rings.IronRing, 0.0, 0.0, 0.0)]
+        public void HUD_displays_dps_breakdown_numbers_for_elemental_weapons(string gameItemText, double dps, double physicalDps, double elementalDps)
+        {
+            StartQuartermaster();
+
+            PasteIntoClipboard(gameItemText);
+
+            _hudViewModel.Item.Damage.DPS.Should().Be(dps);
+            _hudViewModel.Item.Damage.ElementalDPS.Should().Be(elementalDps);
+            _hudViewModel.Item.Damage.PhysicalDPS.Should().Be(physicalDps);
         }
 
         [Fact]
         public void Copying_non_weapon_over_weapon_resets_dps_to_zero()
         {
             StartQuartermaster();
-            PasteIntoClipboard(Weapons.DriftwoodWand);
+            PasteIntoClipboard(Weapons.HypnoticWing);
 
             PasteIntoClipboard(Rings.IronRing);
 
             _hudViewModel.Item.Damage.DPS.Should().Be(0.0);
-//            _hudViewModel.ShouldRaisePropertyChangeFor(x => x.Weapon);
+            _hudViewModel.Item.Damage.PhysicalDPS.Should().Be(0.0);
+            _hudViewModel.Item.Damage.ElementalDPS.Should().Be(0.0);
+        }
+
+        [Fact]
+        public void Copying_non_elemental_weapon_over_elemental_weapon_resets_dps_to_zero()
+        {
+            StartQuartermaster();
+            PasteIntoClipboard(Weapons.HypnoticWing);
+
+            PasteIntoClipboard(Weapons.DriftwoodWand);
+
+            _hudViewModel.Item.Damage.DPS.Should().Be(0.0);
+            _hudViewModel.Item.Damage.PhysicalDPS.Should().Be(0.0);
+            _hudViewModel.Item.Damage.ElementalDPS.Should().Be(0.0);
         }
     }
 }

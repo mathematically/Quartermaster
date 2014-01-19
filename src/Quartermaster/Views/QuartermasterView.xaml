@@ -7,7 +7,7 @@
     <UserControl.Resources>
     </UserControl.Resources>
 
-    <DockPanel>
+    <DockPanel Background="Black">
         <StackPanel DockPanel.Dock="Bottom">
             <ToggleButton x:Name="HUD">HUD</ToggleButton>
         </StackPanel>
@@ -15,7 +15,8 @@
                     TextElement.FontSize="12"
                     TextOptions.TextFormattingMode="Display"
                     Orientation="Vertical"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Left"
+                    Margin="3">
             <ContentControl Name="Item" ContentTemplate="{StaticResource PoeItemTemplate}" />
             <ContentControl Name="Weapon" Content="{Binding Item}"
                             ContentTemplate="{StaticResource PoeWeaponTemplate}"

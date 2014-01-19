@@ -91,6 +91,8 @@ Adds 3-32 Lightning Damage
 ";
 
         public const double HypnoticWingDPS = 46.50;
+        public const double HypnoticWingPhysicalDPS = 19.38;
+        public const double HypnoticWingElementalDPS = 27.12;
 
         // Tri-elemental weapon
         public const string CorpseBlast = @"Rarity: Rare
@@ -119,6 +121,8 @@ Adds 4-53 Lightning Damage
 ";
 
         public const double CorpseBlastDPS = 86.80;
+        public const double CorpseBlastPhysicalDPS = 30.22;
+        public const double CorpseBlastElementalDPS = 56.58;
 
         // Rare weapon with all sorts of stats
         public const string BeastThrasher = @"Rarity: Rare

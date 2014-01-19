@@ -68,12 +68,15 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void WeaponParse( )
         {
-            ZeroWeaponStats();
             IsWeapon = DetectWeapon();
 
             if (IsWeapon)
             {
                 ParseWeaponStats();
+            }
+            else
+            {
+                Damage = new NullWeaponDamage();
             }
         }
 
@@ -84,6 +87,11 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseWeaponStats()
         {
+            _physicalDamageRange = new Range { Min = 0, Max = 0 };
+            _fireDamageRange = new Range { Min = 0, Max = 0 };
+            _coldDamageRange = new Range { Min = 0, Max = 0 };
+            _lightningDamageRange = new Range { Min = 0, Max = 0 };
+
             ParseAttackSpeed();
 
             ParsePhysicalDamage();
@@ -94,11 +102,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
                 _coldDamageRange.Min, _coldDamageRange.Max,
                 _lightningDamageRange.Min, _lightningDamageRange.Max);
 
-        }
-
-        private void ZeroWeaponStats( )
-        {
-            Damage = PoeItem.NoWeaponDamage;
         }
 
         private void ParseAttackSpeed()
