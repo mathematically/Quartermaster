@@ -83,8 +83,8 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
             PasteIntoClipboard(Weapons.DriftwoodWand);
 
-            _hudViewModel.Item.Damage.DPS.Should().Be(0.0);
-            _hudViewModel.Item.Damage.PhysicalDPS.Should().Be(0.0);
+            _hudViewModel.Item.Damage.DPS.Should().Be(Weapons.DriftwoodWandDPS);
+            _hudViewModel.Item.Damage.PhysicalDPS.Should().Be(Weapons.DriftwoodWandDPS);
             _hudViewModel.Item.Damage.ElementalDPS.Should().Be(0.0);
         }
     }

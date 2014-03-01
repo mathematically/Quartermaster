@@ -10,7 +10,6 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
     public class QuartermasterStoreTests : FakeQuartermasterFixture
     {
         // These tests have so much fakery they are not that useful and overlap with other, better tests.
-        // So just do a couple.
         [Theory]
         [InlineData(Rings.IronRing, IronRingName, ItemRarity.Normal)]
         [InlineData(Rings.SapphireRing, SapphireRingName, ItemRarity.Normal)]
