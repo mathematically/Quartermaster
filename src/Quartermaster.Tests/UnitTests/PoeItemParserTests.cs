@@ -40,6 +40,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         [Theory]
         [InlineData(Rings.IronRing, ItemRarity.Normal)]
         [InlineData(Rings.ThirstyRubyRingOfSuccess, ItemRarity.Magic)]
+        [InlineData(Rings.StormTurn, ItemRarity.Rare)]
+        [InlineData(Rings.KaomsSign, ItemRarity.Unique)]
         public void Parser_parses_rarity_correctly(string itemText, ItemRarity rarity)
         {
             ParseTextWithSut(itemText);
