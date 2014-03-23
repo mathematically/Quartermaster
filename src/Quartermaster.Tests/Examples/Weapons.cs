@@ -1,9 +1,13 @@
-﻿namespace Mathematically.Quartermaster.Tests.ExampleItems
+﻿using Mathematically.Quartermaster.Domain.Items;
+
+namespace Mathematically.Quartermaster.Tests.Examples
 {
     public static class Weapons
     {
+        #region DRIFTWOOD WAND
+
         // About as simple as a weapon can be
-        internal const string DriftwoodWand = @"Rarity: Normal
+        internal const string DriftwoodWandText = @"Rarity: Normal
 Driftwood Wand
 --------
 Wand
@@ -18,10 +22,22 @@ Itemlevel: 4
 11% increased Spell Damage
 ";
 
+        public static readonly PoeItem DriftwoodWand = new PoeItem(
+            "Driftwood Wand",
+            ItemRarity.Normal,
+            itemLevel: 4,
+            minPhysicalDamage: 4,
+            maxPhysicalDamage: 7,
+            attackSpeed: 1.30);
+
         public const double DriftwoodWandDPS = 1.95;
 
+        #endregion
+
+        #region DRIFTWOOD MAUL
+
         // Another simple example weapon
-        internal const string DriftwoodMaul = @"Rarity: Normal
+        internal const string DriftwoodMaulText = @"Rarity: Normal
 Driftwood Maul
 --------
 Two Handed Mace
@@ -39,10 +55,23 @@ Itemlevel: 4
 20% increased Stun Duration on enemies
 ";
 
+        public static readonly PoeItem DriftwoodMaul = new PoeItem(
+            "Driftwood Maul",
+            ItemRarity.Normal,
+            itemLevel: 4,
+            minPhysicalDamage: 12,
+            maxPhysicalDamage: 19,
+            attackSpeed: 1.1);
+
         public const double DriftwoodMaulDPS = 3.85;
 
+
+        #endregion
+
+        #region HEAVY SHORT BOW
+
         // Blue weapon with augmented weapons stats
-        internal const string HeavyShortBow = @"Rarity: Magic
+        internal const string HeavyShortBowText = @"Rarity: Magic
 Heavy Short Bow
 --------
 Bow
@@ -61,10 +90,23 @@ Itemlevel: 7
 23% increased Physical Damage
 ";
 
+        public static readonly PoeItem HeavyShortBow = new PoeItem(
+            "Heavy Short Bow",
+            ItemRarity.Magic,
+            itemLevel: 7,
+            minPhysicalDamage: 5,
+            maxPhysicalDamage: 14,
+            attackSpeed: 1.55);
+
         public const double HeavyShortBowDPS = 6.98;
 
+
+        #endregion
+
+        #region HYPNOTIC WING
+
         // A rare bow with elemental damage (Fire, Lightning)
-        public const string HypnoticWing = @"Rarity: Rare
+        public const string HypnoticWingText = @"Rarity: Rare
 Hypnotic Wing
 Grove Bow
 --------
@@ -90,12 +132,28 @@ Adds 3-32 Lightning Damage
 +13% to Fire Resistance
 ";
 
+        public static readonly PoeItem HypnoticWing = new PoeItem(
+            "Hypnotic Wing",
+            ItemRarity.Rare,
+            itemLevel: 35,
+            minPhysicalDamage: 13,
+            maxPhysicalDamage: 38,
+            attackSpeed: 1.55,
+            minFireDamage: 7, maxFireDamage: 13,
+            minColdDamage: 0, maxColdDamage: 0,
+            minLightningDamage: 3, maxLightningDamage: 32);
+
         public const double HypnoticWingDPS = 46.50;
         public const double HypnoticWingPhysicalDPS = 19.38;
         public const double HypnoticWingElementalDPS = 27.12;
 
+
+        #endregion
+
+        #region CORPSE BLAST
+
         // Tri-elemental weapon
-        public const string CorpseBlast = @"Rarity: Rare
+        public const string CorpseBlastText = @"Rarity: Rare
 Corpse Blast
 Thicket Bow
 --------
@@ -120,12 +178,26 @@ Adds 4-53 Lightning Damage
 +32% to Cold Resistance
 ";
 
+        public static readonly PoeItem CorpseBlast = new PoeItem(
+            "Corpse Blast",
+            ItemRarity.Rare,
+            itemLevel: 59,
+            minPhysicalDamage: 19,
+            maxPhysicalDamage: 58,
+            attackSpeed: 1.55,
+            minFireDamage: 27, maxFireDamage: 46,
+            minColdDamage: 7, maxColdDamage: 12,
+            minLightningDamage: 4, maxLightningDamage: 53);
+
         public const double CorpseBlastDPS = 86.80;
         public const double CorpseBlastPhysicalDPS = 30.22;
         public const double CorpseBlastElementalDPS = 56.58;
 
+
+        #endregion
+ 
         // Rare weapon with all sorts of stats
-        public const string BeastThrasher = @"Rarity: Rare
+        public const string BeastThrasherText = @"Rarity: Rare
 Beast Thresher
 Tribal Maul
 --------
@@ -152,7 +224,7 @@ Adds 2-4 Physical Damage
 +11% to Cold Resistance
 14% increased Stun Duration on enemies
 ";
-        // Actually 8.075 but we are just doing everything at 2 dp for simplicity's sake.
-        public const double BeastThrasherDPS = 8.08; 
+        public const string BeastThresherName = "Beast Thresher";
+        public const double BeastThrasherDPS = 8.08; // Actually 8.075 but we are just doing everything at 2 dp.
     }
 }

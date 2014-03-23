@@ -2,8 +2,7 @@
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Parser;
-using Mathematically.Quartermaster.Tests.ExampleItems;
-using Mathematically.Quartermaster.Tests.Fixtures;
+using Mathematically.Quartermaster.Tests.Examples;
 using NSubstitute;
 using Ploeh.AutoFixture;
 using Quartermaster.Infrastructure;
@@ -11,16 +10,16 @@ using Xunit;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class ClipboardItemTextSourceTests: TestItemsFixture
+    public class ClipboardItemTextSourceTests
     {
+        private readonly Fixture _auto = new Fixture();
+
         private readonly IClipboardMonitor _clipboardMonitor = Substitute.For<IClipboardMonitor>();
         private readonly IItemTextChecker _itemTextChecker = Substitute.For<IItemTextChecker>();
 
         private ClipboardItemTextSource _sut;
+
         private string _itemArrivedEventText = string.Empty;
-        protected readonly IPoeItemParser ItemParser = Substitute.For<IPoeItemParser>();
-        protected readonly IPoeItemFactory ItemTextFactory = Substitute.For<IPoeItemFactory>();
-        protected readonly IItemTextSource ItemTextSource = Substitute.For<IItemTextSource>();
 
         public ClipboardItemTextSourceTests()
         {
@@ -41,16 +40,16 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         private void ConfigureSanityChecker()
         {
             _itemTextChecker.LooksLikeGameText(Arg.Any<string>()).Returns(false);
-            _itemTextChecker.LooksLikeGameText(Arg.Is(Rings.IronRing)).Returns(true);
+            _itemTextChecker.LooksLikeGameText(Arg.Is(Rings.IronRingText)).Returns(true);
         }
 
         [Fact]
         public void If_an_item_is_already_in_the_clipboard_at_startup_then_it_will_be_available_in_the_item_property()
         {
-            _clipboardMonitor.CurrentText.Returns(Rings.IronRing);
+            _clipboardMonitor.CurrentText.Returns(Rings.IronRingText);
             CreateSUT();
 
-            _sut.ItemText.Should().Be(Rings.IronRing);
+            _sut.ItemText.Should().Be(Rings.IronRingText);
         }
 
         [Fact]
@@ -60,7 +59,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             PasteIronRing();
 
-            _itemArrivedEventText.Should().Be(Rings.IronRing);
+            _itemArrivedEventText.Should().Be(Rings.IronRingText);
         }
 
         private void FakeItemCopy(string itemText)
@@ -73,7 +72,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             CreateSUT();
 
-            FakeItemCopy(Auto.Create<string>());
+            FakeItemCopy(_auto.Create<string>());
 
             _itemArrivedEventText.Should().BeNullOrEmpty();
         }
@@ -101,17 +100,17 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             PasteNonItemText()
                 .ShouldNotThrow();
 
-            _itemArrivedEventText.Should().Be(Rings.IronRing);
+            _itemArrivedEventText.Should().Be(Rings.IronRingText);
         }
 
         private void PasteIronRing()
         {
-            FakeItemCopy(Rings.IronRing);
+            FakeItemCopy(Rings.IronRingText);
         }
 
         private Action PasteNonItemText()
         {
-            return () => FakeItemCopy(Auto.Create<string>());
+            return () => FakeItemCopy(_auto.Create<string>());
         }
 
         [Fact]
@@ -121,7 +120,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             PasteIronRing();
 
-            _itemArrivedEventText.Should().Be(Rings.IronRing);
+            _itemArrivedEventText.Should().Be(Rings.IronRingText);
         }
     }
 }

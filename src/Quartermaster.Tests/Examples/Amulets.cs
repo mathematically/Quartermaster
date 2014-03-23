@@ -1,9 +1,9 @@
-﻿namespace Mathematically.Quartermaster.Tests.ExampleItems
+﻿namespace Mathematically.Quartermaster.Tests.Examples
 {
     public static class Amulets
     {
         // Basic rare amulet
-        internal const string HorrorMedallion = @"Rarity: Rare
+        internal const string HorrorMedallionText = @"Rarity: Rare
 Horror Medallion
 Jade Amulet
 --------
@@ -19,6 +19,5 @@ Adds 1-2 Physical Damage
 +9 to Dexterity
 +11% to Cold Resistance
 ";
-
     }
 }

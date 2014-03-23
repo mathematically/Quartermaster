@@ -1,8 +1,14 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using ExpectedObjects;
 using FluentAssertions;
-using Mathematically.Quartermaster.Tests.ExampleItems;
+using Grean.Exude;
+using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Tests.Examples;
 using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
@@ -24,37 +30,116 @@ namespace Mathematically.Quartermaster.Tests.Specs
             _quartermasterViewModel.MonitorEvents();
         }
 
-        [Theory]
-        [InlineData(Rings.IronRing, IronRingName, 0.0)]
-        [InlineData(Rings.SapphireRing, SapphireRingName, 0.0)]
-        [InlineData(Rings.ThirstyRubyRingOfSuccess, ThirstyRubyRingOfSuccessName, 0.0)]
-        [InlineData(Weapons.DriftwoodWand, DriftwoodWandName, Weapons.DriftwoodWandDPS)]
-        [InlineData(Weapons.DriftwoodMaul, DriftwoodMaulName, Weapons.DriftwoodMaulDPS)]
-        [InlineData(Weapons.HeavyShortBow, HeavyShortBowName, Weapons.HeavyShortBowDPS)]
-        [InlineData(Weapons.HypnoticWing, HypnoticWingName, Weapons.HypnoticWingDPS)]
-        public void Copying_item_text_in_game_sets_the_displayed_item_to_the_item_that_text_represents(
-            string gameItemText, string itemName, double dps)
+        [FirstClassTests]
+        public static TestCase<AutoDisplayClipboardItemFeature>[] Example_item_tests()
         {
-            var expectedItem = GetExpectedItem(itemName);
-            StartQuartermaster();
+            var testCases = new[]
+            {
+                new 
+                {
+                    GameText = Weapons.DriftwoodWandText,
+                    ExpectedItem = Weapons.DriftwoodWand,
+                    DPS = Weapons.DriftwoodWandDPS,
+                },
 
-            PasteIntoClipboard(gameItemText);
+                new
+                {
+                    GameText = Weapons.DriftwoodMaulText,
+                    ExpectedItem = Weapons.DriftwoodMaul,
+                    DPS = Weapons.DriftwoodMaulDPS,
+                },
 
-            Quartermaster.Item.ShouldMatch(expectedItem);
-            Quartermaster.Item.Damage.DPS.Should().Be(dps);
+                new
+                {
+                    GameText = Weapons.HeavyShortBowText,
+                    ExpectedItem = Weapons.HeavyShortBow,
+                    DPS = Weapons.HeavyShortBowDPS,
+                },
 
-            _quartermasterViewModel.Item.ShouldMatch(expectedItem);
-            _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
+                new
+                {
+                    GameText = Weapons.HypnoticWingText,
+                    ExpectedItem = Weapons.HypnoticWing,
+                    DPS = Weapons.HypnoticWingDPS,
+                },
+
+                new 
+                {
+                    GameText = Weapons.CorpseBlastText,
+                    ExpectedItem = Weapons.CorpseBlast,
+                    DPS = Weapons.CorpseBlastDPS,
+                },
+
+                new 
+                {
+                    GameText = Weapons.CorpseBlastText,
+                    ExpectedItem = Weapons.CorpseBlast,
+                    DPS = Weapons.CorpseBlastDPS,
+                },
+
+                new 
+                {
+                    GameText = Rings.IronRingText,
+                    ExpectedItem = Rings.IronRing,
+                    DPS = 0.0,
+                },
+
+                new 
+                {
+                    GameText = Rings.KaomsSignText,
+                    ExpectedItem = Rings.KaomsSign,
+                    DPS = 0.0,
+                },
+
+                new 
+                {
+                    GameText = Rings.SapphireRingText,
+                    ExpectedItem = Rings.SapphireRing,
+                    DPS = 0.0,
+                },
+
+                new 
+                {
+                    GameText = Rings.ThirstyRubyRingOfSuccessText,
+                    ExpectedItem = Rings.ThirstyRubyRingOfSuccess,
+                    DPS = 0.0,
+                },
+            };
+
+            return testCases.Select(c => new TestCase<AutoDisplayClipboardItemFeature>(expect => expect.Copying_game_text_into_clipboard_produces_correct_item(c.GameText, c.ExpectedItem, c.DPS))).ToArray();
+        }
+
+
+        private void Copying_game_text_into_clipboard_produces_correct_item(string gameItemText, PoeItem expectedItem, double dps)
+        {
+            try
+            {
+                StartQuartermaster();
+
+                CopyIntoClipboard(gameItemText);
+
+                Quartermaster.Item.ShouldMatch(expectedItem.ToExpectedObject());
+                Quartermaster.Item.Damage.DPS.Should().Be(dps);
+
+                _quartermasterViewModel.Item.ShouldMatch(expectedItem.ToExpectedObject());
+                _quartermasterViewModel.ShouldRaisePropertyChangeFor(x => x.Item);
+
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine(gameItemText);
+                throw;
+            }
         }
 
         [Theory]
-        [InlineData(Rings.IronRing, false)]
-        [InlineData(Weapons.DriftwoodMaul, true)]
+        [InlineData(Rings.IronRingText, false)]
+        [InlineData(Weapons.DriftwoodMaulText, true)]
         public void Weapon_property_should_only_be_set_for_weapons(string gameItemText, bool isWeapon)
         {
             StartQuartermaster();
 
-            PasteIntoClipboard(gameItemText);
+            CopyIntoClipboard(gameItemText);
 
             if (isWeapon)
                 _quartermasterViewModel.Item.Damage.DPS.Should().NotBe(0.0);
@@ -86,12 +171,12 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [Fact]
         public void On_startup_if_the_clipboard_has_an_iron_ring_then_an_iron_ring_should_be_displayed()
         {
-            ClipboardMonitor.CurrentText.Returns(Rings.IronRing);
+            ClipboardMonitor.CurrentText.Returns(Rings.IronRingText);
 
             StartQuartermaster();
 
-            Quartermaster.Item.ShouldMatch(IronRingItem);
-            _quartermasterViewModel.Item.ShouldMatch(IronRingItem);
+            Quartermaster.Item.ShouldMatch(Rings.IronRing.ToExpectedObject());
+            _quartermasterViewModel.Item.ShouldMatch(Rings.IronRing.ToExpectedObject());
         }
     }
 }

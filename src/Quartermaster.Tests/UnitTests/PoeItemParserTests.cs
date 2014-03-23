@@ -1,14 +1,13 @@
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Parser;
-using Mathematically.Quartermaster.Tests.ExampleItems;
-using Mathematically.Quartermaster.Tests.Fixtures;
+using Mathematically.Quartermaster.Tests.Examples;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-    public class PoeItemParserTests : TestItemsFixture
+    public class PoeItemParserTests
     {
         private PoeItemParser _sut;
 
@@ -20,8 +19,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         // Name parsing is always the same so two tests is enough
 
         [Theory]
-        [InlineData(Rings.IronRing, IronRingName)]
-        [InlineData(Rings.SapphireRing, SapphireRingName)]
+        [InlineData(Rings.IronRingText, Rings.IronRingName)]
+        [InlineData(Rings.SapphireRingText, Rings.SapphireRingName)]
         public void Parser_parses_name_correctly(string itemText, string itemName)
         {
             ParseTextWithSut(itemText);
@@ -38,10 +37,10 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         // Parse one of each rarity
 
         [Theory]
-        [InlineData(Rings.IronRing, ItemRarity.Normal)]
-        [InlineData(Rings.ThirstyRubyRingOfSuccess, ItemRarity.Magic)]
-        [InlineData(Rings.StormTurn, ItemRarity.Rare)]
-        [InlineData(Rings.KaomsSign, ItemRarity.Unique)]
+        [InlineData(Rings.IronRingText, ItemRarity.Normal)]
+        [InlineData(Rings.ThirstyRubyRingOfSuccessText, ItemRarity.Magic)]
+        [InlineData(Rings.StormTurnText, ItemRarity.Rare)]
+        [InlineData(Rings.KaomsSignText, ItemRarity.Unique)]
         public void Parser_parses_rarity_correctly(string itemText, ItemRarity rarity)
         {
             ParseTextWithSut(itemText);
@@ -52,8 +51,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         // Item level always the same
 
         [Theory]
-        [InlineData(Rings.IronRing, 4)]
-        [InlineData(Rings.SapphireRing, 15)]
+        [InlineData(Rings.IronRingText, 4)]
+        [InlineData(Rings.SapphireRingText, 15)]
         public void Parser_parses_item_level_correctly(string itemText, int itemLevel)
         {
             ParseTextWithSut(itemText);
@@ -62,9 +61,9 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         }
 
         [Theory]
-        [InlineData(Weapons.DriftwoodWand, true)]
-        [InlineData(Weapons.DriftwoodMaul, true)]
-        [InlineData(Rings.IronRing, false)]
+        [InlineData(Weapons.DriftwoodWandText, true)]
+        [InlineData(Weapons.DriftwoodMaulText, true)]
+        [InlineData(Rings.IronRingText, false)]
         public void Parser_detects_weapons_correctly(string itemText, bool isWeapon)
         {
             ParseTextWithSut(itemText);
@@ -76,9 +75,9 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         // todo this is not true.  There are weapons without physical damage (at least one unique, maybe more).
 
         [Theory]
-        [InlineData(Weapons.DriftwoodWand, 4, 7)]
-        [InlineData(Weapons.DriftwoodMaul, 12, 19)]
-        [InlineData(Rings.IronRing, 0, 0)]
+        [InlineData(Weapons.DriftwoodWandText, 4, 7)]
+        [InlineData(Weapons.DriftwoodMaulText, 12, 19)]
+        [InlineData(Rings.IronRingText, 0, 0)]
         public void Parser_detects_physical_damage_correctly(string itemText, int minPhysicalDamage, int maxPhysicalDamage)
         {
             ParseTextWithSut(itemText);
@@ -90,18 +89,17 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         [Fact]
         public void Physical_damage_parse_works_for_augmented_items( )
         {
-            ParseTextWithSut(Weapons.HeavyShortBow);
+            ParseTextWithSut(Weapons.HeavyShortBowText);
 
             _sut.Damage.MinPhysical.Should().Be(5);
             _sut.Damage.MaxPhysical.Should().Be(14);
         }
 
         // Attack speed exists for all weapons.
-
         [Theory]
-        [InlineData(Weapons.DriftwoodWand, 1.30)]
-        [InlineData(Weapons.DriftwoodMaul, 1.10)]
-        [InlineData(Rings.IronRing, 0.0)]
+        [InlineData(Weapons.DriftwoodWandText, 1.30)]
+        [InlineData(Weapons.DriftwoodMaulText, 1.10)]
+        [InlineData(Rings.IronRingText, 0.0)]
         public void Parser_detects_attack_speed_correctly(string itemText, double attackSpeed)
         {
             ParseTextWithSut(itemText);
@@ -111,8 +109,8 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         // Elemental damage
         [Theory]
-        [InlineData(Weapons.HypnoticWing, 13, 38, 7, 13, 0, 0, 3, 32)]
-        [InlineData(Weapons.CorpseBlast, 19, 58, 27, 46, 7, 12, 4, 53)]
+        [InlineData(Weapons.HypnoticWingText, 13, 38, 7, 13, 0, 0, 3, 32)]
+        [InlineData(Weapons.CorpseBlastText, 19, 58, 27, 46, 7, 12, 4, 53)]
         public void Parser_detects_elemental_damage_correctly(string itemText,
             int minPhysicalDamage, int maxPhysicalDamage,
             int minFireDamage, int maxFireDamage,
