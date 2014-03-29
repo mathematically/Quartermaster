@@ -78,13 +78,15 @@
     </Compile>
     <Compile Include="Examples\Amulets.cs" />
     <Compile Include="Examples\Boots.cs" />
-    <Compile Include="Examples\ExampleItemTests.cs" />
+    <Compile Include="Examples\When_example_items_are_copied.cs" />
     <Compile Include="Examples\Rings.cs" />
     <Compile Include="Examples\Weapons.cs" />
-    <Compile Include="Fixtures\QuartermasterFixture.cs" />
-    <Compile Include="Specs\AutoDisplayClipboardItemFeature.cs" />
+    <Compile Include="Specs\When_an_item_is_copied_in_game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Specs\HUDDisplayFeature.cs" />
+    <Compile Include="Specs\When_an_item_is_copied_in_game_and_the_hud_is_open.cs" />
+    <Compile Include="Specs\QuartermasterInitialised.cs" />
+    <Compile Include="Specs\QuartermasterStarted.cs" />
+    <Compile Include="Specs\When_quartermaster_starts.cs" />
     <Compile Include="UnitTests\ClipboardItemTextSourceTests.cs" />
     <Compile Include="UnitTests\ClipboardMonitorTests.cs" />
     <Compile Include="UnitTests\ItemTextCheckerTests.cs" />

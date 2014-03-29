@@ -1,4 +1,6 @@
-﻿namespace Mathematically.Quartermaster.Tests.Examples
+﻿using Mathematically.Quartermaster.Domain.Items;
+
+namespace Mathematically.Quartermaster.Tests.Examples
 {
     public static class Amulets
     {
@@ -19,5 +21,6 @@ Adds 1-2 Physical Damage
 +9 to Dexterity
 +11% to Cold Resistance
 ";
+        public static readonly PoeItem HorrorMedallion = new PoeItem("Horror Medallion", ItemRarity.Rare, 7);
     }
 }

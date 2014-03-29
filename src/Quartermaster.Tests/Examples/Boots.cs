@@ -52,7 +52,7 @@ Itemlevel: 28
 18% increased Block and Stun Recovery
 ";
         public static readonly PoeItem PandemoniumSole = new PoeItem(
-            "PandemoniumSole",
+            "Pandemonium Sole",
             ItemRarity.Rare,
             28
             );

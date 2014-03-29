@@ -83,6 +83,8 @@ Adds 7-11 Cold Damage
 +38% to Lightning Resistance
 ";
 
+        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63);
+
         // A unique ring
         internal const string KaomsSignText = @"Rarity: Unique
 Kaom's Sign

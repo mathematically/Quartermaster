@@ -1,20 +1,18 @@
 ﻿using FluentAssertions;
 using Mathematically.Quartermaster.Tests.Examples;
-using Mathematically.Quartermaster.Tests.Fixtures;
 using Mathematically.Quartermaster.ViewModels;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class HUDDisplayFeature : QuartermasterFixture
+    [Trait("When the HUD is open and a weapon is copied in game", "")]
+    public class When_an_item_is_copied_in_game_and_the_hud_is_open : QuartermasterStarted
     {
-        private HUDViewModel _hudViewModel;
+        private readonly HUDViewModel _hudViewModel;
 
-        protected override void StartQuartermaster()
+        public When_an_item_is_copied_in_game_and_the_hud_is_open()
         {
-            base.StartQuartermaster();
-
             _hudViewModel = new HUDViewModel(Quartermaster);
             _hudViewModel.MonitorEvents();
         }
@@ -24,10 +22,8 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Rings.SapphireRingText, 15)]
         [InlineData(Weapons.DriftwoodMaulText, 4)]
         [InlineData(Weapons.DriftwoodWandText, 4)]
-        public void Copying_item_text_in_game_sets_the_HUD_item_level_correctly(string gameItemText, int itemLevel)
+        public void The_HUD_item_level_is_displayed(string gameItemText, int itemLevel)
         {
-            StartQuartermaster();
-
             CopyIntoClipboard(gameItemText);
 
             _hudViewModel.Item.ItemLevel.Should().Be(itemLevel);
@@ -38,7 +34,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Weapons.DriftwoodWandText, Weapons.DriftwoodWandDPS)]
         [InlineData(Weapons.DriftwoodMaulText, Weapons.DriftwoodMaulDPS)]
         [InlineData(Rings.IronRingText, 0.0)]
-        public void Copying_weapon_item_text_in_game_sets_the_HUD_DPS_correctly(string gameItemText, double dps)
+        public void And_the_item_is_a_weapon_the_DPS_is_displayed(string gameItemText, double dps)
         {
             StartQuartermaster();
 
@@ -51,7 +47,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Weapons.HypnoticWingText, Weapons.HypnoticWingDPS, Weapons.HypnoticWingPhysicalDPS, Weapons.HypnoticWingElementalDPS)]
         [InlineData(Weapons.CorpseBlastText, Weapons.CorpseBlastDPS, Weapons.CorpseBlastPhysicalDPS, Weapons.CorpseBlastElementalDPS)]
         [InlineData(Rings.IronRingText, 0.0, 0.0, 0.0)]
-        public void HUD_displays_dps_breakdown_numbers_for_elemental_weapons(string gameItemText, double dps, double physicalDps, double elementalDps)
+        public void DPS_breakdown_numbers_for_elemental_weapons_are_displayed(string gameItemText, double dps, double physicalDps, double elementalDps)
         {
             StartQuartermaster();
 

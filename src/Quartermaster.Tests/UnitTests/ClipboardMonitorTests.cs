@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
+
     public class ClipboardMonitorTests
     {
         private ClipboardMonitor _sut;

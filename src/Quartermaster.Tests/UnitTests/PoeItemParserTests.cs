@@ -129,7 +129,6 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
             _sut.Damage.MinPhysical.Should().Be(minPhysicalDamage);
             _sut.Damage.MaxPhysical.Should().Be(maxPhysicalDamage);
-
         }
     }
 }

@@ -1,14 +1,17 @@
-﻿using ExpectedObjects;
+﻿using Caliburn.Micro;
+using ExpectedObjects;
+using FluentAssertions;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Parser;
+using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
 using Ploeh.AutoFixture;
 using Quartermaster.Infrastructure;
 
-namespace Mathematically.Quartermaster.Tests.Fixtures
+namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class QuartermasterFixture
+    public class QuartermasterInitialised
     {
         protected readonly Fixture Auto = new Fixture();
         protected readonly ExpectedObject NoItem = new NullPoeItem().ToExpectedObject();
@@ -23,14 +26,18 @@ namespace Mathematically.Quartermaster.Tests.Fixtures
         private ClipboardItemTextSource _clipboardItemTextSource;
 
         protected QuartermasterStore Quartermaster;
+        protected QuartermasterViewModel QuartermasterViewModel;
 
-        protected virtual void StartQuartermaster()
+        protected void StartQuartermaster()
         {
             _itemFactory = new PoeItemFactory(_itemParser);
             _clipboardItemTextSource = new ClipboardItemTextSource(ClipboardMonitor, _itemTextChecker);
 
             Quartermaster = new QuartermasterStore(_itemFactory, _clipboardItemTextSource);
+            QuartermasterViewModel = new QuartermasterViewModel(Substitute.For<IWindowManager>(), Quartermaster, ClipboardMonitor);
+            QuartermasterViewModel.MonitorEvents();
         }
+
 
         protected void CopyIntoClipboard(string gameItemText)
         {
