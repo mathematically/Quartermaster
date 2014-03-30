@@ -1,4 +1,5 @@
 ﻿using System;
+using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Parser;
 

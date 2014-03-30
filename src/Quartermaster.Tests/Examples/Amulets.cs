@@ -21,6 +21,6 @@ Adds 1-2 Physical Damage
 +9 to Dexterity
 +11% to Cold Resistance
 ";
-        public static readonly PoeItem HorrorMedallion = new PoeItem("Horror Medallion", ItemRarity.Rare, 7);
+        public static readonly PoeItem HorrorMedallion = new PoeItem("Horror Medallion", ItemRarity.Rare, 7, PoeItem.NoAffixes);
     }
 }

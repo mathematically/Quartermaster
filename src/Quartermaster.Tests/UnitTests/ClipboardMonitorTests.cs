@@ -6,13 +6,13 @@ using Xunit;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
-
+    [Trait("Clipboard already has text", "")]
     public class ClipboardMonitorTests
     {
         private ClipboardMonitor _sut;
 
         [Fact]
-        public void If_the_clipboard_already_has_text_new_monitors_will_have_that_text_in_their_item_property()
+        public void New_clipboard_monitors_will_have_that_text_in_their_item_property()
         {
             Clipboard.SetData(DataFormats.Text, Rings.IronRingText);
 

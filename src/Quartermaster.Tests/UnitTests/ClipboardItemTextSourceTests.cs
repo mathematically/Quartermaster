@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
+    [Trait("Clipboard item text source", "")]
     public class ClipboardItemTextSourceTests
     {
         private readonly Fixture _auto = new Fixture();

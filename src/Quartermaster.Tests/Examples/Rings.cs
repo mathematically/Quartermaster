@@ -19,7 +19,8 @@ Adds 1-4 Physical Damage
         public static readonly PoeItem IronRing = new PoeItem(
             IronRingName,
             ItemRarity.Normal,
-            4
+            4,
+            PoeItem.NoAffixes
             );
 
         // Another simple ring with a level requirement.
@@ -39,7 +40,8 @@ Itemlevel: 15
         public static readonly PoeItem SapphireRing = new PoeItem(
             SapphireRingName,
             ItemRarity.Normal,
-            15
+            15,
+            PoeItem.NoAffixes
             );
 
         // A magic ring
@@ -60,7 +62,8 @@ Itemlevel: 16
         public static readonly PoeItem ThirstyRubyRingOfSuccess = new PoeItem(
             "Thirsty Ruby Ring of Success",
             ItemRarity.Magic,
-            16
+            16,
+            PoeItem.NoAffixes
             );
 
         // A rare ring
@@ -83,7 +86,7 @@ Adds 7-11 Cold Damage
 +38% to Lightning Resistance
 ";
 
-        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63);
+        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, PoeItem.NoAffixes);
 
         // A unique ring
         internal const string KaomsSignText = @"Rarity: Unique
@@ -106,7 +109,8 @@ to lead his Karui to Wraeclast.
         public static readonly PoeItem KaomsSign = new PoeItem(
             "Kaom's Sign",
             ItemRarity.Unique,
-            6
+            6,
+            PoeItem.NoAffixes
             );
     }
 }

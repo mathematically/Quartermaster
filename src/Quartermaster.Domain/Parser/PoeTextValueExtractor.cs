@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mathematically.Quartermaster.Domain.Parser
 {
-    internal class PoeTextValueExtractor
+    public class PoeTextValueExtractor
     {
         public string ValueTextFrom(string rawTooltipLine)
         {

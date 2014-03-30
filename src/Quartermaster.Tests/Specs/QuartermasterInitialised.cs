@@ -20,7 +20,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         protected readonly IClipboardMonitor ClipboardMonitor = Substitute.For<IClipboardMonitor>();
 
         private readonly ItemTextChecker _itemTextChecker = new ItemTextChecker();
-        private readonly PoeItemParser _itemParser = new PoeItemParser();
 
         private PoeItemFactory _itemFactory;
         private ClipboardItemTextSource _clipboardItemTextSource;
@@ -30,7 +29,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
         protected void StartQuartermaster()
         {
-            _itemFactory = new PoeItemFactory(_itemParser);
+            _itemFactory = new PoeItemFactory();
             _clipboardItemTextSource = new ClipboardItemTextSource(ClipboardMonitor, _itemTextChecker);
 
             Quartermaster = new QuartermasterStore(_itemFactory, _clipboardItemTextSource);

@@ -28,7 +28,8 @@ Itemlevel: 4
             itemLevel: 4,
             minPhysicalDamage: 4,
             maxPhysicalDamage: 7,
-            attackSpeed: 1.30);
+            attackSpeed: 1.30,
+            affixes: PoeItem.NoAffixes);
 
         public const double DriftwoodWandDPS = 1.95;
 
@@ -61,7 +62,8 @@ Itemlevel: 4
             itemLevel: 4,
             minPhysicalDamage: 12,
             maxPhysicalDamage: 19,
-            attackSpeed: 1.1);
+            attackSpeed: 1.1,
+            affixes: PoeItem.NoAffixes);
 
         public const double DriftwoodMaulDPS = 3.85;
 
@@ -96,7 +98,8 @@ Itemlevel: 7
             itemLevel: 7,
             minPhysicalDamage: 5,
             maxPhysicalDamage: 14,
-            attackSpeed: 1.55);
+            attackSpeed: 1.55,
+            affixes: PoeItem.NoAffixes);
 
         public const double HeavyShortBowDPS = 6.98;
 
@@ -141,7 +144,8 @@ Adds 3-32 Lightning Damage
             attackSpeed: 1.55,
             minFireDamage: 7, maxFireDamage: 13,
             minColdDamage: 0, maxColdDamage: 0,
-            minLightningDamage: 3, maxLightningDamage: 32);
+            minLightningDamage: 3, maxLightningDamage: 32,
+            affixes: PoeItem.NoAffixes);
 
         public const double HypnoticWingDPS = 46.50;
         public const double HypnoticWingPhysicalDPS = 19.38;
@@ -187,7 +191,8 @@ Adds 4-53 Lightning Damage
             attackSpeed: 1.55,
             minFireDamage: 27, maxFireDamage: 46,
             minColdDamage: 7, maxColdDamage: 12,
-            minLightningDamage: 4, maxLightningDamage: 53);
+            minLightningDamage: 4, maxLightningDamage: 53,
+            affixes: PoeItem.NoAffixes);
 
         public const double CorpseBlastDPS = 86.80;
         public const double CorpseBlastPhysicalDPS = 30.22;

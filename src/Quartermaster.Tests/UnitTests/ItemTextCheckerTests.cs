@@ -7,6 +7,7 @@ using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.UnitTests
 {
+    [Trait("Item checker", "")]
     public class ItemTextCheckerTests
     {
         [Theory]

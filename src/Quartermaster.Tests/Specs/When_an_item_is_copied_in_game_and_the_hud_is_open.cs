@@ -36,8 +36,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Rings.IronRingText, 0.0)]
         public void And_the_item_is_a_weapon_the_DPS_is_displayed(string gameItemText, double dps)
         {
-            StartQuartermaster();
-
             CopyIntoClipboard(gameItemText);
 
             _hudViewModel.Item.Damage.DPS.Should().Be(dps);
@@ -49,8 +47,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [InlineData(Rings.IronRingText, 0.0, 0.0, 0.0)]
         public void DPS_breakdown_numbers_for_elemental_weapons_are_displayed(string gameItemText, double dps, double physicalDps, double elementalDps)
         {
-            StartQuartermaster();
-
             CopyIntoClipboard(gameItemText);
 
             _hudViewModel.Item.Damage.DPS.Should().Be(dps);
@@ -61,7 +57,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [Fact]
         public void Copying_non_weapon_over_weapon_resets_dps_to_zero()
         {
-            StartQuartermaster();
             CopyIntoClipboard(Weapons.HypnoticWingText);
 
             CopyIntoClipboard(Rings.IronRingText);
@@ -74,7 +69,6 @@ namespace Mathematically.Quartermaster.Tests.Specs
         [Fact]
         public void Copying_non_elemental_weapon_over_elemental_weapon_resets_dps_to_zero()
         {
-            StartQuartermaster();
             CopyIntoClipboard(Weapons.HypnoticWingText);
 
             CopyIntoClipboard(Weapons.DriftwoodWandText);

@@ -87,8 +87,10 @@
     <Compile Include="Specs\QuartermasterInitialised.cs" />
     <Compile Include="Specs\QuartermasterStarted.cs" />
     <Compile Include="Specs\When_quartermaster_starts.cs" />
+    <Compile Include="UnitTests\AffixParsingTests.cs" />
     <Compile Include="UnitTests\ClipboardItemTextSourceTests.cs" />
     <Compile Include="UnitTests\ClipboardMonitorTests.cs" />
+    <Compile Include="UnitTests\ItemParserTestBase.cs" />
     <Compile Include="UnitTests\ItemTextCheckerTests.cs" />
     <Compile Include="UnitTests\PoeItemParserTests.cs" />
   </ItemGroup>
