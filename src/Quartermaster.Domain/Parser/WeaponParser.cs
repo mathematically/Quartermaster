@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 {
     public class WeaponParser : PoeTextValueExtractor, IWeaponDamage
     {
-        private readonly GameText _gameText;
+        private GameText _gameText;
         private Range _physicalDamageRange;
         private Range _fireDamageRange;
         private Range _coldDamageRange;
@@ -78,13 +78,10 @@ namespace Mathematically.Quartermaster.Domain.Parser
             get { return _damage.ElementalDPS; }
         }
 
-        public WeaponParser(GameText gameText)
+        public void Parse(GameText gameText)
         {
             _gameText = gameText;
-        }
 
-        public void Parse()
-        {
             IsWeapon = DetectWeapon();
 
             if (IsWeapon)

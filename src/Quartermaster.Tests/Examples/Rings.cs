@@ -110,7 +110,7 @@ to lead his Karui to Wraeclast.
             "Kaom's Sign",
             ItemRarity.Unique,
             6,
-            PoeItem.NoAffixes
+            new[] { new ItemMod(AffixName.KaomsSignLife, "+24 to maximum Life", 24, 40, 0) }
             );
     }
 }

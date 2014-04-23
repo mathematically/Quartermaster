@@ -4,6 +4,6 @@ namespace Mathematically.Quartermaster.Domain.Items
 {
     public interface IItemModData
     {
-        IEnumerable<Affix> Affixes { get; }
+        IEnumerable<ItemMod> Mods { get; }
     }
 }

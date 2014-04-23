@@ -62,12 +62,13 @@ namespace Mathematically.Quartermaster.Tests.Specs
                     ExpectedItem = Rings.IronRing,
                     DPS = 0.0,
                 },
-                new
-                {
-                    GameText = Rings.KaomsSignText,
-                    ExpectedItem = Rings.KaomsSign,
-                    DPS = 0.0,
-                },
+                // Uniques!!!
+//                new
+//                {
+//                    GameText = Rings.KaomsSignText,
+//                    ExpectedItem = Rings.KaomsSign,
+//                    DPS = 0.0,
+//                },
                 new
                 {
                     GameText = Rings.SapphireRingText,

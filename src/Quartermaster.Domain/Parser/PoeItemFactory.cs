@@ -8,13 +8,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-//        private readonly IPoeItemParser _itemParser;
-//
-//        public PoeItemFactory(IPoeItemParser itemParser)
-//        {
-//            _itemParser = itemParser;
-//        }
-
         public IPoeItem CreateItem(string gameItemText)
         {
             var itemParser = new PoeItemParser(gameItemText);

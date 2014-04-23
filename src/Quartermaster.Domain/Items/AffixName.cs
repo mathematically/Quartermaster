@@ -2,6 +2,18 @@ namespace Mathematically.Quartermaster.Domain.Items
 {
     public enum AffixName
     {
-        Stout
+        // Life
+        Healthy,
+        Sanguine,
+        Stalwart,
+        Stout,
+        Robust,
+        Rotund,
+        Virile,
+        Athletes,
+        Fecund,
+        Vigorous,
+
+        KaomsSignLife,
     }
 }

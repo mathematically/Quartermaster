@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
-using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Domain.Parser;
+﻿using Mathematically.Quartermaster.Domain.Items;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -31,7 +28,7 @@ Itemlevel: 30
             "Oblivion Trail",
             ItemRarity.Rare,
             30,
-            new [] { new Affix(AffixName.Stout, "+40 to maximum Life", 47, 80, 1) }
+            new [] { new ItemMod(AffixName.Stout, "+47 to maximum Life", 47, 80, -1) }
             );
 
         internal const string PandemoniumSoleText = @"Rarity: Rare

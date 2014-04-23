@@ -1,27 +1,40 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Domain.Parser
 {
-    public class PoeItemParser : IPoeItemParser
+    public class PoeItemParser : PoeTextValueExtractor, IPoeItemParser
     {
-        private readonly CommonPropertyParser _commonProperties;
-        private readonly WeaponParser _weapon;
-        private readonly ModsParser _mods;
+        private const int RarityLineIndex = 0;
+        private const int NameLineIndex = 1;
+
+        private static readonly List<IAffix> Affixes = new List<IAffix>
+        {
+            new LifeAffix(),
+        };
+
+        private readonly WeaponParser _weapon = new WeaponParser();
+        private readonly List<ItemMod> _mods = new List<ItemMod>();
+
+        private readonly GameText _gameText;
 
         public string Name
         {
-            get { return _commonProperties.Name; }
+            get; private set;
         }
 
         public ItemRarity Rarity
         {
-            get { return _commonProperties.Rarity; }
+            get; private set;
         }
 
         public int ItemLevel
         {
-            get { return _commonProperties.ItemLevel; }
+            get; private set;
         }
 
         public bool IsWeapon
@@ -34,25 +47,64 @@ namespace Mathematically.Quartermaster.Domain.Parser
             get { return _weapon; }
         }
 
-        public IEnumerable<Affix> Affixes
+        public IEnumerable<ItemMod> Mods
         {
-            get { return _mods.Affixes; }
+            get { return _mods; }
         }
 
         public PoeItemParser(string gameItemText)
         {
-            var gameText = new GameText(gameItemText);
-
-            _commonProperties = new CommonPropertyParser(gameText);
-            _weapon = new WeaponParser(gameText);
-            _mods = new ModsParser(gameText);
+            _gameText = new GameText(gameItemText);
         }
 
         public void Parse()
         {
-            _commonProperties.Parse();
-            _weapon.Parse();
-            _mods.Parse(_commonProperties.ItemLevel);
+            Name = _gameText[NameLineIndex];
+            Rarity = ParseRarity();
+            ItemLevel = ParseItemLevel();
+
+            _weapon.Parse(_gameText);
+
+            ParseMods();
+        }
+
+        private ItemRarity ParseRarity()
+        {
+            var rarityText = ValueTextFrom(_gameText[RarityLineIndex]);
+
+            return (ItemRarity)Enum.Parse(typeof(ItemRarity), rarityText);
+        }
+
+        private int ParseItemLevel()
+        {
+            return IntegerFrom(_gameText.LineWith(PoeText.ITEMLEVEL_LABEL));
+        }
+
+        private void ParseMods()
+        {
+            Affixes.Where(OnThisItem).ForEach(affix =>
+            {
+                var roll = GetAffixRoll(affix);
+                _mods.Add(new ItemMod(affix, ItemLevel, roll.Item1, roll.Item2));
+            });
+        }
+
+        private bool OnThisItem(IAffix a)
+        {
+            return _gameText.Contains(a.MatchText);
+        }
+
+        private Tuple<string, int> GetAffixRoll(IAffix affix)
+        {
+            var rollText = _gameText.LineWith(affix.MatchText);
+            var match = Regex.Match(rollText, affix.ValueRegEx);
+
+            if (!match.Success)
+            {
+                throw new ArgumentException(string.Format("Could not match {0} in {1}", affix.MatchText, _gameText.Text));
+            }
+
+            return new Tuple<string, int>(rollText, Convert.ToInt32(match.Value));
         }
     }
 }
