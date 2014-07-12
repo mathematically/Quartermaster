@@ -1,4 +1,5 @@
 ﻿using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -28,7 +29,7 @@ Itemlevel: 30
             "Oblivion Trail",
             ItemRarity.Rare,
             30,
-            new [] { new ItemMod(AffixName.Stout, "+47 to maximum Life", 47, 80, -1) }
+            new[] { new ItemMod(AffixCompendium.GetAffix(AffixType.Life), "+47 to maximum Life", 47, 30) }
             );
 
         internal const string PandemoniumSoleText = @"Rarity: Rare
@@ -56,7 +57,7 @@ Itemlevel: 28
             "Pandemonium Sole",
             ItemRarity.Rare,
             28,
-            PoeItem.NoAffixes
+            new[] { new ItemMod(AffixCompendium.GetAffix(AffixType.Life), "+48 to maximum Life", 48, 28) }
             );
     }
 }

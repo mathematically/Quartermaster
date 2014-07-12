@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
@@ -10,9 +11,14 @@ using Quartermaster.Infrastructure;
 
 namespace Mathematically.Quartermaster
 {
-    public class AppBootstrapper : Bootstrapper<QuartermasterViewModel>
+    public class AppBootstrapper : BootstrapperBase
     {
         private StructureMap.IContainer _container;
+
+        public AppBootstrapper()
+        {
+            Initialize();
+        }
 
         protected override void Configure()
         {
@@ -50,6 +56,12 @@ namespace Mathematically.Quartermaster
         protected override void BuildUp(object instance)
         {
             _container.BuildUp(instance);
+        }
+
+        protected override void OnStartup(object sender, StartupEventArgs e)
+        {
+            base.OnStartup(sender, e);
+            DisplayRootViewFor<QuartermasterViewModel>();
         }
     }
 }

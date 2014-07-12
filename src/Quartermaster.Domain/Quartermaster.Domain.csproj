@@ -35,8 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,7 +51,6 @@
     <Compile Include="GameItemChangedEventArgs.cs" />
     <Compile Include="IQuartermaster.cs" />
     <Compile Include="Items\ItemMod.cs" />
-    <Compile Include="Items\AffixName.cs" />
     <Compile Include="Items\IItemModData.cs" />
     <Compile Include="Items\WeaponDamage.cs" />
     <Compile Include="Items\ElementalType.cs" />
@@ -64,6 +64,8 @@
     <Compile Include="Items\IPoeWeaponData.cs" />
     <Compile Include="Items\ItemRarity.cs" />
     <Compile Include="Items\PoeItem.cs" />
+    <Compile Include="Mods\AffixCompendium.cs" />
+    <Compile Include="Mods\AffixLevelName.cs" />
     <Compile Include="Mods\IAffix.cs" />
     <Compile Include="Mods\LifeAffix.cs" />
     <Compile Include="Mods\Affix.cs" />
@@ -86,7 +88,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

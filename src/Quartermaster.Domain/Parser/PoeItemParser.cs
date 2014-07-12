@@ -12,11 +12,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
         private const int RarityLineIndex = 0;
         private const int NameLineIndex = 1;
 
-        private static readonly List<IAffix> Affixes = new List<IAffix>
-        {
-            new LifeAffix(),
-        };
-
         private readonly WeaponParser _weapon = new WeaponParser();
         private readonly List<ItemMod> _mods = new List<ItemMod>();
 
@@ -82,10 +77,10 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseMods()
         {
-            Affixes.Where(OnThisItem).ForEach(affix =>
+            AffixCompendium.Affixes.Where(OnThisItem).ForEach(affix =>
             {
                 var roll = GetAffixRoll(affix);
-                _mods.Add(new ItemMod(affix, ItemLevel, roll.Item1, roll.Item2));
+                _mods.Add(new ItemMod(affix, roll.Item1, roll.Item2, ItemLevel));
             });
         }
 

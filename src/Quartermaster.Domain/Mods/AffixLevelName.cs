@@ -1,6 +1,11 @@
-namespace Mathematically.Quartermaster.Domain.Items
+namespace Mathematically.Quartermaster.Domain.Mods
 {
-    public enum AffixName
+    public enum AffixType
+    {
+        Life
+    }
+
+    public enum AffixLevelName
     {
         // Life
         Healthy,

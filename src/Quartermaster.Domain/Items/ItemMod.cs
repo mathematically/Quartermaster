@@ -1,37 +1,87 @@
+using System;
 using System.Linq;
 using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Domain.Items
 {
+    /// <summary>
+    /// ItemMod is an actual instance of a particular Affix.  That is an AffixLevel with an associated roll.
+    /// </summary>
     public class ItemMod
     {
-        public AffixName Name { get; private set; }
+        private readonly IAffix _affix;
+        private readonly AffixLevel _affixLevel;
+
+        /// <summary>
+        /// The name of the Affix level associated with this mod.
+        /// </summary>
+        public AffixLevelName Name { get; private set; }
+
+        /// <summary>
+        /// The original text from the item tooltip.
+        /// </summary>
         public string Text { get; private set; }
-        public int RollValue { get; private set; }
-        public int RollQuality { get; private set; }
+
+        /// <summary>
+        /// Tha numeric roll value.
+        /// </summary>
+        public int Roll { get; private set; }
+
+        /// <summary>
+        /// The quality of this mod with respect to the items level.  That is the maximum quality available for an item of this level.
+        /// </summary>
+        public int ModQualityLevel { get; private set; }
+
+        /// <summary>
+        /// The overall quality of this mod relative to the highest possible level for the associated affix.
+        /// </summary>
+        public int ModQuality { get; private set; }
+
+        /// <summary>
+        /// The number of levels below the best possible level for this affix.
+        /// </summary>
+        public int Offset { get; private set; }
+
+        /// <summary>
+        /// The number of levels below the best possible affix level for an item of this item level.
+        /// </summary>
         public int LevelOffset { get; private set; }
 
-        public ItemMod(AffixName name, string rollText, int rollValue, int rollQuality, int levelOffset)
+
+        public ItemMod(IAffix affix, string modText, int roll, int itemLevel)
         {
-            Name = name;
-            Text = rollText;
-            RollValue = rollValue;
-            RollQuality = rollQuality;
-            LevelOffset = levelOffset;
+            _affix = affix;
+            _affixLevel = affix[roll];
+
+            Name = _affixLevel.Name;
+            Text = modText;
+            Roll = roll;
+
+            CalculateLevelOffset(affix, itemLevel);
+            CalculateModQuality();
         }
 
-        public ItemMod(IAffix affix, int itemLevel, string rollText, int rollValue)
+        private void CalculateLevelOffset(IAffix affix, int itemLevel)
         {
-            var affixLevel = affix[rollValue];
+            var actual = affix.Levels.Count(l => l.Min <= Roll);
+            var bestThisItemLevel = affix.Levels.Count(l => l.Level <= itemLevel);
 
-            Name = affixLevel.Name;
-            Text = rollText;
-            RollValue = rollValue;
-            RollQuality = affixLevel.CalculateQuality(rollValue);
+            Offset = affix.Levels.Count() - actual;
+            LevelOffset = bestThisItemLevel - actual;
+        }
 
-            var best = affix.Levels.Count(l => l.Level <= itemLevel);
-            var actual = affix.Levels.Count(l => l.Min <= rollValue);
-            LevelOffset = actual - best;
+        private void CalculateModQuality()
+        {
+            var levels = _affix.Levels.Count();
+            var perLevel = 100/levels;
+
+            ModQuality = CalculateQuality(perLevel, Offset);
+            ModQualityLevel = CalculateQuality(perLevel, LevelOffset);
+        }
+
+        private int CalculateQuality(int perLevel, int offset)
+        {
+            return 100 - (perLevel * offset + 1) + ((_affixLevel.Max - Roll) * (perLevel / 100));
         }
     }
 }

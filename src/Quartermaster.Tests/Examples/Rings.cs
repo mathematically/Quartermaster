@@ -1,4 +1,5 @@
 ﻿using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -106,11 +107,12 @@ A sign for Kaom
 to lead his Karui to Wraeclast.
 ";
 
-        public static readonly PoeItem KaomsSign = new PoeItem(
-            "Kaom's Sign",
-            ItemRarity.Unique,
-            6,
-            new[] { new ItemMod(AffixName.KaomsSignLife, "+24 to maximum Life", 24, 40, 0) }
-            );
+//        public static readonly PoeItem KaomsSign = new PoeItem(
+//            "Kaom's Sign",
+//            ItemRarity.Unique,
+//            6,
+//            PoeItem.NoAffixes,
+//            new[] { new ItemMod(AffixLevelName.KaomsSignLife, "+24 to maximum Life", 24, 40, 0) }
+//            );
     }
 }
