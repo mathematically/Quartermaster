@@ -2,12 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:items="clr-namespace:Mathematically.Quartermaster.Domain.Items;assembly=Quartermaster.Domain">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Resources/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="ItemModTemplate" DataType="{x:Type items:IPoeItemData}">
+        <StackPanel Orientation="Horizontal" TextElement.Foreground="{Binding Converter={StaticResource LevelOffsetColorConverter}}">
+            <TextBlock Text="{Binding Text}" Foreground="White" />
+            <TextBlock Text=" (" />
+            <TextBlock Text="{Binding Path=(items:IItemMod.Name)}" />
+            <TextBlock Text=" , " />
+            <TextBlock Text="{Binding Path=(items:IItemMod.ModQuality)}" />
+            <TextBlock Text="%)" />
+        </StackPanel>
+    </DataTemplate>
+
     <DataTemplate x:Key="PoeItemTemplate" DataType="{x:Type items:IPoeItem}">
         <StackPanel TextElement.Foreground="White">
             <TextBlock Text="{Binding Rarity, Converter={StaticResource EnumDescriptionConverter}}" />
             <TextBlock Text="{Binding Name}" />
             <TextBlock Text="--------" />
             <TextBlock Text="{Binding ItemLevel, StringFormat='Item Level: {0}'}" />
+            <ItemsControl ItemsSource="{Binding Mods}" ItemTemplate="{StaticResource ItemModTemplate}"/>
         </StackPanel>
     </DataTemplate>
 

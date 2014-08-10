@@ -6,7 +6,8 @@ namespace Mathematically.Quartermaster.Domain.Mods
     {
         private static readonly Dictionary<AffixType, IAffix> Compendium = new Dictionary<AffixType, IAffix>
         {
-            {AffixType.Life, new LifeAffix()}
+            {AffixType.Life, new LifeAffix()},
+            {AffixType.DamageScaling, new DamageScalingAffix()},
         };
 
         public static IEnumerable<IAffix> Affixes

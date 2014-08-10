@@ -97,8 +97,8 @@
     <Compile Include="Specs\When_an_item_is_copied_in_game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specs\When_an_item_is_copied_in_game_and_the_hud_is_open.cs" />
-    <Compile Include="Specs\QuartermasterInitialised.cs" />
-    <Compile Include="Specs\QuartermasterStarted.cs" />
+    <Compile Include="Specs\And_quartermaster_has_been_initialised.cs" />
+    <Compile Include="Specs\And_quartermaster_has_started.cs" />
     <Compile Include="Specs\When_quartermaster_starts.cs" />
     <Compile Include="UnitTests\AffixParsingTests.cs" />
     <Compile Include="UnitTests\ClipboardItemTextSourceTests.cs" />

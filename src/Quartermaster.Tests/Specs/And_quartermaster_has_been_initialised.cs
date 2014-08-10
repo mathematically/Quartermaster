@@ -11,7 +11,7 @@ using Quartermaster.Infrastructure;
 
 namespace Mathematically.Quartermaster.Tests.Specs
 {
-    public class QuartermasterInitialised
+    public class And_quartermaster_has_been_initialised
     {
         protected readonly Fixture Auto = new Fixture();
         protected readonly ExpectedObject NoItem = new NullPoeItem().ToExpectedObject();

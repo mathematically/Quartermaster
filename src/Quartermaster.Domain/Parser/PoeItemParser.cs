@@ -42,7 +42,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             get { return _weapon; }
         }
 
-        public IEnumerable<ItemMod> Mods
+        public IEnumerable<IItemMod> Mods
         {
             get { return _mods; }
         }

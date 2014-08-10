@@ -11,7 +11,7 @@ using Xunit.Extensions;
 namespace Mathematically.Quartermaster.Tests.Specs
 {
     [Trait("When an item is copied in game", "")]
-    public class When_an_item_is_copied_in_game : QuartermasterStarted
+    public class When_an_item_is_copied_in_game : And_quartermaster_has_started
     {
         [FirstClassTests]
         public static TestCase<When_an_item_is_copied_in_game>[] The_item_is_displayed_in_the_main_window()

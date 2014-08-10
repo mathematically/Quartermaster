@@ -43,8 +43,8 @@ Itemlevel: {1}
 
             var affix = SUT.Mods.First();
 
-//            var expectedAffix = new ItemMod(affixName, affixText, value, rollQuality, modOffset).ToExpectedObject();
-//            affix.ShouldMatch(expectedAffix);
+            var expectedAffix = new ItemMod(new LifeAffix(), affixText, value, itemLevel).ToExpectedObject();
+            affix.ShouldMatch(expectedAffix);
         }
     }
 }

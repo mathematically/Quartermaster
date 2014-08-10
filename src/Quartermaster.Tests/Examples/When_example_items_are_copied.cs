@@ -19,11 +19,7 @@ namespace Mathematically.Quartermaster.Tests.Examples
             yield return new TestCase(_ => Item_parsed_correctly(Amulets.HorrorMedallionText, Amulets.HorrorMedallion));
             yield return new TestCase(_ => Item_parsed_correctly(Boots.OblivionTrailText, Boots.OblivionTrail));
             yield return new TestCase(_ => Item_parsed_correctly(Boots.PandemoniumSoleText, Boots.PandemoniumSole));
-//                new
-//                {
-//                    GameText = Rings.IronRingText,
-//                    ExpectedItem = Rings.IronRing
-//                },
+            yield return new TestCase(_ => Item_parsed_correctly(Rings.IronRingText, Rings.IronRing));
 //                new
 //                {
 //                    GameText = Rings.SapphireRingText,

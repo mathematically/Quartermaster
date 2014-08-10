@@ -2,7 +2,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
 {
     public enum AffixType
     {
-        Life
+        Life, DamageScaling
     }
 
     public enum AffixLevelName
@@ -20,5 +20,15 @@ namespace Mathematically.Quartermaster.Domain.Mods
         Vigorous,
 
         KaomsSignLife,
+
+        // Damage Scaling
+        Heavy,
+        Serrated,
+        Wicked,
+        Vicious,
+        Bloodthirsty,
+        Cruel,
+        Tyrannical,
+
     }
 }

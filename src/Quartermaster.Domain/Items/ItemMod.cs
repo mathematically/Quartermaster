@@ -7,7 +7,7 @@ namespace Mathematically.Quartermaster.Domain.Items
     /// <summary>
     /// ItemMod is an actual instance of a particular Affix.  That is an AffixLevel with an associated roll.
     /// </summary>
-    public class ItemMod
+    public class ItemMod: IItemMod
     {
         private readonly IAffix _affix;
         private readonly AffixLevel _affixLevel;

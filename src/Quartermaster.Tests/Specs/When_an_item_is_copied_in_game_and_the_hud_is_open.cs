@@ -7,7 +7,7 @@ using Xunit.Extensions;
 namespace Mathematically.Quartermaster.Tests.Specs
 {
     [Trait("When the HUD is open and a weapon is copied in game", "")]
-    public class When_an_item_is_copied_in_game_and_the_hud_is_open : QuartermasterStarted
+    public class When_an_item_is_copied_in_game_and_the_hud_is_open : And_quartermaster_has_started
     {
         private readonly HUDViewModel _hudViewModel;
 

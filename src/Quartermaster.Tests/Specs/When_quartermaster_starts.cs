@@ -8,7 +8,7 @@ using Xunit;
 namespace Mathematically.Quartermaster.Tests.Specs
 {
     [Trait("When Quartermaster starts", "")]
-    public class When_quartermaster_starts : QuartermasterInitialised
+    public class When_quartermaster_starts : And_quartermaster_has_been_initialised
     {
         [Fact]
         public void If_the_clipboard_is_empty_then_no_item_should_be_displayed()

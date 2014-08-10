@@ -17,9 +17,9 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public IWeaponDamage Damage { get; private set; }
 
-        public IEnumerable<ItemMod> Mods { get { return _mods; } }
+        public IEnumerable<IItemMod> Mods { get { return _mods; } }
 
-        public PoeItem(string name, ItemRarity rarity, int itemLevel, IEnumerable<ItemMod> affixes)
+        public PoeItem(string name, ItemRarity rarity, int itemLevel, IEnumerable<IItemMod> affixes)
         {
             Name = name;
             Rarity = rarity;
@@ -27,17 +27,17 @@ namespace Mathematically.Quartermaster.Domain.Items
 
             Damage = NoWeaponDamage;
 
-            _mods = affixes.ToList();
+            _mods = affixes.Cast<ItemMod>().ToList();
         }
 
-        public PoeItem(string name, ItemRarity rarity, int itemLevel, int minPhysicalDamage, int maxPhysicalDamage, double attackSpeed, IEnumerable<ItemMod> affixes)
+        public PoeItem(string name, ItemRarity rarity, int itemLevel, int minPhysicalDamage, int maxPhysicalDamage, double attackSpeed, IEnumerable<IItemMod> affixes)
             : this(name, rarity, itemLevel, affixes)
         {
             Damage = new WeaponDamage(attackSpeed, minPhysicalDamage, maxPhysicalDamage);
         }
 
         public PoeItem(string name, ItemRarity rarity, int itemLevel, int minPhysicalDamage, int maxPhysicalDamage, double attackSpeed,
-            int minFireDamage, int maxFireDamage, int minColdDamage, int maxColdDamage, int minLightningDamage, int maxLightningDamage, IEnumerable<ItemMod> affixes)
+            int minFireDamage, int maxFireDamage, int minColdDamage, int maxColdDamage, int minLightningDamage, int maxLightningDamage, IEnumerable<IItemMod> affixes)
             : this(name, rarity, itemLevel, minPhysicalDamage, maxPhysicalDamage, attackSpeed, affixes)
         {
             Damage = new WeaponDamage(attackSpeed, minPhysicalDamage, maxPhysicalDamage, minFireDamage, maxFireDamage, minColdDamage, maxColdDamage, minLightningDamage, maxLightningDamage);
