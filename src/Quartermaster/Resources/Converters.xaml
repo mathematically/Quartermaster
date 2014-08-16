@@ -4,5 +4,6 @@
     <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
     <converters:NullVisibilityConverter x:Key="CollapsedIfNull" IsNotNull="Visible" IsNull="Collapsed" />
     <converters:ZeroDoubleVisibilityConverter x:Key="CollapsedIfZero" IsZero="Collapsed" IsNotZero="Visible" />
+    <converters:OffsetTextConverter x:Key="OffsetTextConverter" />
     <converters:LevelOffsetColorConverter x:Key="LevelOffsetColorConverter" />
 </ResourceDictionary>

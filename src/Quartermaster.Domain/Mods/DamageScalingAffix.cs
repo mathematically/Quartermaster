@@ -4,7 +4,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
     {
         public DamageScalingAffix()
         {
-            Definition("% increased Physical Damage", @"\d+", new[]
+            Definition(AffixPosition.Prefix, "% increased Physical Damage", @"\d+", new[]
             {
                 new AffixLevel(AffixLevelName.Heavy, 1, 20, 49),
                 new AffixLevel(AffixLevelName.Serrated, 11, 50, 69),

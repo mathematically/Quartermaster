@@ -1,5 +1,12 @@
+using System.ComponentModel;
+
 namespace Mathematically.Quartermaster.Domain.Mods
 {
+    public enum AffixPosition
+    {
+        Prefix, Suffix
+    }
+
     public enum AffixType
     {
         Life, DamageScaling

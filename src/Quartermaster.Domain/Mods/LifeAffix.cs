@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
     {
         public LifeAffix()
         {
-            Definition(" to maximum Life", @"\d+", new[]
+            Definition(AffixPosition.Prefix, " to maximum Life", @"\d+", new[]
             {
                 new AffixLevel(AffixLevelName.Healthy, 1, 10, 19),
                 new AffixLevel(AffixLevelName.Sanguine, 11, 20, 29),

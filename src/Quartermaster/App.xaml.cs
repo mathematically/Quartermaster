@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using NLog;
 
@@ -14,6 +16,7 @@ namespace Mathematically.Quartermaster
         public App()
         {
             Dispatcher.UnhandledException += DispatcherOnUnhandledException;
+            ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
         }
 
         private void DispatcherOnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs args)

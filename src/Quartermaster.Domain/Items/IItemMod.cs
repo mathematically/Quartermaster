@@ -4,6 +4,8 @@ namespace Mathematically.Quartermaster.Domain.Items
 {
     public interface IItemMod
     {
+        IAffix Affix { get; }
+
         /// <summary>
         /// The name of the Affix level associated with this mod.
         /// </summary>
@@ -38,5 +40,15 @@ namespace Mathematically.Quartermaster.Domain.Items
         /// The number of levels below the best possible affix level for an item of this item level.
         /// </summary>
         int LevelOffset { get; }
+
+        /// <summary>
+        /// The maximum roll value.
+        /// </summary>
+        int MaxRoll { get; }
+
+        /// <summary>
+        /// The maximum roll value.
+        /// </summary>
+        int MaxRollLevel { get; }
     }
 }

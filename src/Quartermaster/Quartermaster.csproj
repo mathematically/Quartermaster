@@ -82,6 +82,7 @@
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
     <Compile Include="Converters\LevelOffsetColorConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
+    <Compile Include="Converters\OffsetTextConverter.cs" />
     <Compile Include="Converters\ZeroDoubleVisibilityConverter.cs" />
     <Compile Include="QuartermasterWindowManager.cs" />
     <Compile Include="ViewModels\HUDViewModel.cs" />

@@ -9,8 +9,9 @@ namespace Mathematically.Quartermaster.Domain.Items
     /// </summary>
     public class ItemMod: IItemMod
     {
-        private readonly IAffix _affix;
         private readonly AffixLevel _affixLevel;
+
+        public IAffix Affix { get; private set; }
 
         /// <summary>
         /// The name of the Affix level associated with this mod.
@@ -23,9 +24,19 @@ namespace Mathematically.Quartermaster.Domain.Items
         public string Text { get; private set; }
 
         /// <summary>
-        /// Tha numeric roll value.
+        /// The numeric roll value.
         /// </summary>
         public int Roll { get; private set; }
+
+        /// <summary>
+        /// The maximum roll value.
+        /// </summary>
+        public int MaxRoll { get; private set; }
+
+        /// <summary>
+        /// The maximum roll value.
+        /// </summary>
+        public int MaxRollLevel { get; private set; }
 
         /// <summary>
         /// The quality of this mod with respect to the items level.  That is the maximum quality available for an item of this level.
@@ -50,12 +61,14 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public ItemMod(IAffix affix, string modText, int roll, int itemLevel)
         {
-            _affix = affix;
+            Affix = affix;
             _affixLevel = affix[roll];
 
             Name = _affixLevel.Name;
             Text = modText;
             Roll = roll;
+            MaxRoll = affix.Levels.Last().Max;
+            MaxRollLevel = _affixLevel.Max;
 
             CalculateLevelOffset(affix, itemLevel);
             CalculateModQuality();
@@ -72,7 +85,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private void CalculateModQuality()
         {
-            var levels = _affix.Levels.Count();
+            var levels = Affix.Levels.Count();
             var perLevel = 100/levels;
 
             ModQuality = CalculateQuality(perLevel, Offset);
