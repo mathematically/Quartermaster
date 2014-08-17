@@ -1,4 +1,5 @@
 ﻿using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -99,7 +100,7 @@ Itemlevel: 7
             minPhysicalDamage: 5,
             maxPhysicalDamage: 14,
             attackSpeed: 1.55,
-            affixes: PoeItem.NoAffixes);
+            affixes: new IItemMod[] { new ItemMod(new DamageScalingAffix(), "23% increased Physical Damage", 23, 7) });
 
         public const double HeavyShortBowDPS = 6.98;
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Mathematically.Quartermaster.Domain.Mods
 {
-    public static class AffixCompendium
+    public class AffixCompendium: IAffixCompendium
     {
         private static readonly Dictionary<AffixType, IAffix> Compendium = new Dictionary<AffixType, IAffix>
         {
@@ -10,12 +10,12 @@ namespace Mathematically.Quartermaster.Domain.Mods
             {AffixType.DamageScaling, new DamageScalingAffix()},
         };
 
-        public static IEnumerable<IAffix> Affixes
+        public IEnumerable<IAffix> Affixes
         {
             get { return Compendium.Values; }
         }
 
-        public static IAffix GetAffix(AffixType ofType)
+        public IAffix GetAffix(AffixType ofType)
         {
             return Compendium[ofType];
         }

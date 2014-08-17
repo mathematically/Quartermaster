@@ -3,6 +3,7 @@ using ExpectedObjects;
 using FluentAssertions;
 using Mathematically.Quartermaster.Domain;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 using Mathematically.Quartermaster.Domain.Parser;
 using Mathematically.Quartermaster.ViewModels;
 using NSubstitute;
@@ -29,7 +30,7 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
         protected void StartQuartermaster()
         {
-            _itemFactory = new PoeItemFactory();
+            _itemFactory = new PoeItemFactory(new AffixCompendium());
             _clipboardItemTextSource = new ClipboardItemTextSource(ClipboardMonitor, _itemTextChecker);
 
             Quartermaster = new QuartermasterStore(_itemFactory, _clipboardItemTextSource);

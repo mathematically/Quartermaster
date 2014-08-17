@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Mathematically.Quartermaster.Domain;
-using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 using Mathematically.Quartermaster.Domain.Parser;
 using Mathematically.Quartermaster.ViewModels;
 using Quartermaster.Infrastructure;
@@ -31,6 +31,7 @@ namespace Mathematically.Quartermaster
                 x.For<IQuartermaster>().Singleton().Use<QuartermasterStore>();
 
                 // Domain dependencies
+                x.For<IAffixCompendium>().Singleton().Use<AffixCompendium>();
                 x.For<IItemTextSource>().Use<ClipboardItemTextSource>();
                 x.For<IItemTextChecker>().Use<ItemTextChecker>();
                 x.For<IPoeItemFactory>().Use<PoeItemFactory>();

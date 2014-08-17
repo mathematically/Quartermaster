@@ -69,6 +69,7 @@
     <Compile Include="Mods\AffixLevelName.cs" />
     <Compile Include="Mods\DamageScalingAffix.cs" />
     <Compile Include="Mods\IAffix.cs" />
+    <Compile Include="Mods\IAffixCompendium.cs" />
     <Compile Include="Mods\LifeAffix.cs" />
     <Compile Include="Mods\Affix.cs" />
     <Compile Include="Mods\AffixLevel.cs" />

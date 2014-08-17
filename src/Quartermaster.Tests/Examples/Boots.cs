@@ -3,8 +3,15 @@ using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
-    public static class Boots
+    public static class Boots 
     {
+        private static readonly AffixCompendium Affixes;
+
+        static Boots()
+        {
+            Affixes = new AffixCompendium();
+        }
+
         internal const string OblivionTrailText = @"Rarity: Rare
 Oblivion Trail
 Plated Greaves
@@ -29,7 +36,7 @@ Itemlevel: 30
             "Oblivion Trail",
             ItemRarity.Rare,
             30,
-            new[] { new ItemMod(AffixCompendium.GetAffix(AffixType.Life), "+47 to maximum Life", 47, 30) }
+            new[] { new ItemMod(new LifeAffix(), "+47 to maximum Life", 47, 30) }
             );
 
         internal const string PandemoniumSoleText = @"Rarity: Rare
@@ -57,7 +64,8 @@ Itemlevel: 28
             "Pandemonium Sole",
             ItemRarity.Rare,
             28,
-            new[] { new ItemMod(AffixCompendium.GetAffix(AffixType.Life), "+48 to maximum Life", 48, 28) }
+            new[] { new ItemMod(new LifeAffix(), "+48 to maximum Life", 48, 28) }
             );
+
     }
 }

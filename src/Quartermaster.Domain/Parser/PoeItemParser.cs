@@ -9,6 +9,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 {
     public class PoeItemParser : PoeTextValueExtractor, IPoeItemParser
     {
+        private readonly IAffixCompendium _affixCompendium;
         private const int RarityLineIndex = 0;
         private const int NameLineIndex = 1;
 
@@ -47,8 +48,9 @@ namespace Mathematically.Quartermaster.Domain.Parser
             get { return _mods; }
         }
 
-        public PoeItemParser(string gameItemText)
+        public PoeItemParser(IAffixCompendium affixCompendium, string gameItemText)
         {
+            _affixCompendium = affixCompendium;
             _gameText = new GameText(gameItemText);
         }
 
@@ -77,7 +79,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseMods()
         {
-            AffixCompendium.Affixes.Where(OnThisItem).ForEach(affix =>
+            _affixCompendium.Affixes.Where(OnThisItem).ForEach(affix =>
             {
                 var roll = GetAffixRoll(affix);
                 _mods.Add(new ItemMod(affix, roll.Item1, roll.Item2, ItemLevel));
@@ -86,7 +88,8 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private bool OnThisItem(IAffix a)
         {
-            return _gameText.Contains(a.MatchText);
+            var textMatch = _gameText.Contains(a.MatchText);
+            return textMatch;
         }
 
         private Tuple<string, int> GetAffixRoll(IAffix affix)

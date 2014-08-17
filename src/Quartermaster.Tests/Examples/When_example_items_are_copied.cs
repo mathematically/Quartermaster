@@ -5,6 +5,7 @@ using System.Linq;
 using ExpectedObjects;
 using Grean.Exude;
 using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 using Mathematically.Quartermaster.Domain.Parser;
 using Xunit;
 
@@ -139,7 +140,7 @@ namespace Mathematically.Quartermaster.Tests.Examples
         {
             Console.WriteLine(gameText);
 
-            var itemFactory = new PoeItemFactory();
+            var itemFactory = new PoeItemFactory(new AffixCompendium());
             var actualItem = itemFactory.CreateItem(gameText);
             actualItem.ShouldMatch(expectedItem.ToExpectedObject());
         }
