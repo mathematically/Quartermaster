@@ -21,6 +21,7 @@ Adds 1-4 Physical Damage
             IronRingName,
             ItemRarity.Normal,
             4,
+            BaseItemType.IronRing,
             PoeItem.NoAffixes
             );
 
@@ -42,6 +43,7 @@ Itemlevel: 15
             SapphireRingName,
             ItemRarity.Normal,
             15,
+            BaseItemType.SapphireRing,
             PoeItem.NoAffixes
             );
 
@@ -64,6 +66,7 @@ Itemlevel: 16
             "Thirsty Ruby Ring of Success",
             ItemRarity.Magic,
             16,
+            BaseItemType.RubyRing,
             PoeItem.NoAffixes
             );
 
@@ -87,7 +90,7 @@ Adds 7-11 Cold Damage
 +38% to Lightning Resistance
 ";
 
-        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, PoeItem.NoAffixes);
+        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, BaseItemType.RubyRing, PoeItem.NoAffixes);
 
         // A unique ring
         internal const string KaomsSignText = @"Rarity: Unique

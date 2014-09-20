@@ -73,6 +73,7 @@
     <Compile Include="Mods\LifeAffix.cs" />
     <Compile Include="Mods\Affix.cs" />
     <Compile Include="Mods\AffixLevel.cs" />
+    <Compile Include="Parser\BaseItemTypeParser.cs" />
     <Compile Include="Parser\GameText.cs" />
     <Compile Include="Parser\IItemTextChecker.cs" />
     <Compile Include="Parser\IItemTextSource.cs" />

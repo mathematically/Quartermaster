@@ -17,6 +17,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         private readonly List<ItemMod> _mods = new List<ItemMod>();
 
         private readonly GameText _gameText;
+        private readonly BaseItemTypeParser _baseItemTypeParser;
 
         public string Name
         {
@@ -29,6 +30,11 @@ namespace Mathematically.Quartermaster.Domain.Parser
         }
 
         public int ItemLevel
+        {
+            get; private set;
+        }
+
+        public BaseItemType BaseType
         {
             get; private set;
         }
@@ -52,6 +58,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             _affixCompendium = affixCompendium;
             _gameText = new GameText(gameItemText);
+            _baseItemTypeParser = new BaseItemTypeParser(_gameText);
         }
 
         public void Parse()
@@ -59,6 +66,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             Name = _gameText[NameLineIndex];
             Rarity = ParseRarity();
             ItemLevel = ParseItemLevel();
+            BaseType = _baseItemTypeParser.ParseBaseItemType();
 
             _weapon.Parse(_gameText);
 

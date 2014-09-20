@@ -25,8 +25,8 @@ Itemlevel: 4
 
         public static readonly PoeItem DriftwoodWand = new PoeItem(
             "Driftwood Wand",
-            ItemRarity.Normal,
-            itemLevel: 4,
+            ItemRarity.Normal, 4,
+            BaseItemType.DriftwoodWand, 
             minPhysicalDamage: 4,
             maxPhysicalDamage: 7,
             attackSpeed: 1.30,
@@ -60,7 +60,8 @@ Itemlevel: 4
         public static readonly PoeItem DriftwoodMaul = new PoeItem(
             "Driftwood Maul",
             ItemRarity.Normal,
-            itemLevel: 4,
+            4,
+            BaseItemType.DriftwoodMaul,
             minPhysicalDamage: 12,
             maxPhysicalDamage: 19,
             attackSpeed: 1.1,
@@ -96,7 +97,8 @@ Itemlevel: 7
         public static readonly PoeItem HeavyShortBow = new PoeItem(
             "Heavy Short Bow",
             ItemRarity.Magic,
-            itemLevel: 7,
+            7,
+            BaseItemType.ShortBow,
             minPhysicalDamage: 5,
             maxPhysicalDamage: 14,
             attackSpeed: 1.55,
@@ -139,7 +141,8 @@ Adds 3-32 Lightning Damage
         public static readonly PoeItem HypnoticWing = new PoeItem(
             "Hypnotic Wing",
             ItemRarity.Rare,
-            itemLevel: 35,
+            35,
+            BaseItemType.GroveBow,
             minPhysicalDamage: 13,
             maxPhysicalDamage: 38,
             attackSpeed: 1.55,
@@ -186,7 +189,8 @@ Adds 4-53 Lightning Damage
         public static readonly PoeItem CorpseBlast = new PoeItem(
             "Corpse Blast",
             ItemRarity.Rare,
-            itemLevel: 59,
+            59,
+            BaseItemType.ThicketBow,
             minPhysicalDamage: 19,
             maxPhysicalDamage: 58,
             attackSpeed: 1.55,
