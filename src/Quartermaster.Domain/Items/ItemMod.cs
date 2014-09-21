@@ -85,16 +85,12 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private void CalculateModQuality()
         {
-            var levels = Affix.Levels.Count();
-            var perLevel = 100/levels;
+            var r = (double) Roll;
+            var max = (double) Affix.Levels.Last().Max;
+            var lmax = (double) _affixLevel.Max;
 
-            ModQuality = CalculateQuality(perLevel, Offset);
-            ModQualityLevel = CalculateQuality(perLevel, LevelOffset);
-        }
-
-        private int CalculateQuality(int perLevel, int offset)
-        {
-            return 100 - (perLevel * offset + 1) + ((_affixLevel.Max - Roll) * (perLevel / 100));
+            ModQuality = (int) ((r/max)*100.0);
+            ModQualityLevel = (int)((r / lmax) * 100.0);
         }
     }
 }

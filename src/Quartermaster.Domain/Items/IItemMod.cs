@@ -22,7 +22,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         int Roll { get; }
 
         /// <summary>
-        /// The quality of this mod with respect to the items level.  That is the maximum quality available for an item of this level.
+        /// The quality of this mod with respect to the item's level.  That is the maximum quality available for an item of this level.
         /// </summary>
         int ModQualityLevel { get; }
 

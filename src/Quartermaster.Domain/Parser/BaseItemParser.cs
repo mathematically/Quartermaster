@@ -7,16 +7,14 @@ using NLog;
 
 namespace Mathematically.Quartermaster.Domain.Parser
 {
-    public class BaseItemTypeParser
+    public class BaseItemParser
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
-        private readonly GameText _gameText;
 
         // This is full of entries like:
         //  BaseItemType.CrudeBow, { "Crude", "Bow" }
         // i.e. if we can find Crude and Bow in the tooltip text we think is the base item type, then this 
-        // is the type in hhe key (e.g. CrudeBow).
+        // is the type in the key (e.g. CrudeBow).
         private static readonly Dictionary<BaseItemType, string[]> _lookup = new Dictionary<BaseItemType, string[]>();
 
         private void CreateBaseItemTypeWordLookup()
@@ -35,41 +33,42 @@ namespace Mathematically.Quartermaster.Domain.Parser
             });
         }
 
-        public BaseItemTypeParser(GameText gameText)
+        public BaseItemParser()
         {
-            _gameText = gameText;
             CreateBaseItemTypeWordLookup();
         }
 
-        public BaseItemType ParseBaseItemType()
+        public BaseItemType Parse(GameText gameText)
         {
-            var baseItemTypeText = _gameText.BaseItemText().Replace(" ", string.Empty);
+            var baseItemTypeText = gameText.BaseItemText().Replace(" ", string.Empty);
 
             // Simple parse will find "Ruby Ring", complex parse for things like "Thirsty Ruby Ring of Success"
             BaseItemType baseItemType;
-            if (!Enum.TryParse(baseItemTypeText, true, out baseItemType))
+            if (Enum.TryParse(baseItemTypeText, true, out baseItemType))
             {
-                // Simple parse didn't work, try long slow parse
-                return ComplexParse(baseItemTypeText);
+                return baseItemType;
+            }
+
+            if (TryComplexParse(baseItemTypeText, out baseItemType))
+            {
+                return baseItemType;
             }
 
             Log.Error("Couldn't parse base item type of " + baseItemTypeText + " defaulting to CrudeBow");
-            return baseItemType;
+            return BaseItemType.CrudeBow;
         }
 
-        private BaseItemType ComplexParse(string baseItemTypeText)
+        private bool TryComplexParse(string baseItemTypeText, out BaseItemType baseItemType)
         {
-            var actualType = BaseItemType.CrudeBow;
-            _lookup.ForEach(requiredWords =>
+            // This is likely not going to be perfect.
+            foreach (var map in _lookup.Where(map => map.Value.All(baseItemTypeText.Contains)))
             {
-                if (requiredWords.Value.All(baseItemTypeText.Contains))
-                {
-                    actualType = requiredWords.Key;
-                }
-            });
+                baseItemType = map.Key;
+                return true;
+            }
 
-
-            return actualType;
+            baseItemType = BaseItemType.CrudeBow;
+            return false;
         }
     }
 }

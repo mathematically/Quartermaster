@@ -5,6 +5,9 @@ using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Domain.Items
 {
+    /// <summary>
+    /// The properties every item has regardless of type or level.
+    /// </summary>
     public interface ICommonPoeItemData
     {
         string Name { get; }
@@ -75,7 +78,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         #endregion
 
-        #region Other
+        #region Jewelry
 
         // Amulet
         PauaAmulet, CoralAmulet, AmberAmulet, LapisAmulet, JadeAmulet, GoldAmulet, AgateAmulet, CitrineAmulet, 
@@ -107,7 +110,7 @@ namespace Mathematically.Quartermaster.Domain.Items
             // ARMOUR
             values.Where(t => t >= BaseItemType.IronGreaves && t <= BaseItemType.SlinkBoots).ForEach(t => Lexicon.Add(t, ItemCategory.Boots));
 
-            // OTHER
+            // JEWELRY
             values.Where(t => t >= BaseItemType.PauaAmulet && t <= BaseItemType.OnyxAmulet).ForEach(t => Lexicon.Add(t, ItemCategory.Amulet));
             values.Where(t => t >= BaseItemType.IronRing && t <= BaseItemType.UnsetRing).ForEach(t => Lexicon.Add(t, ItemCategory.Ring));
         }

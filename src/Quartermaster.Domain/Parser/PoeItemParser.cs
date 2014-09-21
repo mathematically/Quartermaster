@@ -13,11 +13,11 @@ namespace Mathematically.Quartermaster.Domain.Parser
         private const int RarityLineIndex = 0;
         private const int NameLineIndex = 1;
 
-        private readonly WeaponParser _weapon = new WeaponParser();
+        private readonly WeaponParser _weaponParser = new WeaponParser();
+        private readonly BaseItemParser _baseItemParser = new BaseItemParser();
         private readonly List<ItemMod> _mods = new List<ItemMod>();
 
         private readonly GameText _gameText;
-        private readonly BaseItemTypeParser _baseItemTypeParser;
 
         public string Name
         {
@@ -41,12 +41,12 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         public bool IsWeapon
         {
-            get { return _weapon.IsWeapon; }
+            get { return _weaponParser.IsWeapon; }
         }
 
         public IWeaponDamage Damage
         {
-            get { return _weapon; }
+            get { return _weaponParser; }
         }
 
         public IEnumerable<IItemMod> Mods
@@ -58,7 +58,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             _affixCompendium = affixCompendium;
             _gameText = new GameText(gameItemText);
-            _baseItemTypeParser = new BaseItemTypeParser(_gameText);
         }
 
         public void Parse()
@@ -66,10 +65,9 @@ namespace Mathematically.Quartermaster.Domain.Parser
             Name = _gameText[NameLineIndex];
             Rarity = ParseRarity();
             ItemLevel = ParseItemLevel();
-            BaseType = _baseItemTypeParser.ParseBaseItemType();
+            BaseType = _baseItemParser.Parse(_gameText);
 
-            _weapon.Parse(_gameText);
-
+            ParseWeapon();
             ParseMods();
         }
 
@@ -83,6 +81,11 @@ namespace Mathematically.Quartermaster.Domain.Parser
         private int ParseItemLevel()
         {
             return IntegerFrom(_gameText.LineWith(PoeText.ITEMLEVEL_LABEL));
+        }
+
+        private void ParseWeapon()
+        {
+            _weaponParser.Parse(_gameText);
         }
 
         private void ParseMods()

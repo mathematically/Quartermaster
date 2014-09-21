@@ -11,10 +11,9 @@ namespace Mathematically.Quartermaster.Converters
             var offset = (int) value;
 
             if (offset == 0)
-                return "--";
+                return "*";
 
-            return "-" + offset;
-
+            return offset <= 3 ? new string('-', offset) : "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
