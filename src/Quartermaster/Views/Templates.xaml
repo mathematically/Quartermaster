@@ -36,14 +36,14 @@
 
                         <TextBlock Grid.Row="1" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.ModQuality), StringFormat=Quality: {0}%}" />
-                        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" 
+                        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Visibility="{Binding Path=(items:IItemMod.Offset), Converter={StaticResource HideLargeOffsetConverter}}"
                                    Text="{Binding Path=(items:IItemMod.Offset), StringFormat=Tier: {0}, Converter={StaticResource OffsetTextConverter}}" />
                         <TextBlock Grid.Row="3" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.MaxRoll), StringFormat=Max Roll: {0}}" />
 
                         <TextBlock Grid.Row="5" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.ModQualityLevel), StringFormat=Level Quality: {0}%}" />
-                        <TextBlock Grid.Row="6" Grid.ColumnSpan="3" 
+                        <TextBlock Grid.Row="6" Grid.ColumnSpan="3" Visibility="{Binding Path=(items:IItemMod.Offset), Converter={StaticResource HideLargeOffsetConverter}}"
                                    Text="{Binding Path=(items:IItemMod.LevelOffset), StringFormat=Level Tier: {0}, Converter={StaticResource OffsetTextConverter}}" />
                         <TextBlock Grid.Row="7" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.MaxRollLevel), StringFormat=Level Max Roll: {0}}" />

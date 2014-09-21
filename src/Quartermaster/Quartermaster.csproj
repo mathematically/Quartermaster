@@ -80,6 +80,7 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Behaviours\AlwaysOnTopBehavior.cs" />
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
+    <Compile Include="Converters\HideLargeOffsetConverter.cs" />
     <Compile Include="Converters\LevelOffsetColorConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="Converters\OffsetTextConverter.cs" />
