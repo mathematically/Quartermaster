@@ -92,7 +92,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         #endregion
     }
 
-    public class ItemTypeLexicon : IItemLexicon, IModItemLexicon
+    public class ItemTypeLexicon : IItemLexicon
     {
         private static readonly Dictionary<BaseItemType, ItemCategory> Lexicon = new Dictionary<BaseItemType, ItemCategory>();
 
@@ -129,10 +129,6 @@ namespace Mathematically.Quartermaster.Domain.Items
     public interface IItemLexicon
     {
         ItemCategory GetItemCategory(BaseItemType forBaseType);
-    }
-
-    public interface IModItemLexicon
-    {
         bool IsValidOnBaseType(IAffix affix, BaseItemType baseItemType);
     }
 }

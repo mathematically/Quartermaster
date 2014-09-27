@@ -29,12 +29,12 @@ namespace Mathematically.Quartermaster.Domain.Items
         public int Roll { get; private set; }
 
         /// <summary>
-        /// The maximum roll value.
+        /// The maximum roll value for this affix.
         /// </summary>
         public int MaxRoll { get; private set; }
 
         /// <summary>
-        /// The maximum roll value.
+        /// The maximum roll value for the given level of this affix.
         /// </summary>
         public int MaxRollLevel { get; private set; }
 
