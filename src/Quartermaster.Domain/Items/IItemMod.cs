@@ -9,7 +9,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         /// <summary>
         /// The name of the Affix level associated with this mod.
         /// </summary>
-        AffixLevelName Name { get; }
+        AffixTierName Name { get; }
 
         /// <summary>
         /// The original text from the item tooltip.

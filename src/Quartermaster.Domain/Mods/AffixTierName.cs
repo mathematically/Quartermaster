@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Mathematically.Quartermaster.Domain.Mods
 {
-    public enum AffixLevelName
+    public enum AffixTierName
     {
         // Life
         Healthy,

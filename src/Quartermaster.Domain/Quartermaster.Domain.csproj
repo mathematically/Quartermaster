@@ -70,7 +70,7 @@
     <Compile Include="Items\ItemRarity.cs" />
     <Compile Include="Items\PoeItem.cs" />
     <Compile Include="Mods\AffixCompendium.cs" />
-    <Compile Include="Mods\AffixLevelName.cs" />
+    <Compile Include="Mods\AffixTierName.cs" />
     <Compile Include="Mods\AffixPosition.cs" />
     <Compile Include="Mods\AffixType.cs" />
     <Compile Include="Mods\DamageScalingAffix.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Mods\IAffixCompendium.cs" />
     <Compile Include="Mods\LifeAffix.cs" />
     <Compile Include="Mods\Affix.cs" />
-    <Compile Include="Mods\AffixLevel.cs" />
+    <Compile Include="Mods\AffixTier.cs" />
     <Compile Include="Parser\BaseItemParser.cs" />
     <Compile Include="Parser\GameText.cs" />
     <Compile Include="Parser\IItemTextChecker.cs" />

@@ -13,10 +13,10 @@ namespace Mathematically.Quartermaster.Domain.Mods
         public string MatchText { get; private set; }
         public string ValueRegEx { get; private set; }
 
-        private readonly List<AffixLevel> _levels = new List<AffixLevel>();
+        private readonly List<AffixTier> _levels = new List<AffixTier>();
 
         protected void Definition(AffixPosition position, string matchText, string valueRegEx,
-            IEnumerable<AffixLevel> levels)
+            IEnumerable<AffixTier> levels)
         {
             Position = position;
             MatchText = matchText;
@@ -25,12 +25,12 @@ namespace Mathematically.Quartermaster.Domain.Mods
             _levels.AddRange(levels);
         }
 
-        public IEnumerable<AffixLevel> Levels
+        public IEnumerable<AffixTier> Levels
         {
             get { return _levels; }
         }
 
-        public AffixLevel this[int roll]
+        public AffixTier this[int roll]
         {
             get { return Levels.Single(l => roll >= l.Min && roll <= l.Max); }
         }

@@ -6,16 +6,16 @@ namespace Mathematically.Quartermaster.Domain.Mods
         {
             Definition(AffixPosition.Prefix, " to maximum Life", @"\d+", new[]
             {
-                new AffixLevel(AffixLevelName.Healthy, 1, 10, 19),
-                new AffixLevel(AffixLevelName.Sanguine, 11, 20, 29),
-                new AffixLevel(AffixLevelName.Stalwart, 18, 30, 39),
-                new AffixLevel(AffixLevelName.Stout, 24, 40, 49),
-                new AffixLevel(AffixLevelName.Robust, 30, 50, 59),
-                new AffixLevel(AffixLevelName.Rotund, 36, 60, 69),
-                new AffixLevel(AffixLevelName.Virile, 44, 70, 79),
-                new AffixLevel(AffixLevelName.Athletes, 54, 80, 89),
-                new AffixLevel(AffixLevelName.Fecund, 64, 90, 99),
-                new AffixLevel(AffixLevelName.Vigorous, 73, 100, 109)
+                new AffixTier(AffixTierName.Healthy, 1, 10, 19),
+                new AffixTier(AffixTierName.Sanguine, 11, 20, 29),
+                new AffixTier(AffixTierName.Stalwart, 18, 30, 39),
+                new AffixTier(AffixTierName.Stout, 24, 40, 49),
+                new AffixTier(AffixTierName.Robust, 30, 50, 59),
+                new AffixTier(AffixTierName.Rotund, 36, 60, 69),
+                new AffixTier(AffixTierName.Virile, 44, 70, 79),
+                new AffixTier(AffixTierName.Athletes, 54, 80, 89),
+                new AffixTier(AffixTierName.Fecund, 64, 90, 99),
+                new AffixTier(AffixTierName.Vigorous, 73, 100, 109)
             });
         }
     }

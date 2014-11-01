@@ -4,18 +4,18 @@ using Mathematically.Quartermaster.Domain.Mods;
 namespace Mathematically.Quartermaster.Domain.Items
 {
     /// <summary>
-    ///     ItemMod is an actual instance of a particular Affix.  That is an AffixLevel with an associated roll.
+    ///     ItemMod is an actual instance of a particular Affix.  That is an AffixTier with an associated roll.
     /// </summary>
     public class ItemMod : IItemMod
     {
-        private readonly AffixLevel _affixLevel;
+        private readonly AffixTier _affixTier;
 
         public IAffix Affix { get; private set; }
 
         /// <summary>
         ///     The name of the Affix level associated with this mod.
         /// </summary>
-        public AffixLevelName Name { get; private set; }
+        public AffixTierName Name { get; private set; }
 
         /// <summary>
         ///     The original text from the item tooltip.
@@ -62,13 +62,13 @@ namespace Mathematically.Quartermaster.Domain.Items
         public ItemMod(IAffix affix, string modText, int roll, int itemLevel)
         {
             Affix = affix;
-            _affixLevel = affix[roll];
+            _affixTier = affix[roll];
 
-            Name = _affixLevel.Name;
+            Name = _affixTier.Name;
             Text = modText;
             Roll = roll;
             MaxRoll = affix.Levels.Last().Max;
-            MaxRollLevel = _affixLevel.Max;
+            MaxRollLevel = _affixTier.Max;
 
             CalculateLevelOffset(affix, itemLevel);
             CalculateModQuality();
@@ -87,7 +87,7 @@ namespace Mathematically.Quartermaster.Domain.Items
         {
             var r = (double) Roll;
             var max = (double) Affix.Levels.Last().Max;
-            var lmax = (double) _affixLevel.Max;
+            var lmax = (double) _affixTier.Max;
 
             ModQuality = (int) ((r/max)*100.0);
             ModQualityLevel = (int) ((r/lmax)*100.0);
