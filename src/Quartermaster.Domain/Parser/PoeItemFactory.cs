@@ -26,7 +26,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             }
             catch (Exception e)
             {
-                Log.ErrorException("Failed to parse clipboard text " + gameItemText + " (" + e.Message + ")", e);
+                Log.Error("Failed to parse clipboard text " + gameItemText + " (" + e.Message + ")", e);
             }
 
             return new PoeItem(itemParser);

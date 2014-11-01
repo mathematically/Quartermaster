@@ -16,7 +16,8 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             _itemText = itemText;
             _textLines = itemText.Split(Constants.AllPlatformLineSplitChars, StringSplitOptions.None);
-            _dividerIndexes = Enumerable.Range(0, _textLines.Count()).Where(t => _textLines[t] == PoeText.SECTION_DIVIDER).ToList();
+            _dividerIndexes = Enumerable.Range(0, _textLines.Count())
+                .Where(t => _textLines[t] == PoeText.SECTION_DIVIDER).ToList();
         }
 
         public string Text

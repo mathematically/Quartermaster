@@ -29,7 +29,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             {
                 // todo this is a crap way of doing this with the replace and then split but my RegEx fu is crap today
                 var wordSet = Regex.Replace(s, "([a-z](?=[A-Z])|[A-Z](?=[A-Z][a-z]))", "$1 ").Split(new[] {' '});
-                _lookup.Add((BaseItemType)Enum.Parse(typeof(BaseItemType), s), wordSet);
+                _lookup.Add((BaseItemType) Enum.Parse(typeof (BaseItemType), s), wordSet);
             });
         }
 

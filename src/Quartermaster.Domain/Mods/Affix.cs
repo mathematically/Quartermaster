@@ -4,8 +4,8 @@ using System.Linq;
 namespace Mathematically.Quartermaster.Domain.Mods
 {
     /// <summary>
-    /// An affix definition, that being the text and regex we need to find it in the game text
-    /// and the set of AffixLevels defined by the game.
+    ///     An affix definition, that being the text and regex we need to find it in the game text
+    ///     and the set of AffixLevels defined by the game.
     /// </summary>
     public class Affix : IAffix
     {
@@ -15,7 +15,8 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         private readonly List<AffixLevel> _levels = new List<AffixLevel>();
 
-        protected void Definition(AffixPosition position, string matchText, string valueRegEx, IEnumerable<AffixLevel> levels)
+        protected void Definition(AffixPosition position, string matchText, string valueRegEx,
+            IEnumerable<AffixLevel> levels)
         {
             Position = position;
             MatchText = matchText;
@@ -31,7 +32,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         public AffixLevel this[int roll]
         {
-            get { return Levels.Single(l => roll >= l.Min  && roll <= l.Max); }
+            get { return Levels.Single(l => roll >= l.Min && roll <= l.Max); }
         }
     }
 }

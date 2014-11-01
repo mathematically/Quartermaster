@@ -44,7 +44,8 @@ namespace Mathematically.Quartermaster.Domain.Items
             _dps = _physicalDPS + _elementalDPS;
         }
 
-        public WeaponDamage(double attackSpeed, int minPhysical, int maxPhysical, int minFireDamage, int maxFireDamage, int minColdDamage, int maxColdDamage, int minLightningDamage, int maxLightningDamage)
+        public WeaponDamage(double attackSpeed, int minPhysical, int maxPhysical, int minFireDamage, int maxFireDamage,
+            int minColdDamage, int maxColdDamage, int minLightningDamage, int maxLightningDamage)
         {
             AttackSpeed = attackSpeed;
             MinPhysical = minPhysical;
@@ -61,21 +62,22 @@ namespace Mathematically.Quartermaster.Domain.Items
             _dps = _physicalDPS + _elementalDPS;
         }
 
-        private double CalculatePhysicalDPS( )
+        private double CalculatePhysicalDPS()
         {
             var damageRange = MaxPhysical - MinPhysical;
-            var averageDamage = damageRange / 2.0;
+            var averageDamage = damageRange/2.0;
 
             // Sod rounding errors, 2dp will be close enough.
-            return Math.Round(averageDamage * AttackSpeed, 2);
+            return Math.Round(averageDamage*AttackSpeed, 2);
         }
 
-        private double CalculateElementalDPS( )
+        private double CalculateElementalDPS()
         {
-            var damageRange = MaxFireDamage + MaxColdDamage + MaxLightningDamage - MinFireDamage - MinColdDamage - MinLightningDamage;
-            var averageDamage = damageRange / 2.0;
+            var damageRange = MaxFireDamage + MaxColdDamage + MaxLightningDamage - MinFireDamage - MinColdDamage -
+                              MinLightningDamage;
+            var averageDamage = damageRange/2.0;
 
-            return Math.Round(averageDamage * AttackSpeed, 2);
+            return Math.Round(averageDamage*AttackSpeed, 2);
         }
 
         protected WeaponDamage()

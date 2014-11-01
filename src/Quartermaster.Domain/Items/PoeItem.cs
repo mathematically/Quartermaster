@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Mathematically.Quartermaster.Domain.Items
@@ -7,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Items
     public class PoeItem : IPoeItem
     {
         public static readonly IEnumerable<ItemMod> NoAffixes = new List<ItemMod>();
-        private readonly static IWeaponDamage NoWeaponDamage = new NullWeaponDamage();
+        private static readonly IWeaponDamage NoWeaponDamage = new NullWeaponDamage();
 
         private readonly List<ItemMod> _mods;
 
@@ -18,9 +17,13 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public IWeaponDamage Damage { get; private set; }
 
-        public IEnumerable<IItemMod> Mods { get { return _mods; } }
+        public IEnumerable<IItemMod> Mods
+        {
+            get { return _mods; }
+        }
 
-        public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType, IEnumerable<IItemMod> affixes)
+        public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType,
+            IEnumerable<IItemMod> affixes)
         {
             Name = name;
             Rarity = rarity;
@@ -32,29 +35,34 @@ namespace Mathematically.Quartermaster.Domain.Items
             _mods = affixes.Cast<ItemMod>().ToList();
         }
 
-        public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType, int minPhysicalDamage, int maxPhysicalDamage, double attackSpeed, 
+        public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType, int minPhysicalDamage,
+            int maxPhysicalDamage, double attackSpeed,
             IEnumerable<IItemMod> affixes)
             : this(name, rarity, itemLevel, baseType, affixes)
         {
             Damage = new WeaponDamage(attackSpeed, minPhysicalDamage, maxPhysicalDamage);
         }
 
-        public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType, int minPhysicalDamage, int maxPhysicalDamage, double attackSpeed,
-            int minFireDamage, int maxFireDamage, int minColdDamage, int maxColdDamage, int minLightningDamage, int maxLightningDamage, IEnumerable<IItemMod> affixes)
+        public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType, int minPhysicalDamage,
+            int maxPhysicalDamage, double attackSpeed,
+            int minFireDamage, int maxFireDamage, int minColdDamage, int maxColdDamage, int minLightningDamage,
+            int maxLightningDamage, IEnumerable<IItemMod> affixes)
             : this(name, rarity, itemLevel, baseType, minPhysicalDamage, maxPhysicalDamage, attackSpeed, affixes)
         {
-            Damage = new WeaponDamage(attackSpeed, minPhysicalDamage, maxPhysicalDamage, minFireDamage, maxFireDamage, minColdDamage, maxColdDamage, minLightningDamage, maxLightningDamage);
+            Damage = new WeaponDamage(attackSpeed, minPhysicalDamage, maxPhysicalDamage, minFireDamage, maxFireDamage,
+                minColdDamage, maxColdDamage, minLightningDamage, maxLightningDamage);
         }
 
         public PoeItem(IPoeItemData itemData)
             : this(itemData.Name, itemData.Rarity, itemData.ItemLevel, itemData.BaseType,
                 itemData.Damage.MinPhysical, itemData.Damage.MaxPhysical, itemData.Damage.AttackSpeed,
-                itemData.Damage.MinFireDamage, itemData.Damage.MaxFireDamage, itemData.Damage.MinColdDamage, itemData.Damage.MaxColdDamage,
+                itemData.Damage.MinFireDamage, itemData.Damage.MaxFireDamage, itemData.Damage.MinColdDamage,
+                itemData.Damage.MaxColdDamage,
                 itemData.Damage.MinLightningDamage, itemData.Damage.MaxLightningDamage, itemData.Mods)
         {
         }
 
-        protected PoeItem( )
+        protected PoeItem()
         {
             Damage = NoWeaponDamage;
         }

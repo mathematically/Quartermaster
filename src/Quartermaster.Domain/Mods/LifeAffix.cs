@@ -1,5 +1,3 @@
-using Mathematically.Quartermaster.Domain.Items;
-
 namespace Mathematically.Quartermaster.Domain.Mods
 {
     public class LifeAffix : Affix
@@ -17,7 +15,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
                 new AffixLevel(AffixLevelName.Virile, 44, 70, 79),
                 new AffixLevel(AffixLevelName.Athletes, 54, 80, 89),
                 new AffixLevel(AffixLevelName.Fecund, 64, 90, 99),
-                new AffixLevel(AffixLevelName.Vigorous, 73, 100, 109),
+                new AffixLevel(AffixLevelName.Vigorous, 73, 100, 109)
             });
         }
     }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Mathematically.Quartermaster.Domain.Mods
 {
-    public class AffixCompendium: IAffixCompendium
+    public class AffixCompendium : IAffixCompendium
     {
         private static readonly Dictionary<AffixType, IAffix> Compendium = new Dictionary<AffixType, IAffix>
         {

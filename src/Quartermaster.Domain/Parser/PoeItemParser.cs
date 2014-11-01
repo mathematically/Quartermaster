@@ -19,25 +19,13 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private readonly GameText _gameText;
 
-        public string Name
-        {
-            get; private set;
-        }
+        public string Name { get; private set; }
 
-        public ItemRarity Rarity
-        {
-            get; private set;
-        }
+        public ItemRarity Rarity { get; private set; }
 
-        public int ItemLevel
-        {
-            get; private set;
-        }
+        public int ItemLevel { get; private set; }
 
-        public BaseItemType BaseType
-        {
-            get; private set;
-        }
+        public BaseItemType BaseType { get; private set; }
 
         public bool IsWeapon
         {
@@ -75,7 +63,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             var rarityText = ValueTextFrom(_gameText[RarityLineIndex]);
 
-            return (ItemRarity)Enum.Parse(typeof(ItemRarity), rarityText);
+            return (ItemRarity) Enum.Parse(typeof (ItemRarity), rarityText);
         }
 
         private int ParseItemLevel()

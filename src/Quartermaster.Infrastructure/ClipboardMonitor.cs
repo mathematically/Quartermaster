@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -7,7 +6,7 @@ using System.Windows.Interop;
 namespace Quartermaster.Infrastructure
 {
     /// <summary>
-    /// Listens for clipboard changes and raises ClipboardTextArrived event.
+    ///     Listens for clipboard changes and raises ClipboardTextArrived event.
     /// </summary>
     public class ClipboardMonitor : IClipboardMonitor
     {

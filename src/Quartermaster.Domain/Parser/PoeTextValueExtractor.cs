@@ -38,7 +38,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             string valueText = ValueTextFrom(tooltipLine);
 
-            var values = valueText.Split(new[] { PoeText.RANGE_DIVIDER }, StringSplitOptions.None);
+            var values = valueText.Split(new[] {PoeText.RANGE_DIVIDER}, StringSplitOptions.None);
 
             return new Range
             {
@@ -58,8 +58,8 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
             valueTexts.ForEach(t =>
             {
-                var v = t.Split(new[] { PoeText.RANGE_DIVIDER }, StringSplitOptions.None);
-                ranges.Add(new Range { Min = int.Parse(v[0]), Max = int.Parse(v[1]) });
+                var v = t.Split(new[] {PoeText.RANGE_DIVIDER}, StringSplitOptions.None);
+                ranges.Add(new Range {Min = int.Parse(v[0]), Max = int.Parse(v[1])});
             });
 
             return ranges;
@@ -70,5 +70,4 @@ namespace Mathematically.Quartermaster.Domain.Parser
             return double.Parse(ValueTextFrom(tooltipLine));
         }
     }
-
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using Mathematically.Quartermaster.Domain;
-using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Parser;
 
 namespace Quartermaster.Infrastructure
@@ -10,10 +9,7 @@ namespace Quartermaster.Infrastructure
         private readonly IClipboardMonitor _clipboardMonitor;
         private readonly IItemTextChecker _itemTextChecker;
 
-        public string ItemText
-        {
-            get; private set;
-        }
+        public string ItemText { get; private set; }
 
         public bool HasItemText()
         {
