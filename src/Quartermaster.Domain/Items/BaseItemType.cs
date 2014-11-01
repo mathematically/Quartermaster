@@ -114,6 +114,30 @@ namespace Mathematically.Quartermaster.Domain.Items
         TornadoWand,
         ProphecyWand,
 
+        // Claws
+        NailedFist,
+        SharktoothClaw,
+        Awl,
+        CatsPaw,
+        Blinder,
+        TimewornClaw,
+        SparklingClaw,
+        FrightClaw,
+        ThresherClaw,
+        Gouger,
+        TigersPaw,
+        GutRipper,
+        PrehistoricClaw,
+        NobleClaw,
+        EagleClaw,
+        GreatWhiteClaw,
+        ThroatStabber,
+        HelionsPaw,
+        EyeGouger,
+        VaalClaw,
+        ImperialClaw,
+        TerrorClaw,
+
         #endregion
 
         #region Armour

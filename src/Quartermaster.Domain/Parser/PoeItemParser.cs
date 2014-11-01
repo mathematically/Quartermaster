@@ -10,6 +10,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
     public class PoeItemParser : PoeTextValueExtractor, IPoeItemParser
     {
         private readonly IAffixCompendium _affixCompendium;
+        private readonly IItemLexicon _itemLexicon;
         private const int RarityLineIndex = 0;
         private const int NameLineIndex = 1;
 
@@ -27,6 +28,8 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         public BaseItemType BaseType { get; private set; }
 
+        public ItemCategory Category { get; private set; }
+
         public bool IsWeapon
         {
             get { return _weaponParser.IsWeapon; }
@@ -42,9 +45,10 @@ namespace Mathematically.Quartermaster.Domain.Parser
             get { return _mods; }
         }
 
-        public PoeItemParser(IAffixCompendium affixCompendium, string gameItemText)
+        public PoeItemParser(IAffixCompendium affixCompendium, IItemLexicon itemLexicon, string gameItemText)
         {
             _affixCompendium = affixCompendium;
+            _itemLexicon = itemLexicon;
             _gameText = new GameText(gameItemText);
         }
 
@@ -54,6 +58,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             Rarity = ParseRarity();
             ItemLevel = ParseItemLevel();
             BaseType = _baseItemParser.Parse(_gameText);
+            Category = _itemLexicon.GetItemCategory(BaseType);
 
             ParseWeapon();
             ParseMods();
@@ -78,17 +83,22 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseMods()
         {
-            _affixCompendium.Affixes.Where(OnThisItem).ForEach(affix =>
+            _affixCompendium.Affixes.Where(IsOnThisItem).ForEach(affix =>
             {
                 var roll = GetAffixRoll(affix);
                 _mods.Add(new ItemMod(affix, roll.Item1, roll.Item2, ItemLevel));
             });
         }
 
-        private bool OnThisItem(IAffix a)
+        private bool IsOnThisItem(IAffix affix)
         {
-            var textMatch = _gameText.Contains(a.MatchText);
-            return textMatch;
+            var isOnThisItem = _gameText.Contains(affix.MatchText);
+
+            // Some mods look the same in the tooltip but differ in terms of what base type they can appear on.
+            // Most commonly local and global versions of the same mod on weapons and non-weapons.
+            var isValidOnBaseType = _itemLexicon.IsValidOnBaseType(affix, BaseType);
+
+            return isOnThisItem && isValidOnBaseType;
         }
 
         private Tuple<string, int> GetAffixRoll(IAffix affix)

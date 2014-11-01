@@ -1,3 +1,4 @@
+using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 using Mathematically.Quartermaster.Domain.Parser;
 
@@ -9,7 +10,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private void CreateSUT(string itemText)
         {
-            SUT = new PoeItemParser(new AffixCompendium(), itemText);
+            SUT = new PoeItemParser(new AffixCompendium(), new ItemTypeLexicon(),  itemText);
         }
 
         protected void ParseTextWithSut(string itemText)

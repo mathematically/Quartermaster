@@ -140,7 +140,7 @@ namespace Mathematically.Quartermaster.Tests.Examples
         {
             Console.WriteLine(gameText);
 
-            var itemFactory = new PoeItemFactory(new AffixCompendium());
+            var itemFactory = new PoeItemFactory(new AffixCompendium(), new ItemTypeLexicon());
             var actualItem = itemFactory.CreateItem(gameText);
             actualItem.ShouldMatch(expectedItem.ToExpectedObject());
         }

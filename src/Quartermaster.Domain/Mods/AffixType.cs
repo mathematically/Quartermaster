@@ -2,6 +2,12 @@ namespace Mathematically.Quartermaster.Domain.Mods
 {
     public enum AffixType
     {
-        Life, DamageScaling
+        // Prefixes
+        DamageScaling,
+        Life, 
+
+        // Suffixes
+        AttackSpeedLocal, 
+        AttackSpeedGlobal,
     }
 }

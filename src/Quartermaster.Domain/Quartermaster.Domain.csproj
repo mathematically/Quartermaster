@@ -73,6 +73,8 @@
     <Compile Include="Mods\AffixTierName.cs" />
     <Compile Include="Mods\AffixPosition.cs" />
     <Compile Include="Mods\AffixType.cs" />
+    <Compile Include="Mods\AttackSpeedAffix.cs" />
+    <Compile Include="Mods\AttackSpeedGlobalAffix.cs" />
     <Compile Include="Mods\DamageScalingAffix.cs" />
     <Compile Include="Mods\IAffix.cs" />
     <Compile Include="Mods\IAffixCompendium.cs" />
