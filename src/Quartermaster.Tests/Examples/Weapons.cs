@@ -32,7 +32,7 @@ Itemlevel: 4
             attackSpeed: 1.30,
             affixes: PoeItem.NoAffixes);
 
-        public const double DriftwoodWandDPS = 1.95;
+        public const double DriftwoodWandDPS = 7.15;
 
         #endregion
 
@@ -67,7 +67,7 @@ Itemlevel: 4
             attackSpeed: 1.1,
             affixes: PoeItem.NoAffixes);
 
-        public const double DriftwoodMaulDPS = 3.85;
+        public const double DriftwoodMaulDPS = 17.05;
 
 
         #endregion
@@ -104,7 +104,7 @@ Itemlevel: 7
             attackSpeed: 1.55,
             affixes: new IItemMod[] { new ItemMod(new DamageScalingAffix(), "23% increased Physical Damage", 23, 7) });
 
-        public const double HeavyShortBowDPS = 6.98;
+        public const double HeavyShortBowDPS = 14.72;
 
 
         #endregion
@@ -151,9 +151,9 @@ Adds 3-32 Lightning Damage
             minLightningDamage: 3, maxLightningDamage: 32,
             affixes: PoeItem.NoAffixes);
 
-        public const double HypnoticWingDPS = 46.50;
-        public const double HypnoticWingPhysicalDPS = 19.38;
-        public const double HypnoticWingElementalDPS = 27.12;
+        public const double HypnoticWingDPS = 82.14;
+        public const double HypnoticWingPhysicalDPS = 39.52;
+        public const double HypnoticWingElementalDPS = 42.62;
 
 
         #endregion
@@ -199,9 +199,9 @@ Adds 4-53 Lightning Damage
             minLightningDamage: 4, maxLightningDamage: 53,
             affixes: PoeItem.NoAffixes);
 
-        public const double CorpseBlastDPS = 86.80;
-        public const double CorpseBlastPhysicalDPS = 30.22;
-        public const double CorpseBlastElementalDPS = 56.58;
+        public const double CorpseBlastDPS = 175.16;
+        public const double CorpseBlastPhysicalDPS = 59.68;
+        public const double CorpseBlastElementalDPS = 115.48;
 
 
         #endregion
@@ -235,6 +235,6 @@ Adds 2-4 Physical Damage
 14% increased Stun Duration on enemies
 ";
         public const string BeastThresherName = "Beast Thresher";
-        public const double BeastThrasherDPS = 8.08; // Actually 8.075 but we are just doing everything at 2 dp.
+        public const double BeastThrasherDPS = 37.50;
     }
 }
