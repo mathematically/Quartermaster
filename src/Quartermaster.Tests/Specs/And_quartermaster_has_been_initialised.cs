@@ -30,7 +30,11 @@ namespace Mathematically.Quartermaster.Tests.Specs
 
         protected void StartQuartermaster()
         {
-            _itemFactory = new PoeItemFactory(new AffixCompendium(), new ItemTypeLexicon());
+            var compendium = new AffixCompendium();
+            var lexicon = new ItemTypeLexicon();
+            var parsers = new ModParserCollection(lexicon, compendium);
+
+            _itemFactory = new PoeItemFactory(compendium, lexicon, parsers);
             _clipboardItemTextSource = new ClipboardItemTextSource(ClipboardMonitor, _itemTextChecker);
 
             Quartermaster = new QuartermasterStore(_itemFactory, _clipboardItemTextSource);

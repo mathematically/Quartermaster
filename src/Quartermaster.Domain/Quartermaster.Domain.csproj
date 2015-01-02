@@ -76,6 +76,7 @@
     <Compile Include="Mods\AttackSpeedAffix.cs" />
     <Compile Include="Mods\AttackSpeedGlobalAffix.cs" />
     <Compile Include="Mods\DamageScalingAffix.cs" />
+    <Compile Include="Mods\EvasionGlobalAffix.cs" />
     <Compile Include="Mods\IAffix.cs" />
     <Compile Include="Mods\IAffixCompendium.cs" />
     <Compile Include="Mods\LifeAffix.cs" />
@@ -85,12 +86,18 @@
     <Compile Include="Parser\GameText.cs" />
     <Compile Include="Parser\IItemTextChecker.cs" />
     <Compile Include="Parser\IItemTextSource.cs" />
+    <Compile Include="Parser\IModParser.cs" />
+    <Compile Include="Parser\IModParserCollection.cs" />
+    <Compile Include="Parser\IModParseResult.cs" />
     <Compile Include="Parser\IPoeItemFactory.cs" />
     <Compile Include="Parser\IPoeItemParser.cs" />
+    <Compile Include="Parser\ModParserCollection.cs" />
+    <Compile Include="Parser\ModParseResult.cs" />
     <Compile Include="Parser\PoeItemFactory.cs" />
     <Compile Include="Parser\PoeItemParser.cs" />
     <Compile Include="Parser\PoeTextValueExtractor.cs" />
     <Compile Include="Parser\Range.cs" />
+    <Compile Include="Parser\SimpleModParser.cs" />
     <Compile Include="Parser\WeaponParser.cs" />
     <Compile Include="PoeItemEventArgs.cs" />
     <Compile Include="PoeText.cs" />

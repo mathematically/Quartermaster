@@ -49,6 +49,9 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public ItemTypeLexicon()
         {
+            if (Lexicon.Any())
+                return;
+
             var values = Enum.GetValues(typeof (BaseItemType)).Cast<BaseItemType>().ToList();
 
             // WEAPONS
@@ -91,11 +94,11 @@ namespace Mathematically.Quartermaster.Domain.Items
 
             if (!AffixItemCategoryValidCombos.ContainsKey(affixType))
             {
-                // No exceptions so affix is valid on this type
+                // No list of valid combos, so affix is valid on all types.
                 return true;
             }
 
-            // If the affix has exceptions then the item category must be listed there for this
+            // If the affix has valid combos then the item category must be listed there for this
             // affix to be valid on this type.
             return AffixItemCategoryValidCombos[affixType].Contains(GetItemCategory(baseItemType));
         }

@@ -19,7 +19,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void CreateBaseItemTypeWordLookup()
         {
-            // Make sure we only do this once.
             if (_lookup.Any())
                 return;
 

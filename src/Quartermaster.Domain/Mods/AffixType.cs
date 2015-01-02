@@ -4,6 +4,8 @@ namespace Mathematically.Quartermaster.Domain.Mods
     {
         // Prefixes
         DamageScaling,
+        EvasionLocal,
+        EvasionGlobal,
         Life, 
 
         // Suffixes

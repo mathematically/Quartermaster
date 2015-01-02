@@ -6,7 +6,37 @@ namespace Mathematically.Quartermaster.Domain.Mods
     {
         #region Prefixes
 
+        #region DamageScaling
+
+        Heavy,
+        Serrated,
+        Wicked,
+        Vicious,
+        Bloodthirsty,
+        Cruel,
+        Tyrannical,
+
+        #endregion
+
+        #region Evasion
+
+        Agile,
+        Shades,
+        Dancers,
+        Ghosts,
+        Acrobats,
+        Spectres,
+        Fleet,
+        Wraiths,
+        Blurred,
+        Phantasms,
+        Phased,
+        Nightmares,
+
+        #endregion
+
         #region Life
+
         Healthy,
         Sanguine,
         Stalwart,
@@ -19,18 +49,6 @@ namespace Mathematically.Quartermaster.Domain.Mods
         Vigorous,
 
         KaomsSignLife,
-
-        #endregion
-
-        #region DamageScaling
-
-        Heavy,
-        Serrated,
-        Wicked,
-        Vicious,
-        Bloodthirsty,
-        Cruel,
-        Tyrannical,
 
         #endregion
 

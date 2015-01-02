@@ -11,13 +11,13 @@ namespace Mathematically.Quartermaster.Converters
             var offset = (int)value;
 
             if (offset == 0)
-                return "GOLD";
+                return "UNIQUE";
             if (offset == 1)
-                return "SILVER";
+                return "RARE";
             if (offset == 0)
-                return "BRONZE";
+                return "MAGIC";
 
-            return "LOW";
+            return "NORMAL";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

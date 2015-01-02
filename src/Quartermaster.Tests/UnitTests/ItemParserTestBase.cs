@@ -10,7 +10,11 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
 
         private void CreateSUT(string itemText)
         {
-            SUT = new PoeItemParser(new AffixCompendium(), new ItemTypeLexicon(),  itemText);
+            var compendium = new AffixCompendium();
+            var lexicon = new ItemTypeLexicon();
+            var parsers = new ModParserCollection(lexicon, compendium);
+
+            SUT = new PoeItemParser(compendium, lexicon, parsers, itemText);
         }
 
         protected void ParseTextWithSut(string itemText)

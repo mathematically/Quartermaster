@@ -8,6 +8,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
         {
             // Prefixes
             {AffixType.DamageScaling, new DamageScalingAffix()},
+            {AffixType.EvasionGlobal, new EvasionGlobalAffix()},
             {AffixType.Life, new LifeAffix()},
 
             // Suffixes

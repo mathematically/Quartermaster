@@ -36,7 +36,7 @@
 
                         <TextBlock Grid.Row="1" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.ModQuality), StringFormat=Quality: {0}%}" />
-                        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Visibility="{Binding Path=(items:IItemMod.Offset), Converter={StaticResource HideLargeOffsetConverter}}"
+                        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.Offset), StringFormat=Tier: {0}, Converter={StaticResource OffsetTextConverter}}" />
                         <TextBlock Grid.Row="3" Grid.ColumnSpan="3" 
                                    Text="{Binding Path=(items:IItemMod.MaxRoll), StringFormat=Max Roll: {0}}" />

@@ -66,5 +66,14 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             return _dividerIndexes.First() != 2;
         }
+
+        public IEnumerable<string> ModText
+        {
+            get
+            {
+                // All the text after the last divider (unless it's an epic which will have flavour text)
+                return _textLines.Skip(_dividerIndexes.Last() + 1);
+            }
+        }
     }
 }

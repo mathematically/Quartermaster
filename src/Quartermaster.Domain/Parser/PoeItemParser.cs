@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 
@@ -11,12 +10,13 @@ namespace Mathematically.Quartermaster.Domain.Parser
     {
         private readonly IAffixCompendium _affixCompendium;
         private readonly IItemLexicon _itemLexicon;
+        private readonly IModParserCollection _modParserCollection;
         private const int RarityLineIndex = 0;
         private const int NameLineIndex = 1;
 
         private readonly WeaponParser _weaponParser = new WeaponParser();
         private readonly BaseItemParser _baseItemParser = new BaseItemParser();
-        private readonly List<ItemMod> _mods = new List<ItemMod>();
+        private readonly List<IItemMod> _mods = new List<IItemMod>();
 
         private readonly GameText _gameText;
 
@@ -45,10 +45,14 @@ namespace Mathematically.Quartermaster.Domain.Parser
             get { return _mods; }
         }
 
-        public PoeItemParser(IAffixCompendium affixCompendium, IItemLexicon itemLexicon, string gameItemText)
+
+
+        public PoeItemParser(IAffixCompendium affixCompendium, IItemLexicon itemLexicon, IModParserCollection modParserCollection, string gameItemText)
         {
             _affixCompendium = affixCompendium;
             _itemLexicon = itemLexicon;
+            _modParserCollection = modParserCollection;
+
             _gameText = new GameText(gameItemText);
         }
 
@@ -83,35 +87,17 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseMods()
         {
-            _affixCompendium.Affixes.Where(IsOnThisItem).ForEach(affix =>
+            IEnumerable<string> workingModText = _gameText.ModText.ToList();
+
+            _modParserCollection.Parsers.ForEach(p =>
             {
-                var roll = GetAffixRoll(affix);
-                _mods.Add(new ItemMod(affix, roll.Item1, roll.Item2, ItemLevel));
+                var result = p.TryParse(ItemLevel, BaseType, workingModText);
+                if (!result.HasDiscoveredMods) return;
+
+                workingModText = result.RemainingModTextLines;
+                result.DiscoveredMods.ForEach(m => _mods.Add(m));
             });
         }
 
-        private bool IsOnThisItem(IAffix affix)
-        {
-            var isOnThisItem = _gameText.Contains(affix.MatchText);
-
-            // Some mods look the same in the tooltip but differ in terms of what base type they can appear on.
-            // Most commonly local and global versions of the same mod on weapons and non-weapons.
-            var isValidOnBaseType = _itemLexicon.IsValidOnBaseType(affix, BaseType);
-
-            return isOnThisItem && isValidOnBaseType;
-        }
-
-        private Tuple<string, int> GetAffixRoll(IAffix affix)
-        {
-            var rollText = _gameText.LineWith(affix.MatchText);
-            var match = Regex.Match(rollText, affix.ValueRegEx);
-
-            if (!match.Success)
-            {
-                throw new ArgumentException(string.Format("Could not match {0} in {1}", affix.MatchText, _gameText.Text));
-            }
-
-            return new Tuple<string, int>(rollText, Convert.ToInt32(match.Value));
-        }
     }
 }

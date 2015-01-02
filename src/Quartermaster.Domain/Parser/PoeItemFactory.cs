@@ -8,18 +8,20 @@ namespace Mathematically.Quartermaster.Domain.Parser
     public class PoeItemFactory : IPoeItemFactory
     {
         private readonly IAffixCompendium _compendium;
+        private readonly IModParserCollection _modParserCollection;
         private readonly IItemLexicon _itemLexicon;
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public PoeItemFactory(IAffixCompendium compendium, IItemLexicon itemLexicon)
+        public PoeItemFactory(IAffixCompendium compendium, IItemLexicon itemLexicon, IModParserCollection modParserCollection)
         {
             _compendium = compendium;
             _itemLexicon = itemLexicon;
+            _modParserCollection = modParserCollection;
         }
 
         public IPoeItem CreateItem(string gameItemText)
         {
-            var itemParser = new PoeItemParser(_compendium, _itemLexicon, gameItemText);
+            var itemParser = new PoeItemParser(_compendium, _itemLexicon, _modParserCollection, gameItemText);
 
             try
             {
