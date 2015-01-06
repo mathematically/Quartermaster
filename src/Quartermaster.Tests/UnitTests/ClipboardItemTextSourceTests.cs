@@ -1,6 +1,5 @@
 ﻿using System;
 using FluentAssertions;
-using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Parser;
 using Mathematically.Quartermaster.Tests.Examples;
 using NSubstitute;

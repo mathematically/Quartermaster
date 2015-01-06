@@ -18,7 +18,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             _affixCompendium = affixCompendium;
         }
 
-        public IEnumerable<IModParser> Parsers
+        public IEnumerable<IModParser> All
         {
             get
             {

@@ -4,6 +4,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
 {
     public interface IModParserCollection
     {
-        IEnumerable<IModParser> Parsers { get; }
+        IEnumerable<IModParser> All { get; }
     }
 }

@@ -14,7 +14,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
             var lexicon = new ItemTypeLexicon();
             var parsers = new ModParserCollection(lexicon, compendium);
 
-            SUT = new PoeItemParser(compendium, lexicon, parsers, itemText);
+            SUT = new PoeItemParser(lexicon, parsers, itemText);
         }
 
         protected void ParseTextWithSut(string itemText)

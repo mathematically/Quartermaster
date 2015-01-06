@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Domain.Parser
 {
     public class PoeItemParser : PoeTextValueExtractor, IPoeItemParser
     {
-        private readonly IAffixCompendium _affixCompendium;
         private readonly IItemLexicon _itemLexicon;
         private readonly IModParserCollection _modParserCollection;
         private const int RarityLineIndex = 0;
@@ -47,9 +45,8 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
 
 
-        public PoeItemParser(IAffixCompendium affixCompendium, IItemLexicon itemLexicon, IModParserCollection modParserCollection, string gameItemText)
+        public PoeItemParser(IItemLexicon itemLexicon, IModParserCollection modParserCollection, string gameItemText)
         {
-            _affixCompendium = affixCompendium;
             _itemLexicon = itemLexicon;
             _modParserCollection = modParserCollection;
 
@@ -77,7 +74,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private int ParseItemLevel()
         {
-            return IntegerFrom(_gameText.LineWith(PoeText.ITEMLEVEL_LABEL));
+            return IntegerFrom(_gameText.LineWith(TooltipText.ITEMLEVEL_LABEL));
         }
 
         private void ParseWeapon()
@@ -89,7 +86,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             IEnumerable<string> workingModText = _gameText.ModText.ToList();
 
-            _modParserCollection.Parsers.ForEach(p =>
+            _modParserCollection.All.ForEach(p =>
             {
                 var result = p.TryParse(ItemLevel, BaseType, workingModText);
                 if (!result.HasDiscoveredMods) return;

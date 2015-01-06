@@ -21,7 +21,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         public IPoeItem CreateItem(string gameItemText)
         {
-            var itemParser = new PoeItemParser(_compendium, _itemLexicon, _modParserCollection, gameItemText);
+            var itemParser = new PoeItemParser(_itemLexicon, _modParserCollection, gameItemText);
 
             try
             {

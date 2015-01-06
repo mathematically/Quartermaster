@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExpectedObjects;
-using FluentAssertions;
 using Grean.Exude;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;

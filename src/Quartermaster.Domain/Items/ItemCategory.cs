@@ -22,5 +22,4 @@ namespace Mathematically.Quartermaster.Domain.Items
         Amulet,
         Ring,
     }
-
 }

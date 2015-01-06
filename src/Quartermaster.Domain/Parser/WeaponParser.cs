@@ -81,7 +81,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
         public void Parse(GameText gameText)
         {
             _gameText = gameText;
-
             IsWeapon = DetectWeapon();
 
             if (IsWeapon)
@@ -92,7 +91,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private bool DetectWeapon()
         {
-            return _gameText.OptionalLineWith(PoeText.WEAPON_MARKER) != null;
+            return _gameText.OptionalLineWith(TooltipText.WEAPON_MARKER) != null;
         }
 
         private void ParseWeaponStats()
@@ -103,7 +102,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
             _lightningDamageRange = new Range {Min = 0, Max = 0};
 
             ParseAttackSpeed();
-
             ParsePhysicalDamage();
             ParseElementalDamage();
 
@@ -115,39 +113,30 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private void ParseAttackSpeed()
         {
-            var line = _gameText.OptionalLineWith(PoeText.ATTACKS_PER_SECOND_LABEL);
+            var line = _gameText.OptionalLineWith(TooltipText.ATTACKS_PER_SECOND_LABEL);
 
             _attackSpeed = String.IsNullOrEmpty(line) ? 0.0 : DoubleFrom(line);
         }
 
         private void ParsePhysicalDamage()
         {
-            var line = _gameText.OptionalLineWith(PoeText.PHYSICAL_DAMAGE_LABEL);
-            if (String.IsNullOrEmpty(line)) return;
+            var physicalDamageLine = _gameText.OptionalLineWith(TooltipText.PHYSICAL_DAMAGE_LABEL);
+            if (String.IsNullOrEmpty(physicalDamageLine)) return;
 
-            _physicalDamageRange = IntegerRangeFrom(line);
+            _physicalDamageRange = IntegerRangeFrom(physicalDamageLine);
         }
 
         private void ParseElementalDamage()
         {
-            var line = _gameText.OptionalLineWith(PoeText.ELEMENTAL_DAMAGE_LABEL);
-            if (String.IsNullOrEmpty(line)) return;
+            var elementalDamageLine = _gameText.OptionalLineWith(TooltipText.ELEMENTAL_DAMAGE_LABEL);
+            if (String.IsNullOrEmpty(elementalDamageLine)) return;
 
-            BuildElementalDamage(line);
+            BuildElementalDamage(elementalDamageLine);
         }
 
         private void BuildElementalDamage(string line)
         {
-            var elementalRanges = new List<Range>
-            {
-                // If we don't find a particular element we will use this for 0 dps in that element.
-                new Range {Min = 0, Max = 0}
-            };
-
-            elementalRanges.AddRange(RangeSetFrom(line));
-
-            // Damage mods are always in the order fire, cold, lightning
-            var n = 1;
+            var elementalRangeMap = BuildElementalRangeMap(line);
 
             // Assume that we find no damage for each element and will use the 0th range
             // which is the dummy null one we created.
@@ -155,40 +144,55 @@ namespace Mathematically.Quartermaster.Domain.Parser
             var cold = 0;
             var lightning = 0;
 
-            if (_gameText.OptionalLineWith(PoeText.FIRE_DAMAGE_LABEL) != null)
+            // Elemental damage mods are always in the order fire, cold, lightning.  We start looking at the 1st element.
+            var n = 1;
+
+            if (_gameText.HasOptionalLineWith(TooltipText.FIRE_DAMAGE_LABEL))
             {
                 // Fire is the nth range specified on the item
                 fire = n++;
             }
 
-            if (_gameText.OptionalLineWith(PoeText.COLD_DAMAGE_LABEL) != null)
+            if (_gameText.HasOptionalLineWith(TooltipText.COLD_DAMAGE_LABEL))
             {
                 cold = n++;
             }
 
-            if (_gameText.OptionalLineWith(PoeText.LIGHTNING_DAMAGE_LABEL) != null)
+            if (_gameText.HasOptionalLineWith(TooltipText.LIGHTNING_DAMAGE_LABEL))
             {
                 lightning = n;
             }
 
             _fireDamageRange = new Range
             {
-                Min = elementalRanges[fire].Min,
-                Max = elementalRanges[fire].Max
+                Min = elementalRangeMap[fire].Min,
+                Max = elementalRangeMap[fire].Max
             };
 
             _coldDamageRange = new Range
             {
-                Min = elementalRanges[cold].Min,
-                Max = elementalRanges[cold].Max
+                Min = elementalRangeMap[cold].Min,
+                Max = elementalRangeMap[cold].Max
             };
 
 
             _lightningDamageRange = new Range
             {
-                Min = elementalRanges[lightning].Min,
-                Max = elementalRanges[lightning].Max
+                Min = elementalRangeMap[lightning].Min,
+                Max = elementalRangeMap[lightning].Max
             };
+        }
+
+        private List<Range> BuildElementalRangeMap(string line)
+        {
+            var elementalRangeMap = new List<Range>
+            {
+                // If we don't find a particular element we will use this for 0 dps in that element.
+                new Range {Min = 0, Max = 0}
+            };
+
+            elementalRangeMap.AddRange(RangeSetFrom(line));
+            return elementalRangeMap;
         }
     }
 }

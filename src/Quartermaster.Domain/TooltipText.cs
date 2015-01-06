@@ -1,6 +1,6 @@
 namespace Mathematically.Quartermaster.Domain
 {
-    public static class PoeText
+    public static class TooltipText
     {
         public const string SECTION_DIVIDER = "--------";
         public const char RANGE_DIVIDER = '-';
@@ -17,5 +17,7 @@ namespace Mathematically.Quartermaster.Domain
         public const string FIRE_DAMAGE_LABEL = "Fire Damage";
         public const string COLD_DAMAGE_LABEL = "Cold Damage";
         public const string LIGHTNING_DAMAGE_LABEL = "Lightning Damage";
+
+        public const string MTX_MARKER = "Has ";
     }
 }

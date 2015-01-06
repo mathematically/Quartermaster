@@ -12,11 +12,11 @@ namespace Quartermaster.Infrastructure
             if (string.IsNullOrEmpty(itemText))
                 return false;
 
-            if (!itemText.Contains(PoeText.RARITY_LABEL))
+            if (!itemText.Contains(TooltipText.RARITY_LABEL))
                 return false;
 
             var lines = itemText.Split(Constants.AllPlatformLineSplitChars, StringSplitOptions.None);
-            var hasAtLeastTwoSectionDividers = lines.Count(line => line == PoeText.SECTION_DIVIDER) >= 2;
+            var hasAtLeastTwoSectionDividers = lines.Count(line => line == TooltipText.SECTION_DIVIDER) >= 2;
 
             return hasAtLeastTwoSectionDividers;
         }

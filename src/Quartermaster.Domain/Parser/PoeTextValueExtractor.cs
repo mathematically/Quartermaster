@@ -15,9 +15,9 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private string RemoveAugmentedAnnotationIfPresent(string tooltipLine)
         {
-            if (tooltipLine.Contains(PoeText.AUGMENTED_ANNOTATION))
+            if (tooltipLine.Contains(TooltipText.AUGMENTED_ANNOTATION))
             {
-                tooltipLine = tooltipLine.Replace(PoeText.AUGMENTED_ANNOTATION, "");
+                tooltipLine = tooltipLine.Replace(TooltipText.AUGMENTED_ANNOTATION, "");
             }
 
             return tooltipLine;
@@ -38,7 +38,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             string valueText = ValueTextFrom(tooltipLine);
 
-            var values = valueText.Split(new[] {PoeText.RANGE_DIVIDER}, StringSplitOptions.None);
+            var values = valueText.Split(new[] {TooltipText.RANGE_DIVIDER}, StringSplitOptions.None);
 
             return new Range
             {
@@ -58,7 +58,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
             valueTexts.ForEach(t =>
             {
-                var v = t.Split(new[] {PoeText.RANGE_DIVIDER}, StringSplitOptions.None);
+                var v = t.Split(new[] {TooltipText.RANGE_DIVIDER}, StringSplitOptions.None);
                 ranges.Add(new Range {Min = int.Parse(v[0]), Max = int.Parse(v[1])});
             });
 

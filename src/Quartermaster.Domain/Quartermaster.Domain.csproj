@@ -100,7 +100,7 @@
     <Compile Include="Parser\SimpleModParser.cs" />
     <Compile Include="Parser\WeaponParser.cs" />
     <Compile Include="PoeItemEventArgs.cs" />
-    <Compile Include="PoeText.cs" />
+    <Compile Include="TooltipText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuartermasterStore.cs" />
   </ItemGroup>
