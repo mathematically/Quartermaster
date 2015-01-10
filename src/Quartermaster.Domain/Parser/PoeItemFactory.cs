@@ -1,27 +1,25 @@
 using System;
 using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Domain.Mods;
 using NLog;
 
 namespace Mathematically.Quartermaster.Domain.Parser
 {
     public class PoeItemFactory : IPoeItemFactory
     {
-        private readonly IAffixCompendium _compendium;
-        private readonly IModParserCollection _modParserCollection;
-        private readonly IItemLexicon _itemLexicon;
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public PoeItemFactory(IAffixCompendium compendium, IItemLexicon itemLexicon, IModParserCollection modParserCollection)
+        private readonly IModParserCollection _modParsers;
+        private readonly IItemLexicon _itemLexicon;
+
+        public PoeItemFactory(IItemLexicon itemLexicon, IModParserCollection modParsers)
         {
-            _compendium = compendium;
             _itemLexicon = itemLexicon;
-            _modParserCollection = modParserCollection;
+            _modParsers = modParsers;
         }
 
         public IPoeItem CreateItem(string gameItemText)
         {
-            var itemParser = new PoeItemParser(_itemLexicon, _modParserCollection, gameItemText);
+            var itemParser = new PoeItemParser(_itemLexicon, _modParsers, gameItemText);
 
             try
             {

@@ -33,7 +33,7 @@ namespace Mathematically.Quartermaster
 
                 // Domain dependencies
                 x.For<IAffixCompendium>().Singleton().Use<AffixCompendium>();
-                x.For<IModParserCollection>().Singleton().Use<ModParserCollection>();
+                x.For<IModParserCollection>().Singleton().Use<ModParsers>();
                 x.For<IItemLexicon>().Singleton().Use<ItemTypeLexicon>();
                 x.For<IItemTextSource>().Use<ClipboardItemTextSource>();
                 x.For<IItemTextChecker>().Use<ItemTextChecker>();

@@ -5,14 +5,14 @@ using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Domain.Parser
 {
-    public class ModParserCollection: IModParserCollection
+    public class ModParsers: IModParserCollection
     {
         private static readonly List<IModParser> _modParsers = new List<IModParser>();
 
         private readonly IItemLexicon _itemLexicon;
         private readonly IAffixCompendium _affixCompendium;
 
-        public ModParserCollection(IItemLexicon itemLexicon, IAffixCompendium affixCompendium)
+        public ModParsers(IItemLexicon itemLexicon, IAffixCompendium affixCompendium)
         {
             _itemLexicon = itemLexicon;
             _affixCompendium = affixCompendium;

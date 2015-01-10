@@ -8,7 +8,7 @@ using Mathematically.Quartermaster.Domain.Mods;
 namespace Mathematically.Quartermaster.Domain.Parser
 {
     /// <summary>
-    /// Parses generic mods that can always be matched using the regex on the associated affix.
+    /// Parses generic mods that can always be matched using the match text and regex on the associated affix.
     /// </summary>
     public class SimpleModParser : IModParser
     {
