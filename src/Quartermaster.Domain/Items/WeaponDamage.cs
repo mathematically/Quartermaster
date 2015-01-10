@@ -67,7 +67,6 @@ namespace Mathematically.Quartermaster.Domain.Items
             var damageTotal = MaxPhysical + MinPhysical;
             var averageDamage = damageTotal/2.0;
 
-            // Sod rounding errors, 2dp will be close enough.
             return Math.Round(averageDamage*AttackSpeed, 2);
         }
 

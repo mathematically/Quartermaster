@@ -44,7 +44,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
         }
 
 
-
         public PoeItemParser(IItemLexicon itemLexicon, IModParserCollection modParserCollection, string gameItemText)
         {
             _itemLexicon = itemLexicon;
@@ -95,6 +94,5 @@ namespace Mathematically.Quartermaster.Domain.Parser
                 result.DiscoveredMods.ForEach(m => _mods.Add(m));
             });
         }
-
     }
 }

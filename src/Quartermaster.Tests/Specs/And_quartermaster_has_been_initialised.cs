@@ -32,9 +32,9 @@ namespace Mathematically.Quartermaster.Tests.Specs
         {
             var compendium = new AffixCompendium();
             var lexicon = new ItemTypeLexicon();
-            var parsers = new ModParserCollection(lexicon, compendium);
+            var parsers = new ModParsers(lexicon, compendium);
 
-            _itemFactory = new PoeItemFactory(compendium, lexicon, parsers);
+            _itemFactory = new PoeItemFactory(lexicon, parsers);
             _clipboardItemTextSource = new ClipboardItemTextSource(ClipboardMonitor, _itemTextChecker);
 
             Quartermaster = new QuartermasterStore(_itemFactory, _clipboardItemTextSource);

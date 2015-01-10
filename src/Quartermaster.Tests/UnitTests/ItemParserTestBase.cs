@@ -12,7 +12,7 @@ namespace Mathematically.Quartermaster.Tests.UnitTests
         {
             var compendium = new AffixCompendium();
             var lexicon = new ItemTypeLexicon();
-            var parsers = new ModParserCollection(lexicon, compendium);
+            var parsers = new ModParsers(lexicon, compendium);
 
             SUT = new PoeItemParser(lexicon, parsers, itemText);
         }

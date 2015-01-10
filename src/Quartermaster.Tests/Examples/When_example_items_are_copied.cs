@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using ExpectedObjects;
 using Grean.Exude;
 using Mathematically.Quartermaster.Domain.Items;
@@ -142,8 +140,8 @@ namespace Mathematically.Quartermaster.Tests.Examples
 
             var compendium = new AffixCompendium();
             var lexicon = new ItemTypeLexicon();
-            var parsers = new ModParserCollection(lexicon, compendium);
-            var itemFactory = new PoeItemFactory(compendium, lexicon, parsers);
+            var parsers = new ModParsers(lexicon, compendium);
+            var itemFactory = new PoeItemFactory(lexicon, parsers);
             var actualItem = itemFactory.CreateItem(gameText);
             actualItem.ShouldMatch(expectedItem.ToExpectedObject());
         }
