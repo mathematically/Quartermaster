@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mathematically.Quartermaster.Domain.Affixes;
 using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Domain.Items
@@ -79,8 +80,8 @@ namespace Mathematically.Quartermaster.Domain.Items
                 .ForEach(t => Lexicon.Add(t, ItemCategory.Ring));
 
             // Use local attack speed for weapons and global attack speed for other items. Does not appear on belts.
-            AffixItemCategoryValidCombos.Add(typeof(AttackSpeedLocalAffix), Weapons);
-            AffixItemCategoryValidCombos.Add(typeof(AttackSpeedGlobalAffix), _nonWeaponsExceptBelts);
+            AffixItemCategoryValidCombos.Add(typeof(AttackSpeedLocal), Weapons);
+            AffixItemCategoryValidCombos.Add(typeof(AttackSpeedGlobal), _nonWeaponsExceptBelts);
         }
 
         public ItemCategory GetItemCategory(BaseItemType forBaseType)

@@ -1,8 +1,10 @@
-namespace Mathematically.Quartermaster.Domain.Mods
+using Mathematically.Quartermaster.Domain.Mods;
+
+namespace Mathematically.Quartermaster.Domain.Affixes
 {
-    public class DamageScalingAffix : Affix
+    public class DamageScaling : Affix
     {
-        public DamageScalingAffix()
+        public DamageScaling()
         {
             Definition(AffixPosition.Prefix, "% increased Physical Damage", @"\d+", new[]
             {

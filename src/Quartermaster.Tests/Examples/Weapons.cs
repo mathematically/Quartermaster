@@ -1,4 +1,5 @@
-﻿using Mathematically.Quartermaster.Domain.Items;
+﻿using Mathematically.Quartermaster.Domain.Affixes;
+using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
@@ -102,7 +103,7 @@ Itemlevel: 7
             minPhysicalDamage: 5,
             maxPhysicalDamage: 14,
             attackSpeed: 1.55,
-            affixes: new IItemMod[] { new ItemMod(new DamageScalingAffix(), "23% increased Physical Damage", 23, 7) });
+            affixes: new IItemMod[] { new ItemMod(new DamageScaling(), "23% increased Physical Damage", 23, 7) });
 
         public const double HeavyShortBowDPS = 14.72;
 
@@ -149,7 +150,8 @@ Adds 3-32 Lightning Damage
             minFireDamage: 7, maxFireDamage: 13,
             minColdDamage: 0, maxColdDamage: 0,
             minLightningDamage: 3, maxLightningDamage: 32,
-            affixes: PoeItem.NoAffixes);
+            affixes: new[] { new ItemMod(new FireResistance(), "+13% to Fire Resistance", 13, 35) }
+            );
 
         public const double HypnoticWingDPS = 82.14;
         public const double HypnoticWingPhysicalDPS = 39.52;
@@ -197,7 +199,7 @@ Adds 4-53 Lightning Damage
             minFireDamage: 27, maxFireDamage: 46,
             minColdDamage: 7, maxColdDamage: 12,
             minLightningDamage: 4, maxLightningDamage: 53,
-            affixes: PoeItem.NoAffixes);
+            affixes: new[] { new ItemMod(new ColdResistance(), "+32% to Cold Resistance", 32, 59) });
 
         public const double CorpseBlastDPS = 175.16;
         public const double CorpseBlastPhysicalDPS = 59.68;

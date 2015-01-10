@@ -1,8 +1,10 @@
-namespace Mathematically.Quartermaster.Domain.Mods
+using Mathematically.Quartermaster.Domain.Mods;
+
+namespace Mathematically.Quartermaster.Domain.Affixes
 {
-    public class LifeAffix : Affix
+    public class Life : Affix
     {
-        public LifeAffix()
+        public Life()
         {
             Definition(AffixPosition.Prefix, " to maximum Life", @"\d+", new[]
             {

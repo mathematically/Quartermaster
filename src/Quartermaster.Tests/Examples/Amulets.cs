@@ -1,4 +1,6 @@
-﻿using Mathematically.Quartermaster.Domain.Items;
+﻿using Mathematically.Quartermaster.Domain.Affixes;
+using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -21,6 +23,6 @@ Adds 1-2 Physical Damage
 +9 to Dexterity
 +11% to Cold Resistance
 ";
-        public static readonly PoeItem HorrorMedallion = new PoeItem("Horror Medallion", ItemRarity.Rare, 7, BaseItemType.JadeAmulet, PoeItem.NoAffixes);
+        public static readonly PoeItem HorrorMedallion = new PoeItem("Horror Medallion", ItemRarity.Rare, 7, BaseItemType.JadeAmulet, new[] { new ItemMod(new ColdResistance(), "+11% to Cold Resistance", 11, 7) });
     }
 }

@@ -46,6 +46,15 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Affixes\AttackSpeedLocal.cs" />
+    <Compile Include="Affixes\AttackSpeedGlobal.cs" />
+    <Compile Include="Affixes\ChaosResistance.cs" />
+    <Compile Include="Affixes\ColdResistance.cs" />
+    <Compile Include="Affixes\DamageScaling.cs" />
+    <Compile Include="Affixes\EvasionGlobal.cs" />
+    <Compile Include="Affixes\FireResistance.cs" />
+    <Compile Include="Affixes\Life.cs" />
+    <Compile Include="Affixes\LightningResistance.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="GameItemChangedEventArgs.cs" />
@@ -73,13 +82,8 @@
     <Compile Include="Mods\AffixTierName.cs" />
     <Compile Include="Mods\AffixPosition.cs" />
     <Compile Include="Mods\AffixType.cs" />
-    <Compile Include="Mods\AttackSpeedAffix.cs" />
-    <Compile Include="Mods\AttackSpeedGlobalAffix.cs" />
-    <Compile Include="Mods\DamageScalingAffix.cs" />
-    <Compile Include="Mods\EvasionGlobalAffix.cs" />
     <Compile Include="Mods\IAffix.cs" />
     <Compile Include="Mods\IAffixCompendium.cs" />
-    <Compile Include="Mods\LifeAffix.cs" />
     <Compile Include="Mods\Affix.cs" />
     <Compile Include="Mods\AffixTier.cs" />
     <Compile Include="Parser\BaseItemParser.cs" />
@@ -91,7 +95,7 @@
     <Compile Include="Parser\IModParseResult.cs" />
     <Compile Include="Parser\IPoeItemFactory.cs" />
     <Compile Include="Parser\IPoeItemParser.cs" />
-    <Compile Include="Parser\ModParserCollection.cs" />
+    <Compile Include="Parser\ModParsers.cs" />
     <Compile Include="Parser\ModParseResult.cs" />
     <Compile Include="Parser\PoeItemFactory.cs" />
     <Compile Include="Parser\PoeItemParser.cs" />
@@ -107,6 +111,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

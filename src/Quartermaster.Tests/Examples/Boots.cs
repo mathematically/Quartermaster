@@ -1,4 +1,5 @@
-﻿using Mathematically.Quartermaster.Domain.Items;
+﻿using Mathematically.Quartermaster.Domain.Affixes;
+using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
@@ -30,7 +31,11 @@ Itemlevel: 30
             ItemRarity.Rare,
             30,
             BaseItemType.PlatedGreaves,
-            new[] { new ItemMod(new LifeAffix(), "+47 to maximum Life", 47, 30) }
+            new[]
+            {
+                new ItemMod(new Life(), "+47 to maximum Life", 47, 30),
+                new ItemMod(new LightningResistance(), "+21% to Lightning Resistance", 21, 30),
+            }
             );
 
         internal const string PandemoniumSoleText = @"Rarity: Rare
@@ -59,7 +64,7 @@ Itemlevel: 28
             ItemRarity.Rare,
             28,
             BaseItemType.MeshBoots,
-            new[] { new ItemMod(new LifeAffix(), "+48 to maximum Life", 48, 28) }
+            new[] { new ItemMod(new Life(), "+48 to maximum Life", 48, 28) }
             );
 
     }

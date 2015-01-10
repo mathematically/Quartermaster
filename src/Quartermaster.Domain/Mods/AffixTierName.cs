@@ -127,6 +127,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         #region Suffixes
 
+
         #region Attack Speed (Local and Global)
 
         OfSkill,
@@ -141,6 +142,53 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         #endregion
 
+        #region Cold Resistance
+
+        Inuit,
+        Seal,
+        Penguin,
+        Yeti,
+        Walrus,
+        Bear,
+        Ice,
+
         #endregion
+
+        #region Fire Resistance
+
+        Whelping,
+        Salamander,
+        Drake,
+        Kiln,
+        Furnace,
+        Volcano,
+        Magma,
+
+        #endregion
+
+        #region Lightning Resistance
+
+        Cloud,
+        Squall,
+        Storm,
+        Thunderhead,
+        Tempest,
+        Maelstrom,
+        Lightning,
+
+        #endregion
+
+        #region Chaos Resistance
+
+        Lost,
+        Banishment,
+        Eviction,
+        Expulsion, 
+        Exile,
+
+        #endregion
+
+        #endregion
+
     }
 }

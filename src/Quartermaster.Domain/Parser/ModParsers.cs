@@ -37,6 +37,10 @@ namespace Mathematically.Quartermaster.Domain.Parser
             _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.DamageScaling)));
             _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.AttackSpeedLocal)));
             _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.AttackSpeedGlobal)));
+            _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.ColdResistance)));
+            _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.FireResistance)));
+            _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.LightningResistance)));
+            _modParsers.Add(new SimpleModParser(_itemLexicon, _affixCompendium.GetAffix(AffixType.ChaosResistance)));
         }
     }
 }

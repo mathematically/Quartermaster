@@ -1,8 +1,10 @@
-namespace Mathematically.Quartermaster.Domain.Mods
+using Mathematically.Quartermaster.Domain.Mods;
+
+namespace Mathematically.Quartermaster.Domain.Affixes
 {
-    public class EvasionGlobalAffix : Affix
+    public class EvasionGlobal : Affix
     {
-        public EvasionGlobalAffix()
+        public EvasionGlobal()
         {
             Definition(AffixPosition.Suffix, "% increased Evasion", @"\d+", new[]
             {

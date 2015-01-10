@@ -1,4 +1,5 @@
-﻿using Mathematically.Quartermaster.Domain.Items;
+﻿using Mathematically.Quartermaster.Domain.Affixes;
+using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
@@ -30,11 +31,11 @@ Adds 1-4 Physical Damage
 Sapphire Ring
 --------
 Requirements:
-Level: 11
+Level: 16
 --------
 Itemlevel: 15
 --------
-+28% to Cold Resistance
++16% to Cold Resistance
 ";
 
         public const string SapphireRingName = "Sapphire Ring";
@@ -44,7 +45,7 @@ Itemlevel: 15
             ItemRarity.Normal,
             15,
             BaseItemType.SapphireRing,
-            PoeItem.NoAffixes
+            new[] { new ItemMod(new ColdResistance(), "+16% to Cold Resistance", 16, 15) }
             );
 
         // A magic ring
@@ -67,7 +68,7 @@ Itemlevel: 16
             ItemRarity.Magic,
             16,
             BaseItemType.RubyRing,
-            PoeItem.NoAffixes
+            new[] { new ItemMod(new FireResistance(), "+30% to Fire Resistance", 30, 16) }
             );
 
         // A rare ring

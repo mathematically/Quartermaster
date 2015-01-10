@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ExpectedObjects;
 using Grean.Exude;
+using Mathematically.Quartermaster.Domain.Affixes;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 using Xunit;
@@ -42,7 +43,7 @@ Itemlevel: {1}
 
             var affix = SUT.Mods.First();
 
-            var expectedAffix = new ItemMod(new LifeAffix(), affixText, value, itemLevel).ToExpectedObject();
+            var expectedAffix = new ItemMod(new Life(), affixText, value, itemLevel).ToExpectedObject();
             affix.ShouldMatch(expectedAffix);
         }
     }

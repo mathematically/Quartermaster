@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mathematically.Quartermaster.Domain.Affixes;
 
 namespace Mathematically.Quartermaster.Domain.Mods
 {
@@ -7,13 +8,17 @@ namespace Mathematically.Quartermaster.Domain.Mods
         private static readonly Dictionary<AffixType, IAffix> Compendium = new Dictionary<AffixType, IAffix>
         {
             // Prefixes
-            {AffixType.DamageScaling, new DamageScalingAffix()},
-            {AffixType.EvasionGlobal, new EvasionGlobalAffix()},
-            {AffixType.Life, new LifeAffix()},
+            {AffixType.DamageScaling, new DamageScaling()},
+            {AffixType.EvasionGlobal, new EvasionGlobal()},
+            {AffixType.Life, new Life()},
 
             // Suffixes
-            {AffixType.AttackSpeedGlobal, new AttackSpeedGlobalAffix()},
-            {AffixType.AttackSpeedLocal, new AttackSpeedLocalAffix()},
+            {AffixType.AttackSpeedGlobal, new AttackSpeedGlobal()},
+            {AffixType.AttackSpeedLocal, new AttackSpeedLocal()},
+            {AffixType.ColdResistance, new ColdResistance()},
+            {AffixType.FireResistance, new FireResistance()},
+            {AffixType.LightningResistance, new LightningResistance()},
+            {AffixType.ChaosResistance, new ChaosResistance()},
         };
 
         public IEnumerable<IAffix> Affixes

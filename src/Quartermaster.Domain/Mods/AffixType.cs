@@ -11,5 +11,9 @@ namespace Mathematically.Quartermaster.Domain.Mods
         // Suffixes
         AttackSpeedLocal, 
         AttackSpeedGlobal,
+        ColdResistance,
+        FireResistance,
+        LightningResistance,
+        ChaosResistance
     }
 }

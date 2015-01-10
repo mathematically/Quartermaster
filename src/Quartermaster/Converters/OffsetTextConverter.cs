@@ -10,14 +10,17 @@ namespace Mathematically.Quartermaster.Converters
         {
             var offset = (int)value;
 
-            if (offset == 0)
-                return "UNIQUE";
-            if (offset == 1)
-                return "RARE";
-            if (offset == 0)
-                return "MAGIC";
+            switch (offset)
+            {
+                case 0:
+                    return "UNIQUE";
+                case 1:
+                    return "RARE";
+                case 2:
+                    return "MAGIC";
+            }
 
-            return "NORMAL";
+            return offset;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

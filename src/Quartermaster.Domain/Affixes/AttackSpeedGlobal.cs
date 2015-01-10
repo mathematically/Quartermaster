@@ -1,8 +1,10 @@
-namespace Mathematically.Quartermaster.Domain.Mods
+using Mathematically.Quartermaster.Domain.Mods;
+
+namespace Mathematically.Quartermaster.Domain.Affixes
 {
-    public class AttackSpeedGlobalAffix : Affix
+    public class AttackSpeedGlobal : Affix
     {
-        public AttackSpeedGlobalAffix()
+        public AttackSpeedGlobal()
         {
             Definition(AffixPosition.Suffix, "% increased Attack Speed", @"\d+", new[]
             {
