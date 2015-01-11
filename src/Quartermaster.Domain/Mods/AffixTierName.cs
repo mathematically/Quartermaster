@@ -123,7 +123,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         #endregion
 
-        #endregion
+        #endregion Prefixes
 
         #region Suffixes
 
@@ -188,7 +188,17 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         #endregion
 
+        #region All Elements Resistance
+
+        Crystal,
+        Prism,
+        Kaleidoscope,
+        Variegation,
+        Rainbow,
+
         #endregion
+
+        #endregion Suffixes
 
     }
 }
