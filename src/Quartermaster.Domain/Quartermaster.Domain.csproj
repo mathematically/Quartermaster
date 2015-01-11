@@ -46,6 +46,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Affixes\AllElementsResistance.cs" />
     <Compile Include="Affixes\AttackSpeedLocal.cs" />
     <Compile Include="Affixes\AttackSpeedGlobal.cs" />
     <Compile Include="Affixes\ChaosResistance.cs" />

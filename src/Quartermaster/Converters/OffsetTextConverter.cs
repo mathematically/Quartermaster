@@ -20,7 +20,7 @@ namespace Mathematically.Quartermaster.Converters
                     return "MAGIC";
             }
 
-            return offset;
+            return offset.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

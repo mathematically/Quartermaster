@@ -14,6 +14,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
         ColdResistance,
         FireResistance,
         LightningResistance,
-        ChaosResistance
+        ChaosResistance,
+        AllElementsResistance,
     }
 }

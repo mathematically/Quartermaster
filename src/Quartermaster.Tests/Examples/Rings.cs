@@ -1,6 +1,5 @@
 ﻿using Mathematically.Quartermaster.Domain.Affixes;
 using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -45,7 +44,7 @@ Itemlevel: 15
             ItemRarity.Normal,
             15,
             BaseItemType.SapphireRing,
-            new[] { new ItemMod(new ColdResistance(), "+16% to Cold Resistance", 16, 15) }
+            new[] {new ItemMod(new ColdResistance(), "+16% to Cold Resistance", 16, 15)}
             );
 
         // A magic ring
@@ -68,7 +67,10 @@ Itemlevel: 16
             ItemRarity.Magic,
             16,
             BaseItemType.RubyRing,
-            new[] { new ItemMod(new FireResistance(), "+30% to Fire Resistance", 30, 16) }
+            new[]
+            {
+                new ItemMod(new FireResistance(), "+30% to Fire Resistance", 30, 16)
+            }
             );
 
         // A rare ring
@@ -91,7 +93,15 @@ Adds 7-11 Cold Damage
 +38% to Lightning Resistance
 ";
 
-        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, BaseItemType.RubyRing, PoeItem.NoAffixes);
+        public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, BaseItemType.RubyRing,
+            new[]
+            {
+                new ItemMod(new Life(), "+15 to maximum Life", 15, 63),
+                new ItemMod(new FireResistance(), "+27% to Fire Resistance", 27, 63),
+                new ItemMod(new LightningResistance(),  "+38% to Lightning Resistance", 38, 63),
+                new ItemMod(new AllElementsResistance(),  "+16% to all Elemental Resistances", 16, 63),
+            }
+            );
 
         // A unique ring
         internal const string KaomsSignText = @"Rarity: Unique
