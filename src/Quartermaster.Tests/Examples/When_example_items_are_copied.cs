@@ -15,7 +15,7 @@ namespace Mathematically.Quartermaster.Tests.Examples
         [FirstClassTests]
         public static TestCase<When_example_items_are_copied>[] Items_are_parsed_correctly()
         {
-//                    GameText = Rings.ThirstyRubyRingOfSuccessText,
+//            yield return new TestCase(_ => Item_parsed_correctly(Rings.StormTurnText, Rings.StormTurn));
             var testCases = new[]
             {
                 new

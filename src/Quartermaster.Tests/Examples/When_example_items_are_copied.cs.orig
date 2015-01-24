@@ -1,0 +1,211 @@
+﻿using System;
+<<<<<<< HEAD
+=======
+using System.Collections.Generic;
+>>>>>>> 8f6bfbcebba20d9d72fa3a5a2816ff5427215ef6
+using System.Linq;
+using ExpectedObjects;
+using Grean.Exude;
+using Mathematically.Quartermaster.Domain.Items;
+using Mathematically.Quartermaster.Domain.Mods;
+using Mathematically.Quartermaster.Domain.Parser;
+using Xunit;
+
+namespace Mathematically.Quartermaster.Tests.Examples
+{
+    [Trait("When example items are copied", "")]
+    public class When_example_items_are_copied
+    {
+<<<<<<< HEAD
+        [FirstClassTests]
+        public static TestCase<When_example_items_are_copied>[] Items_are_parsed_correctly()
+        {
+//                    GameText = Rings.ThirstyRubyRingOfSuccessText,
+            var testCases = new[]
+            {
+                new
+                {
+                    GameText = Amulets.HorrorMedallionText,
+                    ExpectedItem = Amulets.HorrorMedallion
+                },
+                new
+                {
+                    GameText = Boots.OblivionTrailText,
+                    ExpectedItem = Boots.OblivionTrail
+                },
+                new
+                {
+                    GameText = Boots.PandemoniumSoleText,
+                    ExpectedItem = Boots.PandemoniumSole
+                },
+                new
+                {
+                    GameText = Rings.IronRingText,
+                    ExpectedItem = Rings.IronRing
+                },
+                new
+                {
+                    GameText = Rings.SapphireRingText,
+                    ExpectedItem = Rings.SapphireRing
+                },
+                new
+                {
+                    GameText = Rings.ThirstyRubyRingOfSuccessText,
+                    ExpectedItem = Rings.ThirstyRubyRingOfSuccess
+                },
+                new
+                {
+                    GameText = Rings.StormTurnText,
+                    ExpectedItem = Rings.StormTurn
+                },
+=======
+//        [FirstClassTests]
+//        public static IEnumerable<ITestCase> Items_are_parsed_correctly()
+//        {
+//            yield return new TestCase(_ => Item_parsed_correctly(Amulets.HorrorMedallionText, Amulets.HorrorMedallion));
+//            yield return new TestCase(_ => Item_parsed_correctly(Boots.OblivionTrailText, Boots.OblivionTrail));
+//            yield return new TestCase(_ => Item_parsed_correctly(Boots.PandemoniumSoleText, Boots.PandemoniumSole));
+//            yield return new TestCase(_ => Item_parsed_correctly(Rings.IronRingText, Rings.IronRing));
+//            yield return new TestCase(_ => Item_parsed_correctly(Rings.SapphireRingText, Rings.SapphireRing));
+//            yield return new TestCase(_ => Item_parsed_correctly(Rings.ThirstyRubyRingOfSuccessText, Rings.ThirstyRubyRingOfSuccess));
+//            yield return new TestCase(_ => Item_parsed_correctly(Rings.StormTurnText, Rings.StormTurn));
+>>>>>>> 8f6bfbcebba20d9d72fa3a5a2816ff5427215ef6
+//                new
+//                {
+//                    GameText = Rings.KaomsSignText,
+//                    ExpectedItem = Rings.KaomsSign
+//                },
+<<<<<<< HEAD
+=======
+//                new
+//                {
+//                    GameText = Weapons.DriftwoodMaulText,
+//                    ExpectedItem = Weapons.DriftwoodMaul
+//                },
+//                new
+//                {
+//                    GameText = Weapons.DriftwoodWandText,
+//                    ExpectedItem = Weapons.DriftwoodWand
+//                },
+//                new
+//                {
+//                    GameText = Weapons.HeavyShortBowText,
+//                    ExpectedItem = Weapons.HeavyShortBow
+//                },
+//                new
+//                {
+//                    GameText = Weapons.CorpseBlastText,
+//                    ExpectedItem = Weapons.CorpseBlast
+//                },
+        //}
+        [FirstClassTests]
+        public static TestCase<When_example_items_are_copied>[] Items_are_parsed_correctly()
+        {
+            var testCases = new[]
+            {
+                new
+                {
+                    GameText = Amulets.HorrorMedallionText,
+                    ExpectedItem = Amulets.HorrorMedallion
+                },
+                new
+                {
+                    GameText = Boots.OblivionTrailText,
+                    ExpectedItem = Boots.OblivionTrail
+                },
+                new
+                {
+                    GameText = Boots.PandemoniumSoleText,
+                    ExpectedItem = Boots.PandemoniumSole
+                },
+                new
+                {
+                    GameText = Rings.IronRingText,
+                    ExpectedItem = Rings.IronRing
+                },
+                new
+                {
+                    GameText = Rings.SapphireRingText,
+                    ExpectedItem = Rings.SapphireRing
+                },
+                new
+                {
+                    GameText = Rings.ThirstyRubyRingOfSuccessText,
+                    ExpectedItem = Rings.ThirstyRubyRingOfSuccess
+                },
+                new
+                {
+                    GameText = Rings.StormTurnText,
+                    ExpectedItem = Rings.StormTurn
+                },
+//                new
+//                {
+//                    GameText = Rings.KaomsSignText,
+//                    ExpectedItem = Rings.KaomsSign
+//                },
+>>>>>>> 8f6bfbcebba20d9d72fa3a5a2816ff5427215ef6
+                new
+                {
+                    GameText = Weapons.DriftwoodMaulText,
+                    ExpectedItem = Weapons.DriftwoodMaul
+                },
+                new
+                {
+                    GameText = Weapons.DriftwoodWandText,
+                    ExpectedItem = Weapons.DriftwoodWand
+                },
+                new
+                {
+                    GameText = Weapons.HeavyShortBowText,
+<<<<<<< HEAD
+                    ExpectedItem = Weapons.HeavyShortBow
+=======
+                    ExpectedItem = Weapons.DriftwoodWand
+>>>>>>> 8f6bfbcebba20d9d72fa3a5a2816ff5427215ef6
+                },
+                new
+                {
+                    GameText = Weapons.CorpseBlastText,
+                    ExpectedItem = Weapons.CorpseBlast
+                },
+            };
+<<<<<<< HEAD
+
+            return
+                testCases.Select(
+                    testData =>
+                        new TestCase<When_example_items_are_copied>(
+                            expect => expect.Item_parsed_correctly(testData.GameText, testData.ExpectedItem))).ToArray();
+        }
+
+=======
+
+            return
+                testCases.Select(
+                    testData =>
+                        new TestCase<When_example_items_are_copied>(
+                            expect => expect.Item_parsed_correctly(testData.GameText, testData.ExpectedItem))).ToArray();
+        }
+
+>>>>>>> 8f6bfbcebba20d9d72fa3a5a2816ff5427215ef6
+        private void Item_parsed_correctly(string gameText, PoeItem expectedItem)
+        {
+            Console.WriteLine(gameText);
+
+            var compendium = new AffixCompendium();
+            var lexicon = new ItemTypeLexicon();
+            var parsers = new ModParsers(lexicon, compendium);
+            var itemFactory = new PoeItemFactory(lexicon, parsers);
+            var actualItem = itemFactory.CreateItem(gameText);
+
+            // Note that the mods on the expected object must be in the same order as the mods on the parsed item.
+<<<<<<< HEAD
+            // Which is actually determined by the order the parsers are run.  This is crap but not sure how to fix it right now.
+=======
+            // Which is actually determined by the order the parsers are run.  This is more than somewhat naff
+            // but not sure how to fix it right now.
+>>>>>>> 8f6bfbcebba20d9d72fa3a5a2816ff5427215ef6
+            actualItem.ShouldMatch(expectedItem.ToExpectedObject());
+        }
+    }
+}
