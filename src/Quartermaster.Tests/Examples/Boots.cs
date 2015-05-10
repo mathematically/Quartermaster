@@ -1,12 +1,13 @@
 ﻿using Mathematically.Quartermaster.Domain.Affixes;
 using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
-    public static class Boots 
+    public class Boots 
     {
-        internal const string OblivionTrailText = @"Rarity: Rare
+        public static readonly Boots Instance = new Boots();
+
+        public const string OblivionTrailText = @"Rarity: Rare
 Oblivion Trail
 Plated Greaves
 --------
@@ -38,7 +39,7 @@ Itemlevel: 30
             }
             );
 
-        internal const string PandemoniumSoleText = @"Rarity: Rare
+        public const string PandemoniumSoleText = @"Rarity: Rare
 Pandemonium Sole
 Mesh Boots
 --------

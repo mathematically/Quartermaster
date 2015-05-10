@@ -55,9 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Grean.Exude">
-      <HintPath>..\packages\Exude.0.2.1\lib\net35\Grean.Exude.dll</HintPath>
-    </Reference>
     <Reference Include="NSubstitute, Version=1.7.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NSubstitute.1.7.2.0\lib\NET45\NSubstitute.dll</HintPath>
@@ -94,6 +91,7 @@
     </Compile>
     <Compile Include="Examples\Amulets.cs" />
     <Compile Include="Examples\Boots.cs" />
+    <Compile Include="Examples\ExampleItemReflectionHelper.cs" />
     <Compile Include="Examples\When_example_items_are_copied.cs" />
     <Compile Include="Examples\Rings.cs" />
     <Compile Include="Examples\Weapons.cs" />

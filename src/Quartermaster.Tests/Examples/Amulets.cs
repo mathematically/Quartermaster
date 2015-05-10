@@ -4,10 +4,12 @@ using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
-    public static class Amulets
+    public class Amulets
     {
+        public static readonly Amulets Instance = new Amulets();
+
         // Basic rare amulet
-        internal const string HorrorMedallionText = @"Rarity: Rare
+        public const string HorrorMedallionText = @"Rarity: Rare
 Horror Medallion
 Jade Amulet
 --------
@@ -24,5 +26,6 @@ Adds 1-2 Physical Damage
 +11% to Cold Resistance
 ";
         public static readonly PoeItem HorrorMedallion = new PoeItem("Horror Medallion", ItemRarity.Rare, 7, BaseItemType.JadeAmulet, new[] { new ItemMod(new ColdResistance(), "+11% to Cold Resistance", 11, 7) });
+
     }
 }

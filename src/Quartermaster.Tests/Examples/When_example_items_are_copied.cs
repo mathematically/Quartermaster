@@ -1,93 +1,64 @@
 ﻿using System;
-using System.Linq;
+using System.Reflection;
 using ExpectedObjects;
-using Grean.Exude;
 using Mathematically.Quartermaster.Domain.Items;
 using Mathematically.Quartermaster.Domain.Mods;
 using Mathematically.Quartermaster.Domain.Parser;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
     [Trait("When example items are copied", "")]
     public class When_example_items_are_copied
     {
-        [FirstClassTests]
-        public static TestCase<When_example_items_are_copied>[] Items_are_parsed_correctly()
+        [Theory]
+        [InlineData("Corpse Blast")]
+        [InlineData("Heavy Short Bow")]
+        [InlineData("Driftwood Maul")]
+        [InlineData("Driftwood Wand")]
+        public void Weapons_are_parsed_correctly(string expectedItemName)
         {
-//            yield return new TestCase(_ => Item_parsed_correctly(Rings.StormTurnText, Rings.StormTurn));
-            var testCases = new[]
-            {
-                new
-                {
-                    GameText = Amulets.HorrorMedallionText,
-                    ExpectedItem = Amulets.HorrorMedallion
-                },
-                new
-                {
-                    GameText = Boots.OblivionTrailText,
-                    ExpectedItem = Boots.OblivionTrail
-                },
-                new
-                {
-                    GameText = Boots.PandemoniumSoleText,
-                    ExpectedItem = Boots.PandemoniumSole
-                },
-                new
-                {
-                    GameText = Rings.IronRingText,
-                    ExpectedItem = Rings.IronRing
-                },
-                new
-                {
-                    GameText = Rings.SapphireRingText,
-                    ExpectedItem = Rings.SapphireRing
-                },
-                new
-                {
-                    GameText = Rings.ThirstyRubyRingOfSuccessText,
-                    ExpectedItem = Rings.ThirstyRubyRingOfSuccess
-                },
-                new
-                {
-                    GameText = Rings.StormTurnText,
-                    ExpectedItem = Rings.StormTurn
-                },
-//                new
-//                {
-//                    GameText = Rings.KaomsSignText,
-//                    ExpectedItem = Rings.KaomsSign
-//                },
-                new
-                {
-                    GameText = Weapons.DriftwoodMaulText,
-                    ExpectedItem = Weapons.DriftwoodMaul
-                },
-                new
-                {
-                    GameText = Weapons.DriftwoodWandText,
-                    ExpectedItem = Weapons.DriftwoodWand
-                },
-                new
-                {
-                    GameText = Weapons.HeavyShortBowText,
-                    ExpectedItem = Weapons.HeavyShortBow
-                },
-                new
-                {
-                    GameText = Weapons.CorpseBlastText,
-                    ExpectedItem = Weapons.CorpseBlast
-                },
-            };
+            var expectedItem = ExampleItemReflectionHelper.GetItem(Weapons.Instance, expectedItemName);
+            var gameText = ExampleItemReflectionHelper.GetItemText(Weapons.Instance, expectedItemName);
 
-            return
-                testCases.Select(
-                    testData =>
-                        new TestCase<When_example_items_are_copied>(
-                            expect => expect.Item_parsed_correctly(testData.GameText, testData.ExpectedItem))).ToArray();
+            DoParseTest(gameText, expectedItem);
         }
 
-        private void Item_parsed_correctly(string gameText, PoeItem expectedItem)
+        [Theory]
+        [InlineData("Horror Medallion")]
+        public void Amulets_are_parsed_correctly(string expectedItemName)
+        {
+            var expectedItem = ExampleItemReflectionHelper.GetItem(Amulets.Instance, expectedItemName);
+            var gameText = ExampleItemReflectionHelper.GetItemText(Amulets.Instance, expectedItemName);
+
+            DoParseTest(gameText, expectedItem);
+        }
+
+        [Theory]
+        [InlineData("Pandemonium Sole")]
+        public void Boots_are_parsed_correctly(string expectedItemName)
+        {
+            var expectedItem = ExampleItemReflectionHelper.GetItem(Boots.Instance, expectedItemName);
+            var gameText = ExampleItemReflectionHelper.GetItemText(Boots.Instance, expectedItemName);
+
+            DoParseTest(gameText, expectedItem);
+        }
+
+        [Theory]
+        [InlineData("Storm Turn")]
+        [InlineData("Sapphire Ring")]
+        [InlineData("Iron Ring")]
+        [InlineData("Thirsty Ruby Ring Of Success")]
+        public void Rings_are_parsed_correctly(string expectedItemName)
+        {
+            var expectedItem = ExampleItemReflectionHelper.GetItem(Rings.Instance, expectedItemName);
+            var gameText = ExampleItemReflectionHelper.GetItemText(Rings.Instance, expectedItemName);
+
+            DoParseTest(gameText, expectedItem);
+        }
+
+        private static void DoParseTest(string gameText, PoeItem expectedItem)
         {
             Console.WriteLine(gameText);
 
@@ -95,6 +66,7 @@ namespace Mathematically.Quartermaster.Tests.Examples
             var lexicon = new ItemTypeLexicon();
             var parsers = new ModParsers(lexicon, compendium);
             var itemFactory = new PoeItemFactory(lexicon, parsers);
+
             var actualItem = itemFactory.CreateItem(gameText);
 
             // Note that the mods on the expected object must be in the same order as the mods on the parsed item.

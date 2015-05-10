@@ -3,10 +3,12 @@ using Mathematically.Quartermaster.Domain.Items;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
-    public static class Rings
+    public class Rings
     {
+        public static readonly Rings Instance = new Rings();
+
         // Pretty much the most basic item possible.
-        internal const string IronRingText = @"Rarity: Normal
+        public const string IronRingText = @"Rarity: Normal
 Iron Ring
 --------
 Itemlevel: 4
@@ -26,7 +28,7 @@ Adds 1-4 Physical Damage
             );
 
         // Another simple ring with a level requirement.
-        internal const string SapphireRingText = @"Rarity: Normal
+        public const string SapphireRingText = @"Rarity: Normal
 Sapphire Ring
 --------
 Requirements:
@@ -48,7 +50,7 @@ Itemlevel: 15
             );
 
         // A magic ring
-        internal const string ThirstyRubyRingOfSuccessText = @"Rarity: Magic
+        public const string ThirstyRubyRingOfSuccessText = @"Rarity: Magic
 Thirsty Ruby Ring of Success
 --------
 Requirements:
@@ -74,7 +76,7 @@ Itemlevel: 16
             );
 
         // A rare ring
-        internal const string StormTurnText = @"Rarity: Rare
+        public const string StormTurnText = @"Rarity: Rare
 Storm Turn
 Ruby Ring
 --------
@@ -104,7 +106,7 @@ Adds 7-11 Cold Damage
             );
 
         // A unique ring
-        internal const string KaomsSignText = @"Rarity: Unique
+        public const string KaomsSignText = @"Rarity: Unique
 Kaom's Sign
 Coral Ring
 --------

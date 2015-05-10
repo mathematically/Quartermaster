@@ -4,12 +4,14 @@ using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
-    public static class Weapons
+    public class Weapons
     {
+        public static readonly Weapons Instance = new Weapons();
+
         #region DRIFTWOOD WAND
 
         // About as simple as a weapon can be
-        internal const string DriftwoodWandText = @"Rarity: Normal
+        public const string DriftwoodWandText = @"Rarity: Normal
 Driftwood Wand
 --------
 Wand
@@ -40,7 +42,7 @@ Itemlevel: 4
         #region DRIFTWOOD MAUL
 
         // Another simple example weapon
-        internal const string DriftwoodMaulText = @"Rarity: Normal
+        public const string DriftwoodMaulText = @"Rarity: Normal
 Driftwood Maul
 --------
 Two Handed Mace
@@ -76,7 +78,7 @@ Itemlevel: 4
         #region HEAVY SHORT BOW
 
         // Blue weapon with augmented weapons stats
-        internal const string HeavyShortBowText = @"Rarity: Magic
+        public const string HeavyShortBowText = @"Rarity: Magic
 Heavy Short Bow
 --------
 Bow
