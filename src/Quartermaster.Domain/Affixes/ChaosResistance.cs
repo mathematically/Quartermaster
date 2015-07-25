@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public ChaosResistance()
         {
-            Definition(AffixPosition.Suffix, "% to Chaos Resistance", @"\d+", new[]
+            Definition("Base Chaos Dmg Resistance %", AffixPosition.Suffix, "% to Chaos Resistance", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.Lost, 16, 5, 10),
                 new AffixTier(AffixTierName.Banishment, 30, 11, 15),

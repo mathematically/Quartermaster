@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public Life()
         {
-            Definition(AffixPosition.Prefix, " to maximum Life", @"\d+", new[]
+            Definition("Base Max Life", AffixPosition.Prefix, " to maximum Life", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.Healthy, 1, 10, 19),
                 new AffixTier(AffixTierName.Sanguine, 11, 20, 29),

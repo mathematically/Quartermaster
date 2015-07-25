@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public AttackSpeedLocal()
         {
-            Definition(AffixPosition.Suffix, "% increased Attack Speed", @"\d+", new[]
+            Definition("Local Attack Speed +%", AffixPosition.Suffix, "% increased Attack Speed", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.OfSkill, 1, 6, 9),
                 new AffixTier(AffixTierName.OfEase, 11, 5, 10), 

@@ -7,19 +7,19 @@ namespace Mathematically.Quartermaster.Domain.Items
     public enum ItemCategory
     {
         // Weapons
-        OneHandAxe,
-        TwoHandAxe,
-        Bow,
-        Claw,
-        TwoHandMace,
-        Wand,
+        OneHandAxes,
+        TwoHandAxes,
+        Bows,
+        Claws,
+        TwoHandMaces,
+        Wands,
 
         // Armour
         Boots,
         Belts,
 
         // Other
-        Amulet,
-        Ring,
+        Amulets,
+        Rings,
     }
 }

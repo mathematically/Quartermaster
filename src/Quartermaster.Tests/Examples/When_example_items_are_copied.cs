@@ -36,6 +36,16 @@ namespace Mathematically.Quartermaster.Tests.Examples
         }
 
         [Theory]
+        [InlineData("Maelström Bind")]
+        public void Belts_are_parsed_correctly(string expectedItemName)
+        {
+            var expectedItem = ExampleItemReflectionHelper.GetItem(Belts.Instance, expectedItemName);
+            var gameText = ExampleItemReflectionHelper.GetItemText(Belts.Instance, expectedItemName);
+
+            DoParseTest(gameText, expectedItem);
+        }
+
+        [Theory]
         [InlineData("Pandemonium Sole")]
         public void Boots_are_parsed_correctly(string expectedItemName)
         {

@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public LightningResistance()
         {
-            Definition(AffixPosition.Suffix, "% to Lightning Resistance", @"\d+", new[]
+            Definition("Base Lightning Dmg Resistance %", AffixPosition.Suffix, "% to Lightning Resistance", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.Cloud, 1, 6, 11),
                 new AffixTier(AffixTierName.Squall, 14, 12, 17),

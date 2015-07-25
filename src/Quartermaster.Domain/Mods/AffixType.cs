@@ -16,5 +16,6 @@ namespace Mathematically.Quartermaster.Domain.Mods
         LightningResistance,
         ChaosResistance,
         AllElementsResistance,
+        Strength
     }
 }

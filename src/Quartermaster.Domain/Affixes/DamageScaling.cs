@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public DamageScaling()
         {
-            Definition(AffixPosition.Prefix, "% increased Physical Damage", @"\d+", new[]
+            Definition("Local Physical Dmg+%", AffixPosition.Prefix, "% increased Physical Damage", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.Heavy, 1, 20, 49),
                 new AffixTier(AffixTierName.Serrated, 11, 50, 69),

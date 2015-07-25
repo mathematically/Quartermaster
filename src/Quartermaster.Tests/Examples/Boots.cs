@@ -19,7 +19,7 @@ Str: 44
 --------
 Sockets: R-B-R 
 --------
-Itemlevel: 30
+Item Level: 30
 --------
 30% increased Armour
 +47 to maximum Life
@@ -53,7 +53,7 @@ Int: 28
 --------
 Sockets: R-R R G 
 --------
-Itemlevel: 28
+Item Level: 28
 --------
 +10 to Intelligence
 +15 to Armour

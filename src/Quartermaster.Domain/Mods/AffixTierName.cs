@@ -127,6 +127,19 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         #region Suffixes
 
+        #region Strength
+
+        Brute,
+        Wrestler,
+        Bear,
+        Lion,
+        Gorilla,
+        Goliath,
+        Leviathan,
+        Titan,
+
+        #endregion
+
 
         #region Attack Speed (Local and Global)
 
@@ -149,7 +162,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
         Penguin,
         Yeti,
         Walrus,
-        Bear,
+        PolarBear,
         Ice,
 
         #endregion

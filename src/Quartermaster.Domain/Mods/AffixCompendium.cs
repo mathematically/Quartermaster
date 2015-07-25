@@ -20,6 +20,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
             {AffixType.LightningResistance, new LightningResistance()},
             {AffixType.ChaosResistance, new ChaosResistance()},
             {AffixType.AllElementsResistance, new AllElementsResistance()},
+            {AffixType.Strength, new Strength()},
         };
 
         public IEnumerable<IAffix> Affixes

@@ -18,7 +18,7 @@ Fake Ring
 Requirements:
 Level: {0}
 --------
-Itemlevel: {1}
+Item Level: {1}
 --------
 {2}";
 

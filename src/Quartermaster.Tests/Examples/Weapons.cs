@@ -1,6 +1,5 @@
 ﻿using Mathematically.Quartermaster.Domain.Affixes;
 using Mathematically.Quartermaster.Domain.Items;
-using Mathematically.Quartermaster.Domain.Mods;
 
 namespace Mathematically.Quartermaster.Tests.Examples
 {
@@ -21,7 +20,7 @@ Attacks per Second: 1.30
 --------
 Sockets: B 
 --------
-Itemlevel: 4
+Item Level: 4
 --------
 11% increased Spell Damage
 ";
@@ -55,7 +54,7 @@ Strength: 20
 --------
 Sockets: R-B 
 --------
-Itemlevel: 4
+Item Level: 4
 --------
 20% increased Stun Duration on enemies
 ";
@@ -92,7 +91,7 @@ Dex: 26
 --------
 Sockets: G 
 --------
-Itemlevel: 7
+Item Level: 7
 --------
 23% increased Physical Damage
 ";
@@ -131,7 +130,7 @@ Dex: 116
 --------
 Sockets: B-G G 
 --------
-Itemlevel: 35
+Item Level: 35
 --------
 +1 to Level of Bow Gems in this item
 +13 to Dexterity
@@ -182,7 +181,7 @@ Dex: 179
 --------
 Sockets: G-G-R-R G-G 
 --------
-Itemlevel: 59
+Item Level: 59
 --------
 Adds 27-46 Fire Damage
 Adds 7-12 Cold Damage
@@ -227,7 +226,7 @@ Str: 35
 --------
 Sockets: R R 
 --------
-Itemlevel: 8
+Item Level: 8
 --------
 20% increased Stun Duration on enemies
 --------

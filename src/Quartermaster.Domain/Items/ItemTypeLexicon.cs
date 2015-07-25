@@ -17,12 +17,12 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private static readonly HashSet<ItemCategory> Weapons = new HashSet<ItemCategory>
         {
-            ItemCategory.Bow,
-            ItemCategory.Claw,
-            ItemCategory.OneHandAxe,
-            ItemCategory.TwoHandAxe,
-            ItemCategory.TwoHandMace,
-            ItemCategory.Wand,
+            ItemCategory.Bows,
+            ItemCategory.Claws,
+            ItemCategory.OneHandAxes,
+            ItemCategory.TwoHandAxes,
+            ItemCategory.TwoHandMaces,
+            ItemCategory.Wands,
         };
 
         private static readonly HashSet<ItemCategory> Armours = new HashSet<ItemCategory>
@@ -33,11 +33,11 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         private static readonly HashSet<ItemCategory> Other = new HashSet<ItemCategory>
         {
-            ItemCategory.Amulet,
-            ItemCategory.Ring,
+            ItemCategory.Amulets,
+            ItemCategory.Rings,
         };
 
-        private static readonly HashSet<ItemCategory> _belts = new HashSet<ItemCategory>
+        private static readonly HashSet<ItemCategory> Belts = new HashSet<ItemCategory>
         {
             ItemCategory.Belts,
         };
@@ -45,8 +45,8 @@ namespace Mathematically.Quartermaster.Domain.Items
         private static readonly Dictionary<Type, HashSet<ItemCategory>> AffixItemCategoryValidCombos = new Dictionary
             <Type, HashSet<ItemCategory>>();
 
-        private static readonly HashSet<ItemCategory> _nonWeapons = new HashSet<ItemCategory>(Armours.Union(Other));
-        private static readonly HashSet<ItemCategory> _nonWeaponsExceptBelts = new HashSet<ItemCategory>(_nonWeapons.Except(_belts));
+        private static readonly HashSet<ItemCategory> NonWeapons = new HashSet<ItemCategory>(Armours.Union(Other));
+        private static readonly HashSet<ItemCategory> NonWeaponsExceptBelts = new HashSet<ItemCategory>(NonWeapons.Except(Belts));
 
         public ItemTypeLexicon()
         {
@@ -57,17 +57,17 @@ namespace Mathematically.Quartermaster.Domain.Items
 
             // WEAPONS
             values.Where(t => t >= BaseItemType.CrudeBow && t <= BaseItemType.HarbingerBow)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.Bow));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.Bows));
             values.Where(t => t >= BaseItemType.RustedHatchet && t <= BaseItemType.InfernalAxe)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.OneHandAxe));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.OneHandAxes));
             values.Where(t => t >= BaseItemType.StoneAxe && t <= BaseItemType.VoidAxe)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.TwoHandAxe));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.TwoHandAxes));
             values.Where(t => t >= BaseItemType.DriftwoodMaul && t <= BaseItemType.TerrorMaul)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.TwoHandMace));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.TwoHandMaces));
             values.Where(t => t >= BaseItemType.DriftwoodWand && t <= BaseItemType.ProphecyWand)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.Wand));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.Wands));
             values.Where(t => t >= BaseItemType.NailedFist && t <= BaseItemType.TerrorClaw)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.Claw));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.Claws));
 
             // ARMOUR
             values.Where(t => t >= BaseItemType.IronGreaves && t <= BaseItemType.SlinkBoots)
@@ -75,13 +75,15 @@ namespace Mathematically.Quartermaster.Domain.Items
 
             // JEWELRY
             values.Where(t => t >= BaseItemType.PauaAmulet && t <= BaseItemType.OnyxAmulet)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.Amulet));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.Amulets));
+            values.Where(t => t >= BaseItemType.ChainBelt && t <= BaseItemType.StudiedBelt)
+                .ForEach(t => Lexicon.Add(t, ItemCategory.Belts));
             values.Where(t => t >= BaseItemType.IronRing && t <= BaseItemType.UnsetRing)
-                .ForEach(t => Lexicon.Add(t, ItemCategory.Ring));
+                .ForEach(t => Lexicon.Add(t, ItemCategory.Rings));
 
             // Use local attack speed for weapons and global attack speed for other items. Does not appear on belts.
             AffixItemCategoryValidCombos.Add(typeof(AttackSpeedLocal), Weapons);
-            AffixItemCategoryValidCombos.Add(typeof(AttackSpeedGlobal), _nonWeaponsExceptBelts);
+            AffixItemCategoryValidCombos.Add(typeof(AttackSpeedGlobal), NonWeaponsExceptBelts);
         }
 
         public ItemCategory GetItemCategory(BaseItemType forBaseType)

@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public FireResistance()
         {
-            Definition(AffixPosition.Suffix, "% to Fire Resistance", @"\d+", new[]
+            Definition("Base Fire Dmg Resistance %", AffixPosition.Suffix, "% to Fire Resistance", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.Whelping, 1, 6, 11),
                 new AffixTier(AffixTierName.Salamander, 14, 12, 17),

@@ -9,7 +9,7 @@ namespace Mathematically.Quartermaster.Domain
         public const string WEAPON_MARKER = ATTACKS_PER_SECOND_LABEL;
 
         public const string RARITY_LABEL = "Rarity: ";
-        public const string ITEMLEVEL_LABEL = "Itemlevel: ";
+        public const string ITEMLEVEL_LABEL = "Item Level: ";
         public const string PHYSICAL_DAMAGE_LABEL = "Physical Damage: ";
         public const string ELEMENTAL_DAMAGE_LABEL = "Elemental Damage: ";
         public const string ATTACKS_PER_SECOND_LABEL = "Attacks per Second: ";

@@ -200,7 +200,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         #region Jewelry
 
-        // Amulet
+        // Amulets
         PauaAmulet,
         CoralAmulet,
         AmberAmulet,
@@ -211,6 +211,15 @@ namespace Mathematically.Quartermaster.Domain.Items
         CitrineAmulet,
         TurqoiseAmulet,
         OnyxAmulet,
+
+        // Belts
+        ChainBelt,
+        RusticSash,
+        HeavyBelt,
+        LeatherBelt,
+        GoldenObi,
+        ClothBelt,
+        StudiedBelt,
 
         // Rings
         // Note there are really three types of twostone depending on elements, although hopefully can avoid that complexity.

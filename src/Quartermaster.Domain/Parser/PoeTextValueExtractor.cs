@@ -25,7 +25,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private int CalculateMarkerLength(string tooltipLine)
         {
-            // e.g. "Itemlevel: 4"
+            // e.g. "Item Level: 4"
             return tooltipLine.IndexOf(':') + 2;
         }
 

@@ -89,6 +89,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Examples\Amulets.cs" />
+    <Compile Include="Examples\Belts.cs" />
     <Compile Include="Examples\Boots.cs" />
     <Compile Include="Examples\ExampleItemReflectionHelper.cs" />
     <Compile Include="Examples\When_example_items_are_copied.cs" />

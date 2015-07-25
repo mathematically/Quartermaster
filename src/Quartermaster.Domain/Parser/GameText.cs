@@ -60,7 +60,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
             // Rarity: Rare
             // Horror Medallion
-            // Jade Amulet
+            // Jade Amulets
             // --------
 
             var adjustment = HasName() ? 0 : 1;

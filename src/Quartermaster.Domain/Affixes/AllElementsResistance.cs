@@ -6,7 +6,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
     {
         public AllElementsResistance()
         {
-            Definition(AffixPosition.Suffix, "% to all Elemental Resistances", @"\d+", new[]
+            Definition("Base Resist All Elements %", AffixPosition.Suffix, "% to all Elemental Resistances", @"\d+", new[]
             {
                 new AffixTier(AffixTierName.Crystal, 12, 3, 5),
                 new AffixTier(AffixTierName.Prism, 24, 6, 8),

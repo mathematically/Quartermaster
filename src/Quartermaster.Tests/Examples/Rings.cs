@@ -11,7 +11,7 @@ namespace Mathematically.Quartermaster.Tests.Examples
         public const string IronRingText = @"Rarity: Normal
 Iron Ring
 --------
-Itemlevel: 4
+Item Level: 4
 --------
 Adds 1-4 Physical Damage
 ";
@@ -34,7 +34,7 @@ Sapphire Ring
 Requirements:
 Level: 16
 --------
-Itemlevel: 15
+Item Level: 15
 --------
 +16% to Cold Resistance
 ";
@@ -56,7 +56,7 @@ Thirsty Ruby Ring of Success
 Requirements:
 Level: 11
 --------
-Itemlevel: 16
+Item Level: 16
 --------
 +30% to Fire Resistance
 --------
@@ -83,7 +83,7 @@ Ruby Ring
 Requirements:
 Level: 48
 --------
-Itemlevel: 63
+Item Level: 63
 --------
 +27% to Fire Resistance
 --------
@@ -96,13 +96,13 @@ Adds 7-11 Cold Damage
 ";
 
         public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, BaseItemType.RubyRing,
-            new[]
+            new Mods(new[]
             {
                 new ItemMod(new Life(), "+15 to maximum Life", 15, 63),
                 new ItemMod(new FireResistance(), "+27% to Fire Resistance", 27, 63),
                 new ItemMod(new LightningResistance(),  "+38% to Lightning Resistance", 38, 63),
                 new ItemMod(new AllElementsResistance(),  "+16% to all Elemental Resistances", 16, 63),
-            }
+            }).Sorted
             );
 
         // A unique ring
@@ -110,7 +110,7 @@ Adds 7-11 Cold Damage
 Kaom's Sign
 Coral Ring
 --------
-Itemlevel: 6
+Item Level: 6
 --------
 +24 to maximum Life
 --------
