@@ -14,7 +14,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         private readonly WeaponParser _weaponParser = new WeaponParser();
         private readonly BaseItemParser _baseItemParser = new BaseItemParser();
-        private readonly SortedList<string, IItemMod> _mods = new SortedList<string, IItemMod>();
+        private readonly List<IItemMod> _mods = new List<IItemMod>();
 
         private readonly GameText _gameText;
 
@@ -40,7 +40,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         public IEnumerable<IItemMod> Mods
         {
-            get { return _mods.Values; }
+            get { return _mods; }
         }
 
 
@@ -85,20 +85,34 @@ namespace Mathematically.Quartermaster.Domain.Parser
         {
             IEnumerable<string> workingModText = _gameText.ModText.ToList();
 
-            _modParserCollection.All.ForEach(p =>
+            workingModText.ForEach(t =>
             {
-                // We can have the same mod more than once (implicits) so keep parsing
-                // until we dont find any.
-                int n = 1;
-                while (true)
+                _modParserCollection.All.ForEach(p =>
                 {
-                    var result = p.TryParse(ItemLevel, BaseType, workingModText);
-                    if (!result.HasDiscoveredMods) return;
+                    IItemMod parsedMod;
+                    var result = p.TryParse(ItemLevel, BaseType, t, out parsedMod);
 
-                    workingModText = result.RemainingModTextLines;
-                    result.DiscoveredMods.ForEach(m => _mods.Add(m.Affix.AffixName + n++.ToString(), m));
-                }
+                    if (result)
+                    {
+                        _mods.Add(parsedMod);
+                    }
+                });
             });
+
+//            _modParserCollection.All.ForEach(p =>
+//            {
+//                // We can have the same mod more than once (implicits) so keep parsing
+//                // until we dont find any.
+//                int n = 1;
+//                while (true)
+//                {
+//                    var result = p.TryParse(ItemLevel, BaseType, workingModText);
+//                    if (!result.HasDiscoveredMods) return;
+//
+//                    workingModText = result.RemainingModTextLines;
+//                    result.DiscoveredMods.ForEach(m => _mods.Add(m.Affix.Position + m.Affix.AffixName + n++.ToString(), m));
+//                }
+//            });
         }
     }
 }

@@ -96,13 +96,13 @@ Adds 7-11 Cold Damage
 ";
 
         public static readonly PoeItem StormTurn = new PoeItem("Storm Turn", ItemRarity.Rare, 63, BaseItemType.RubyRing,
-            new Mods(new[]
+            new[]
             {
-                new ItemMod(new Life(), "+15 to maximum Life", 15, 63),
                 new ItemMod(new FireResistance(), "+27% to Fire Resistance", 27, 63),
-                new ItemMod(new LightningResistance(),  "+38% to Lightning Resistance", 38, 63),
+                new ItemMod(new Life(), "+15 to maximum Life", 15, 63),
                 new ItemMod(new AllElementsResistance(),  "+16% to all Elemental Resistances", 16, 63),
-            }).Sorted
+                new ItemMod(new LightningResistance(),  "+38% to Lightning Resistance", 38, 63),
+            }
             );
 
         // A unique ring

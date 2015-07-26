@@ -4,6 +4,9 @@ namespace Mathematically.Quartermaster.Domain.Mods
 {
     public enum AffixTierName
     {
+        #region Armour
+        #endregion
+
         #region Prefixes
 
         #region DamageScaling
@@ -37,18 +40,23 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         #region Life
 
+        Hale,
         Healthy,
         Sanguine,
+        StalwartCrafted, // Crafted
+        HealthyCrafted, // Crafted
         Stalwart,
         Stout,
+        StoutCrafted,
+        SanguineCrafted,
         Robust,
+        RobustCrafted,
         Rotund,
         Virile,
         Athletes,
         Fecund,
         Vigorous,
-
-        KaomsSignLife,
+        Raptuous,
 
         #endregion
 
@@ -131,12 +139,15 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         Brute,
         Wrestler,
+        WrestlerCrafted1,
+        WrestlerCrafted2,
         Bear,
         Lion,
         Gorilla,
         Goliath,
         Leviathan,
         Titan,
+        Gods,
 
         #endregion
 

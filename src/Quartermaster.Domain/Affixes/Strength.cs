@@ -10,12 +10,15 @@ namespace Mathematically.Quartermaster.Domain.Affixes
             {
                 new AffixTier(AffixTierName.Brute, 1, 8, 12),
                 new AffixTier(AffixTierName.Wrestler, 11, 13, 17),
+                new AffixTier(AffixTierName.WrestlerCrafted1, 15, 16, 20, MasterCrafted),
+                new AffixTier(AffixTierName.WrestlerCrafted2, 15, 20, 25, MasterCrafted),
                 new AffixTier(AffixTierName.Bear, 22, 18, 22),
                 new AffixTier(AffixTierName.Lion, 33, 23, 27),
                 new AffixTier(AffixTierName.Gorilla, 44, 28, 32),
                 new AffixTier(AffixTierName.Goliath, 55, 33, 37),
                 new AffixTier(AffixTierName.Leviathan, 66, 38, 42),
                 new AffixTier(AffixTierName.Titan, 74, 43, 50),
+                new AffixTier(AffixTierName.Gods, 82, 51, 55),
             });
         }
     }

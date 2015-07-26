@@ -21,24 +21,22 @@ namespace Mathematically.Quartermaster.Domain.Parser
             _affix = affix;
         }
 
-        public IModParseResult TryParse(int itemLevel, BaseItemType baseItemType, IEnumerable<string> modTextLines)
+        public bool TryParse(int itemLevel, BaseItemType baseItemType, string modText, out IItemMod parsedMod)
         {
-            var lines = modTextLines.ToList();
-
-            if (IsOnThisItem(lines, baseItemType))
+            if (IsOnThisItem(modText, baseItemType))
             {
-                var roll = GetAffixRoll(lines);
-                lines.Remove(roll.Item1);
-
-                return new ModParseResult(lines, new[] { new ItemMod(_affix, roll.Item1, roll.Item2, itemLevel) });
+                var roll = GetAffixRoll(modText);
+                parsedMod = new ItemMod(_affix, roll.Item1, roll.Item2, itemLevel);
+                return true;
             }
 
-            return new ModParseResult(lines, Enumerable.Empty<IItemMod>());
+            parsedMod = null;
+            return false;
         }
 
-        private bool IsOnThisItem(IEnumerable<string> modTextLines, BaseItemType baseItemType)
+        private bool IsOnThisItem(string modText, BaseItemType baseItemType)
         {
-            var isOnThisItem = modTextLines.FirstOrDefault(line => line.Contains(_affix.MatchText)) != null;
+            var isOnThisItem = modText.Contains(_affix.MatchText);
 
             // Some mods look the same in the tooltip but differ in terms of what base type they can appear on.
             // Most commonly local and global versions of the same mod on weapons and non-weapons.
@@ -47,17 +45,17 @@ namespace Mathematically.Quartermaster.Domain.Parser
             return isOnThisItem && isValidOnBaseType;
         }
 
-        private Tuple<string, int> GetAffixRoll(IEnumerable<string> modTextLines)
+        private Tuple<string, int> GetAffixRoll(string modText)
         {
-            var rollText = modTextLines.First(line => line.Contains(_affix.MatchText));
-            var match = Regex.Match(rollText, _affix.ValueRegEx);
+            var match = Regex.Match(modText, _affix.ValueRegEx);
 
             if (!match.Success)
             {
-                throw new ArgumentException(string.Format("Could not match {0} in {1}", _affix.MatchText, rollText));
+                throw new ArgumentException(string.Format("Could not match {0} in {1}", _affix.MatchText, modText));
             }
 
-            return new Tuple<string, int>(rollText, Convert.ToInt32(match.Value));
+            return new Tuple<string, int>(modText, Convert.ToInt32(match.Value));
         }
+
     }
 }

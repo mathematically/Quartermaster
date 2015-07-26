@@ -11,12 +11,15 @@ namespace Mathematically.Quartermaster.Domain.Mods
         public int Min { get; private set; }
         public int Max { get; private set; }
 
-        public AffixTier(AffixTierName name, int level, int min, int max) : this()
+        public bool MasterCrafted { get; private set; }
+
+        public AffixTier(AffixTierName name, int level, int min, int max, bool masterCrafted = Affix.Natural) : this()
         {
             Name = name;
             Level = level;
             Min = min;
             Max = max;
+            MasterCrafted = masterCrafted;
         }
     }
 }
