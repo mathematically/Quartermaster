@@ -36,10 +36,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
             //_craftedLevels.AddRange(tiers.Where(l => l.MasterCrafted));
         }
 
-        public IEnumerable<AffixTier> Levels
-        {
-            get { return _levels; }
-        }
+        public IEnumerable<AffixTier> Levels => _levels;
 
         public AffixTier this[int roll]
         {

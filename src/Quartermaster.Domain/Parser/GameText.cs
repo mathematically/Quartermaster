@@ -20,15 +20,9 @@ namespace Mathematically.Quartermaster.Domain.Parser
                 .Where(t => _textLines[t] == TooltipText.SECTION_DIVIDER).ToList();
         }
 
-        public string Text
-        {
-            get { return _itemText; }
-        }
+        public string Text => _itemText;
 
-        public string this[int i]
-        {
-            get { return _textLines[i]; }
-        }
+        public string this[int i] => _textLines[i];
 
         public string LineWith(string label)
         {
@@ -86,10 +80,9 @@ namespace Mathematically.Quartermaster.Domain.Parser
                 var isEpic = _textLines.Any(t => t.Contains(TooltipText.RARITY_LABEL + "Epic"));
 
                 // todo write tests and fix this properly. 
-                return
-                    _textLines.Skip(itemLevelSearch.Index + 2).TakeWhile(text => !text.Contains(TooltipText.MTX_MARKER));
+                return _textLines.Skip(itemLevelSearch.Index + 2)
+                    .TakeWhile(text => !text.Contains(TooltipText.MTX_MARKER));
             }
-
         }
     }
 }

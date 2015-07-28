@@ -23,10 +23,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
             {AffixType.Strength, new Strength()},
         };
 
-        public IEnumerable<IAffix> Affixes
-        {
-            get { return Compendium.Values; }
-        }
+        public IEnumerable<IAffix> Affixes => Compendium.Values;
 
         public IAffix GetAffix(AffixType ofType)
         {

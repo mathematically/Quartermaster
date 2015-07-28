@@ -12,10 +12,7 @@ namespace Mathematically.Quartermaster.Domain.Parser
             DiscoveredMods = discoveredMods;
         }
 
-        public bool HasDiscoveredMods
-        {
-            get { return DiscoveredMods.Any(); }
-        }
+        public bool HasDiscoveredMods => DiscoveredMods.Any();
 
         public IEnumerable<string> RemainingModTextLines { get; private set; }
         public IEnumerable<IItemMod> DiscoveredMods  { get; private set; }

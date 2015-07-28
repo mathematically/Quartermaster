@@ -5,19 +5,10 @@
     /// </summary>
     public class NullPoeItem : PoeItem
     {
-        public override string Name
-        {
-            get { return string.Empty; }
-        }
+        public override string Name => string.Empty;
 
-        public override ItemRarity Rarity
-        {
-            get { return ItemRarity.Normal; }
-        }
+        public override ItemRarity Rarity => ItemRarity.Normal;
 
-        public override int ItemLevel
-        {
-            get { return 1; }
-        }
+        public override int ItemLevel => 1;
     }
 }

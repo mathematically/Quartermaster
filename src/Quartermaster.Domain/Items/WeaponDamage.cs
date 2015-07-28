@@ -18,20 +18,11 @@ namespace Mathematically.Quartermaster.Domain.Items
         public virtual int MinLightningDamage { get; private set; }
         public virtual int MaxLightningDamage { get; private set; }
 
-        public double DPS
-        {
-            get { return _dps; }
-        }
+        public double DPS => _dps;
 
-        public double PhysicalDPS
-        {
-            get { return _physicalDPS; }
-        }
+        public double PhysicalDPS => _physicalDPS;
 
-        public double ElementalDPS
-        {
-            get { return _elementalDPS; }
-        }
+        public double ElementalDPS => _elementalDPS;
 
         public WeaponDamage(double attackSpeed, int minPhysicalDamage, int maxPhysicalDamage)
         {

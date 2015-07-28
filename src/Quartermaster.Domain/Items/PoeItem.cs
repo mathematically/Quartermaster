@@ -17,10 +17,7 @@ namespace Mathematically.Quartermaster.Domain.Items
 
         public IWeaponDamage Damage { get; private set; }
 
-        public IEnumerable<IItemMod> Mods
-        {
-            get { return _mods; }
-        }
+        public IEnumerable<IItemMod> Mods => _mods;
 
         public PoeItem(string name, ItemRarity rarity, int itemLevel, BaseItemType baseType,
             IEnumerable<IItemMod> affixes)

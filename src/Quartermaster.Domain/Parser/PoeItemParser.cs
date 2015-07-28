@@ -19,30 +19,13 @@ namespace Mathematically.Quartermaster.Domain.Parser
         private readonly GameText _gameText;
 
         public string Name { get; private set; }
-
         public ItemRarity Rarity { get; private set; }
-
         public int ItemLevel { get; private set; }
-
         public BaseItemType BaseType { get; private set; }
-
         public ItemCategory Category { get; private set; }
-
-        public bool IsWeapon
-        {
-            get { return _weaponParser.IsWeapon; }
-        }
-
-        public IWeaponDamage Damage
-        {
-            get { return _weaponParser; }
-        }
-
-        public IEnumerable<IItemMod> Mods
-        {
-            get { return _mods; }
-        }
-
+        public bool IsWeapon => _weaponParser.IsWeapon;
+        public IWeaponDamage Damage => _weaponParser;
+        public IEnumerable<IItemMod> Mods => _mods;
 
         public PoeItemParser(IItemLexicon itemLexicon, IModParserCollection modParserCollection, string gameItemText)
         {
@@ -98,21 +81,6 @@ namespace Mathematically.Quartermaster.Domain.Parser
                     }
                 });
             });
-
-//            _modParserCollection.All.ForEach(p =>
-//            {
-//                // We can have the same mod more than once (implicits) so keep parsing
-//                // until we dont find any.
-//                int n = 1;
-//                while (true)
-//                {
-//                    var result = p.TryParse(ItemLevel, BaseType, workingModText);
-//                    if (!result.HasDiscoveredMods) return;
-//
-//                    workingModText = result.RemainingModTextLines;
-//                    result.DiscoveredMods.ForEach(m => _mods.Add(m.Affix.Position + m.Affix.AffixName + n++.ToString(), m));
-//                }
-//            });
         }
     }
 }

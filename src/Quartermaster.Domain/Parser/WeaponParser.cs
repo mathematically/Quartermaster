@@ -18,65 +18,29 @@ namespace Mathematically.Quartermaster.Domain.Parser
 
         public bool IsWeapon { get; private set; }
 
-        public int MinPhysical
-        {
-            get { return _damage.MinPhysical; }
-        }
+        public int MinPhysical => _damage.MinPhysical;
 
-        public int MaxPhysical
-        {
-            get { return _damage.MaxPhysical; }
-        }
+        public int MaxPhysical => _damage.MaxPhysical;
 
-        public int MinFireDamage
-        {
-            get { return _damage.MinFireDamage; }
-        }
+        public int MinFireDamage => _damage.MinFireDamage;
 
-        public int MaxFireDamage
-        {
-            get { return _damage.MaxFireDamage; }
-        }
+        public int MaxFireDamage => _damage.MaxFireDamage;
 
-        public int MinColdDamage
-        {
-            get { return _damage.MinColdDamage; }
-        }
+        public int MinColdDamage => _damage.MinColdDamage;
 
-        public int MaxColdDamage
-        {
-            get { return _damage.MaxColdDamage; }
-        }
+        public int MaxColdDamage => _damage.MaxColdDamage;
 
-        public int MinLightningDamage
-        {
-            get { return _damage.MinLightningDamage; }
-        }
+        public int MinLightningDamage => _damage.MinLightningDamage;
 
-        public int MaxLightningDamage
-        {
-            get { return _damage.MaxLightningDamage; }
-        }
+        public int MaxLightningDamage => _damage.MaxLightningDamage;
 
-        public double AttackSpeed
-        {
-            get { return _damage.AttackSpeed; }
-        }
+        public double AttackSpeed => _damage.AttackSpeed;
 
-        public double DPS
-        {
-            get { return _damage.DPS; }
-        }
+        public double DPS => _damage.DPS;
 
-        public double PhysicalDPS
-        {
-            get { return _damage.PhysicalDPS; }
-        }
+        public double PhysicalDPS => _damage.PhysicalDPS;
 
-        public double ElementalDPS
-        {
-            get { return _damage.ElementalDPS; }
-        }
+        public double ElementalDPS => _damage.ElementalDPS;
 
         public void Parse(GameText gameText)
         {
