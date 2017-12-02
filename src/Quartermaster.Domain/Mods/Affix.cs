@@ -29,7 +29,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
             ValueRegEx = valueRegEx;
 
             // Currently ignoring crafted levels as there is no way to tell
-            // which is crafted from the tooltiup text (other than they are
+            // which is crafted from the tooltip text (other than they are
             // last).  Not sure it matters though; you know it's crafted and 
             // what really matters is where is sits relative to a natural mod.
             _levels.AddRange(tiers.Where(l => l.MasterCrafted == false));
@@ -40,7 +40,11 @@ namespace Mathematically.Quartermaster.Domain.Mods
 
         public AffixTier this[int roll]
         {
-            get { return Levels.Single(l => roll >= l.Min && roll <= l.Max); }
+            get
+            {
+                var matches = Levels.Where(l => roll >= l.Min && roll <= l.Max);
+                return matches.Single();
+            }
         }
     }
 }

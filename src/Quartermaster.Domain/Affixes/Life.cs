@@ -24,7 +24,7 @@ namespace Mathematically.Quartermaster.Domain.Affixes
                 new AffixTier(AffixTierName.Athletes, 54, 80, 89),
                 new AffixTier(AffixTierName.Fecund, 64, 90, 99),
                 new AffixTier(AffixTierName.Vigorous, 73, 100, 109),
-                new AffixTier(AffixTierName.Raptuous, 81, 110, 119),
+                new AffixTier(AffixTierName.Rapturous, 81, 110, 119),
             });
         }
     }

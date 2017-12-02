@@ -18,6 +18,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
         Bloodthirsty,
         Cruel,
         Tyrannical,
+        Merciless,
 
         #endregion
 
@@ -56,7 +57,7 @@ namespace Mathematically.Quartermaster.Domain.Mods
         Athletes,
         Fecund,
         Vigorous,
-        Raptuous,
+        Rapturous,
 
         #endregion
 

@@ -41,7 +41,40 @@ Item Level: 74
                 new ItemMod(new Life(), "+84 to maximum Life", 84, 74),
                 new ItemMod(new LightningResistance(), "+44% to Lightning Resistance", 44, 74),
                 new ItemMod(new ChaosResistance(), "+29% to Chaos Resistance", 29, 74),
-            }
-            );
+            });
+
+        // todo note the implicit mod here.  Need to handle those properly.
+        public const string PlagueLocketText = @"        Rarity: Rare
+Plague Locket
+Rustic Sash
+--------
+Requirements:
+Level: 35
+--------
+Item Level: 70
+--------
+18% increased Physical Damage
+--------
++75 to Armour
++72 to maximum Life
++20% to Fire Resistance
++9% to Cold Resistance
++16% to Lightning Resistance
+
+";
+
+        public static readonly PoeItem PlagueLocket = new PoeItem(
+            "Plague Locket",
+            ItemRarity.Rare,
+            35,
+            BaseItemType.RusticSash,
+            new[]
+            {
+                new ItemMod(new Life(), "+72 to maximum Life", 72, 70),
+            });
+
+
+
+
     }
 }
